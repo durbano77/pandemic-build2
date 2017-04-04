@@ -47,12 +47,12 @@ void createRoles(){
     // Method for distributing roles
     srand(static_cast<unsigned int>(time(nullptr)));
     int arrcheck[nbplayers];
-    for (int i = 0; i < nbplayers; i++) {
-        arrcheck[i] = nbplayers + 2;		// initialize test array elements with values
-        // nbplayers + 2  just to make sure that this value is never reached
+    for (int i = 0; i < numPlayers; i++) {
+        arrcheck[i] = numPlayers + 2;		// initialize test array elements with values
+        // numPlayers + 2  just to make sure that this value is never reached
     }
     
-    for (int i = 0; i < nbplayers; i++) {		// Method for giving role (by number)
+    for (int i = 0; i < numPlayers; i++) {		// Method for giving role (by number)
         bool check;
         int nb;
         do {
@@ -78,10 +78,7 @@ void createRoles(){
     // arrayOfPlayer[i] points to the role player object created to keep track of all players
     // creates playerview object (observer) for each player (subject)
     // Set playercard*'s in player_hand's  - Then NOTIFY();
-    for (int i = 0; i < nbplayers; i++) {
-        
-        
-        
+    for (int i = 0; i < numPlayers; i++) {        
         switch(arrcheck[i]){
             case 0:{
                 Pawn dispatcherpawn("pink", atlantacity);
@@ -90,9 +87,9 @@ void createRoles(){
                     dispatcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(dispatcher);
+                arrayofPlayerViews.push_back(new PlayerView(dispatcher));
                 dispatcher->setHand(dispatcherhand);
-                arrayofPlayers[i]=dispatcher;
+                arrayofPlayers.push_back(dispatcher);
                 break;
             }
             case 1:{
@@ -102,9 +99,9 @@ void createRoles(){
                     medichand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(medic);
+				arrayofPlayerViews.push_back(new PlayerView(medic));
                 medic->setHand(medichand);
-                arrayofPlayers[i]=medic;
+                arrayofPlayers.push_back(medic);
                 break;
             }
             case 2:{
@@ -114,9 +111,9 @@ void createRoles(){
                     scientisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(scientist);
+				arrayofPlayerViews.push_back(new PlayerView(scientist));
                 scientist->setHand(scientisthand);
-                arrayofPlayers[i]=scientist;
+                arrayofPlayers.push_back(scientist);
                 break;
             }
             case 3:{
@@ -126,9 +123,9 @@ void createRoles(){
                     researcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(researcher);
+				arrayofPlayerViews.push_back(new PlayerView(researcher));
                 researcher->setHand(researcherhand);
-                arrayofPlayers[i]=researcher;
+                arrayofPlayers.push_back(researcher);
                 break;
             }
             case 4:{
@@ -138,9 +135,9 @@ void createRoles(){
                     operationsexperthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(operationsexpert);
+				arrayofPlayerViews.push_back(new PlayerView(operationsexpert));
                 operationsexpert->setHand(operationsexperthand);
-                arrayofPlayers[i]=operationsexpert;
+                arrayofPlayers.push_back(operationsexpert);
                 break;
             }
             case 5:{
@@ -150,9 +147,9 @@ void createRoles(){
                     quarantinespecialisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(quarantinespecialist);
+				arrayofPlayerViews.push_back(new PlayerView(quarantinespecialist));
                 quarantinespecialist->setHand(quarantinespecialisthand);
-                arrayofPlayers[i]=quarantinespecialist;
+                arrayofPlayers.push_back(quarantinespecialist);
                 break;
             }
             case 6:{
@@ -162,9 +159,9 @@ void createRoles(){
                     contingencyplannerhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
                 }
-                arrayofPlayerViews[i] = new PlayerView(contingencyplanner);
+				arrayofPlayerViews.push_back(new PlayerView(contingencyplanner));
                 contingencyplanner->setHand(contingencyplannerhand);
-                arrayofPlayers[i]=contingencyplanner;
+                arrayofPlayers.push_back(contingencyplanner);
                 break;
             }
             default:{
@@ -205,8 +202,22 @@ void initialInfection() {
     }
     system("pause");
 }
-
+int getPlayerCount() {
+	//get the number of players playing, validate, and return as int.
+	int pCount;	
+	cout << "Please enter the number of players (2-4):";
+	cin >> pCount;
+	while (pCount < 2 || pCount > 4) {
+		cout << "Please enter a valid number of players (2-4):";
+		cin >> pCount;
+	}
+	//clear the screen
+	system("cls");
+	return pCount;
+}
 void initGame(){
+
+	numPlayers = getPlayerCount();
     
     initInfectionDeck();
     
@@ -223,13 +234,13 @@ void initGame(){
 void endGame(){
     
     // <vector> arrayofPlayerViews contains all *PlayerView (1 per player)
-    for(int i=0; i<nbplayers;i++){
+    for(int i=0; i<numPlayers;i++){
         arrayofPlayerViews[i]=nullptr;
         delete arrayofPlayerViews[i];
     }
     
     // <vector> arrayofPlayers contains all *Player
-    for(int i=0; i<nbplayers;i++){
+    for(int i=0; i<numPlayers;i++){
         arrayofPlayers[i]=nullptr;
         delete arrayofPlayers[i];
     }
@@ -267,9 +278,9 @@ int main(){
     initGame();
     
     //test lines (draw cards)
+    /*arrayofPlayers[0]->draw2pcards(playerdeck);
     arrayofPlayers[0]->draw2pcards(playerdeck);
-    arrayofPlayers[0]->draw2pcards(playerdeck);
-    arrayofPlayers[0]->draw2pcards(playerdeck);
+    arrayofPlayers[0]->draw2pcards(playerdeck);*/
     
    // Save savestate = Save();
    // savestate.save_game();

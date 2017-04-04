@@ -14,8 +14,7 @@
 //----------- GLOBAL OBJECTS---------------------------------------------------->>>
 //Contains only global objects (cards, pawns, player hands, array of players, array of playerviews, playerdeck, discard pile, etc.)
 
-
-const int nbplayers = 2;        // # Players to be instantiated ( 2 to 4)
+const int nbplayers = 4;
 const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
@@ -24,6 +23,9 @@ const int diseaseCubesCount = 24; // # of disease cubes per color disease
 int infectionRate = 1;
 //remaining disease cubes (blue, yellow, black, red)
 int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount };
+
+//Number of players, default 2
+int numPlayers = 2;
 
 //Creates 4 reference cards needed in the game, put them in an array for access
 RefCard refcard1, refcard2, refcard3, refcard4;
@@ -57,11 +59,11 @@ std::vector <InfectionCard*> infectiondeck;
 //Creates <vector> infectiondeck that contains *InfectionCard DISCARD PILE
 std::vector <InfectionCard*> infectiondeck_discard;
 
-//Creates Array of *Players
-Player* arrayofPlayers[nbplayers];
+//Creates <vector> of *Players (size determined by how many players)
+std::vector <Player*> arrayofPlayers;
 
-//Creates Array of *PlayerView objects (Observers) [1 for each player]
-PlayerView * arrayofPlayerViews[nbplayers];
+//Creates <vector> of *PlayerView objects (Observers) [1 for each player]
+std::vector <PlayerView *> arrayofPlayerViews;
 
 
 //-----------PlayerCard CARDS------------------------------->
