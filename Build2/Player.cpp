@@ -143,6 +143,11 @@ void Player::buildResearchStation(){
 }
 
 void Player::treatDisease(){
+	//Remove 1 disease cube from player's current city
+	//Increment the diseasecube count of that color disease by 1
+	//If this disease color is cured, remove all cubes of that color from player's current city
+	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+	//Flip its cure marker from its "vial" side to its "X" side.
 }
 
 void Player::ShareKnowledge(){
