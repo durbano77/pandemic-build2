@@ -60,6 +60,8 @@ public:
     void ShareKnowledge();
     void discoverCure();
     
+    void moveAnyPawn();
+    
 };
 
 //Class Declarations for each RolePlayer : Player
