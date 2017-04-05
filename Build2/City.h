@@ -19,12 +19,12 @@ class City
 {
 public:
 	City();
-    City(string cityname);
+	City(string thecityname, string thecolor);
 	//City(string cityname, string color, CityCard* pcitycard, int cubes, vector<Pawn*> pawnsincity);
 	~City();
 
     string getCityName();
-    //string getColor();
+    string getColor();
     int getCubes();
     //vector<Pawn*> getPawnsInCity();
     
@@ -43,7 +43,7 @@ public:
 	
 private:
     string cityname;
-    //string color;
+    string color;
     //CityCard* pcitycard;
     int cubes;
     bool researchstation;

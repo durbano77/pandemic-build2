@@ -56,7 +56,7 @@ public:
     
     void action();
     void buildResearchStation();
-    void treatDisease();
+    void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge();
     void discoverCure();
     

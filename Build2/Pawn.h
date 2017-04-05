@@ -21,7 +21,7 @@ public:
     ~Pawn();
     void printPawn();
     std::string getPawnColor();
-    std::string getPawnCity();
+	City* getPawnCity();
     void setPawnCity(City* newpawncity);
     //Player* getPawnPlayer();
     //Player* p;

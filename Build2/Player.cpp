@@ -142,12 +142,48 @@ void Player::action(){
 void Player::buildResearchStation(){
 }
 
-void Player::treatDisease(){
+void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
 	//Remove 1 disease cube from player's current city
+	//get current city
+	Pawn *pawn = this->getPawn();
+	City *currentCity = pawn->getPawnCity();
+	currentCity->removeCubes();
+	
 	//Increment the diseasecube count of that color disease by 1
+	//get disease color (blue 0, yellow 1, black 2, red 3)
+	string dColor = currentCity->getColor();
+	int colorIndex;
+	if (dColor == "blue") {
+		colorIndex = 0;
+	}
+	else if (dColor == "yellow") {
+		colorIndex = 1;
+	}
+	else if (dColor == "black") {
+		colorIndex = 2;
+	}
+	else {//red
+		colorIndex = 3;
+	}
+	if (remainingDiseaseCubes[colorIndex] < 24) {
+		//re-add a disease cube to the "pile" of its color
+		remainingDiseaseCubes[colorIndex]++;
+	}
 	//If this disease color is cured, remove all cubes of that color from player's current city
+	int cubesRemoved = 1;
+	if (isCured[colorIndex] == true) {
+		cubesRemoved = currentCity->getCubes();
+		currentCity->removeAllCubes();
+		remainingDiseaseCubes[colorIndex] += cubesRemoved;
+		if (remainingDiseaseCubes[colorIndex] > 24) {
+			remainingDiseaseCubes[colorIndex] = 24;
+		}
+	}
 	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-	//Flip its cure marker from its "vial" side to its "X" side.
+	if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
+		isEradicated[colorIndex] == true;
+		//TODO: if eradicated, no new cubes are placed when infecting.
+	}
 }
 
 void Player::ShareKnowledge(){

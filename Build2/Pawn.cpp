@@ -43,8 +43,8 @@ std::string Pawn::getPawnColor(){
 }
 
 
-std::string Pawn::getPawnCity(){
-    return (pawncity->getCityName());
+City* Pawn::getPawnCity(){
+    return pawncity;
 }
 
 void Pawn::setPawnCity(City* newpawncity){

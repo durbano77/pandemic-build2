@@ -21,7 +21,7 @@
 
 
 //ONLY FOR TEST (TO BE REMOVED)
-City* atlantacity = new City("Atlanta");
+City* atlantacity = new City("Atlanta", "blue");
 
 
 void initInfectionDeck() {

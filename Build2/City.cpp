@@ -19,11 +19,12 @@ City::City()
     cubes=0;
     researchstation=false;
 }
-City::City(string cityname)
+City::City(string thecityname, string thecolor)
 {
-    cityname=cityname;
+    cityname=thecityname;
     cubes=0;
     researchstation=0;
+	color = thecolor;
 }
 
 //City::City(string cityname, string color, CityCard* pcitycard, int cubes, vector<Pawn*> pawnsincity)
@@ -46,9 +47,9 @@ string City::getCityName(){
     return cityname;
 }
 
-//string City::getColor(){
-//    return color;
-//}
+string City::getColor(){
+    return color;
+}
 
 int City::getCubes(){
     return cubes;

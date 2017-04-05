@@ -22,7 +22,11 @@ const int diseaseCubesCount = 24; // # of disease cubes per color disease
 //Infection rate, initialized to 1
 int infectionRate = 1;
 //remaining disease cubes (blue, yellow, black, red)
-int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount };
+int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount};
+//cured diseases (blue, yellow, black, red)
+bool isCured[4] = { false, false, false, false };
+//eradicated diseases (blue, yellow, black, red)
+bool isEradicated[4] = { false, false, false, false };
 
 //Number of players, default 2
 int numPlayers = 2;
