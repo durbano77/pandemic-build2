@@ -90,6 +90,9 @@ void Player::printRoleCard(){
 std::string  Player::getPlayerName() const{
     return playername;
 }
+void Player::printPlayerName() {
+	cout << playername;
+}
 
 
 std::vector<PlayerCard*>  Player::getHand() const{
