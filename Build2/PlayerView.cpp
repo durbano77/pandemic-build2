@@ -80,27 +80,12 @@ void PlayerView::displayHand(){
 void PlayerView::displayDiscardHand(){
     int sizehand = (int)(p->getHand()).size();
     int nbcardsdiscard=sizehand % 7;
-    std::cout<<"\nYou have more than 7 player cards. You must discard "<< nbcardsdiscard <<" cards."<<std::endl;
+    std::cout<<"\nYou have " << sizehand << " player cards. You must discard "<< nbcardsdiscard <<" cards."<<std::endl;
     std::cout<<"What card(s) do you want to discard?"<<std::endl;
     for(int i=0; i<sizehand;i++){
         std::cout<< i+1 <<" - " <<((p->getHand())[i])->getCardName()<<std::endl;
     }
-    
-//    int n=sizehand+2; //init with nb never reached
-//    while(nbcardsdiscard>0){
-//        std::cout<<"For each card you discard, enter number then press enter."<<std::endl;
-//        std::cin>>n;
-//        n=n-1;
-//        std::cout<<n;
-//        
-//      if(0<=n && n<sizehand){
-//          //delete ((p->getHand())[n]);
-//          nbcardsdiscard--;
-//      }
-//      else{ std::cout<<"Enter a valid number."<<std::endl; }
-//    }
-    
-       p->printHand();
+
 }
 
 void PlayerView::displayEpidemicCard(){
