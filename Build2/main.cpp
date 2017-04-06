@@ -13,7 +13,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
-
+#include "GraphView.h"
 #include "PlayerView.h"
 //#include "CardsHeaders.h" (through PlayerView - Player - Subject - CardsHeaders)
 //#include "SaveLoad.h"
@@ -287,4 +287,14 @@ int main(){
    // system("pause");
    // savestate.load_game();
     endGame();
+    
+    Graph myGraph;
+    GraphView gView(&myGraph);
+    myGraph.createMap();
+    //myGraph.printGraph();
+    
+    cin.clear(); // reset any error flags
+    cin.ignore(32767, '\n'); // ignore any characters in the input buffer until we find an enter character
+    cin.get(); // get one more char from the user
+
 }
