@@ -22,6 +22,7 @@
 
 //ONLY FOR TEST (TO BE REMOVED)
 City* atlantacity = new City("Atlanta", "blue");
+//END REMOVE HERE (SO WE KNOW EXACTLY WHERE TO STOP FOR ANY FURTHER TEST CASES WE MAY ADD)
 
 
 void initInfectionDeck() {
