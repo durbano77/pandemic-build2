@@ -44,7 +44,7 @@ void EpidemicCard::Infect(int *remainingDiseaseCubes, vector<InfectionCard*>& in
 	string city = curr_inf->getCardName();
 	string color = curr_inf->getCardTextFront();
 	//infect the city	
-	curr_inf->Infect(remainingDiseaseCubes, city, color);
+	//curr_inf->Infect(remainingDiseaseCubes, city, color);
 	//add drawn card to discard pile
 	infectiondeck_discard.push_back(curr_inf);
 	//remove card from infection deck
