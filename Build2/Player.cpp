@@ -101,7 +101,7 @@ std::vector<PlayerCard*>  Player::getHand() const{
 
 void Player::setHand(std::vector<PlayerCard*> &ha){
     player_hand=ha;
-    Notify();
+    Notify(0);
 }
 
 void Player::printHand(){
@@ -113,18 +113,19 @@ void Player::printHand(){
 
 
 void Player::draw2pcards(std::vector<PlayerCard*> &plyrdeck){
-    std::cout<<"here";
+    
     for(int k=0;k<2;k++){
         player_hand.push_back(plyrdeck.back());
         plyrdeck.pop_back();
         if((player_hand.back())->getCardName()=="Epidemic Card" ){
-            //insert function triggers Epidemic Event
-            NotifyEpidemicCard();
+            Notify(3); //Notify EpidemicCard;
+             //insert function triggers Epidemic Event
             player_hand.pop_back(); //remove this epidemic card from player hand
         };
         
     }
-    NotifyHand();
+    Notify(4); //display pawn info to identify the player
+    Notify(1); //display hand
     
     if(player_hand.size()>7){
         discardCards();
@@ -133,7 +134,8 @@ void Player::draw2pcards(std::vector<PlayerCard*> &plyrdeck){
 }
 
 void Player::discardCards(){
-    NotifyDiscardHand();
+    Notify(2); //Notify DiscardHand
+
 }
 
 void Player::action(){

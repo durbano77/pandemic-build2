@@ -33,6 +33,7 @@ Pawn::~Pawn(){
 void Pawn::printPawn(){
     std::cout<<"----------------------------------------"<<std::endl;
     std::cout<<"Pawn: " << this->color <<std::endl;
+    std::cout<<"Location: "<<pawncity->getCityName()<<std::endl;
     //std::cout<<getPlayerName()<<std::endl;
     std::cout<<"----------------------------------------\n\n"<<std::endl;
     

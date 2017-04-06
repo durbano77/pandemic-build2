@@ -23,14 +23,16 @@ public:
     PlayerView(); //default constructor
     PlayerView(Player *plyr);
     ~PlayerView();
-    void Update();
-    void UpdateHand();
-    void UpdateDiscardHand();
-    void UpdateEpidemicCard();
-    void display();
+    void Update(int u);
+    //void UpdateHand();
+   // void UpdateDiscardHand();
+   // void UpdateEpidemicCard();
+    void display(int t);
+    void displayAll();
     void displayHand();
     void displayDiscardHand();
     void displayEpidemicCard();
+    void displayPawn();
 protected:
     Player* p;
 

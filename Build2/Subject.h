@@ -20,10 +20,10 @@ class Subject {
 public:
     virtual void Attach(Observer* observer);
     virtual void Detach(Observer* observer);
-    virtual void Notify();
-    virtual void NotifyHand();
-    virtual void NotifyDiscardHand();
-    virtual void NotifyEpidemicCard();
+    virtual void Notify(int n);
+   // virtual void NotifyHand();
+   // virtual void NotifyDiscardHand();
+   // virtual void NotifyEpidemicCard();
     Subject();
     ~Subject();
 private:

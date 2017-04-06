@@ -278,9 +278,9 @@ int main(){
     initGame();
     
     //test lines (draw cards)
-    /*arrayofPlayers[0]->draw2pcards(playerdeck);
+   arrayofPlayers[0]->draw2pcards(playerdeck);
     arrayofPlayers[0]->draw2pcards(playerdeck);
-    arrayofPlayers[0]->draw2pcards(playerdeck);*/
+    arrayofPlayers[0]->draw2pcards(playerdeck);
     
    // Save savestate = Save();
    // savestate.save_game();
