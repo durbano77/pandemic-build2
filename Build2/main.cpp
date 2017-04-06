@@ -275,6 +275,16 @@ void endGame(){
 
 int main(){
     
+    Graph myGraph;
+    GraphView gView(&myGraph);
+    myGraph.createMap();
+    //myGraph.printGraph();
+    
+    cin.clear(); // reset any error flags
+   // cin.ignore(32767, '\n'); // ignore any characters in the input buffer until we find an enter character
+   // cin.get(); // get one more char from the user
+
+    
     initGame();
     
     //test lines (draw cards)
@@ -288,13 +298,4 @@ int main(){
    // savestate.load_game();
     endGame();
     
-    Graph myGraph;
-    GraphView gView(&myGraph);
-    myGraph.createMap();
-    //myGraph.printGraph();
-    
-    cin.clear(); // reset any error flags
-    cin.ignore(32767, '\n'); // ignore any characters in the input buffer until we find an enter character
-    cin.get(); // get one more char from the user
-
 }

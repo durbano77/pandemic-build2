@@ -191,14 +191,18 @@ void Graph::cityAdjacency(City* c){
 
 Graph::~Graph()
 {
+    
+    //* Destructor: Not working as it is*/
+    
+    
 	//vector<City>::iterator it = cityInGraph.begin();
 	
-	cMap::iterator itr = cityMap.begin();
-	while (itr !=cityMap.end())
-	{
-		delete itr->first;
-		delete itr->second;
-	}
+//	cMap::iterator itr = cityMap.begin();
+//	while (itr !=cityMap.end())
+//	{
+//		delete itr->first;
+//		delete itr->second;
+//	}
 
 
 }
