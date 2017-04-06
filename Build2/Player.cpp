@@ -142,8 +142,7 @@ void Player::discardCards(){
             Notify(2); //Notify DiscardHand
             
             int cardnb=handsize+2; //cardnb < handsize
-            std::cout<<"Discard one card."<<std::endl;
-            //std::cin>>cardnb;
+            std::cout<<"Discard one card.";
             while (cardnb < 1 || cardnb > handsize) {
                 std::cout << "Enter a valid number from 1 to "<< handsize << ":";
                 std::cin >> cardnb;
@@ -151,11 +150,12 @@ void Player::discardCards(){
             
             if(cardnb>=0 && cardnb<=handsize){
                 string cardn= player_hand.at(cardnb-1)->getCardName();
+                delete player_hand.at(cardnb-1);
                 player_hand.erase(player_hand.begin() + (cardnb-1));
                 std::cout<<cardn<<" was succesfully removed"<<std::endl;
             }
             
-                //delete player_hand.at(cardnb-1);
+            
             
             handsize=static_cast<int>(player_hand.size());
             
