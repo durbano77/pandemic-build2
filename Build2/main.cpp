@@ -272,6 +272,11 @@ void endGame(){
         infectiondeck_discard[i] = nullptr;
         delete infectiondeck_discard[i];
     }
+	// <vector> cities contains *City
+	for (int i = 0; i < cities.size(); i++) {
+		cities[i] = nullptr;
+		delete cities[i];
+	}
     
     
 }
