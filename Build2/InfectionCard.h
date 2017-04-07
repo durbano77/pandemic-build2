@@ -19,7 +19,8 @@ public:
 	InfectionCard();
 	InfectionCard(City* theCity, string title, string cardtextfront, string cardtextback);
 	~InfectionCard();
-	
+
+	City* getCity();
 
 	//action
 	void Infect(int* remainingDiseaseCubes, City* theCity, string color);

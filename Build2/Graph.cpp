@@ -206,119 +206,16 @@ Graph::~Graph()
 
 
 }
-void  Graph::createMap()
+void  Graph::createMap(City** citiesarr)
 
 {
 
 	City c[48];
 
-
-
-	//blue
-	c[0] = City("Atlanta", "blue");
-	c[1] = City("San Francisco", "blue");
-
-
-	c[2] = City("Chicago", "blue");
-
-
-	c[3] = City("Montreal", "blue");
-
-	c[4] = City("Washington", "blue");
-
-
-	c[5] = City("New York", "blue");
-
-
-	c[6] = City("London", "blue");
-
-
-	c[7] = City("Madrid", "blue");
-
-	c[8] = City("Paris", "blue");
-
-	c[9] = City("Milan", "blue");
-
-	c[10] = City("Essen", "blue");
-
-	c[11] = City("St Petersburg", "blue");
-
-
-
-	//yellow
-	c[12] = City("Los Angeles", "yellow");
-
-
-	c[13] = City("Mexico", "yellow");
-
-	c[14] = City("Miami", "yellow");
-
-	c[15] = City("Bogota", "yellow");
-
-
-	c[16] = City("Lima", "yellow");
-
-	c[17] = City("Santiago", "yellow");
-	c[18] = City("Buenos Aires", "yellow");
-
-
-	c[19] = City("Sao Paolo", "yellow");
-
-
-	c[20] = City("Lagos", "yellow");
-
-	c[21] = City("Kinshasa", "yellow");
-	c[22] = City("Johannesburg", "yellow");
-	c[23] = City("Khartoum", "yellow");
-
-	//black
-	c[24] = City("Moscow", "black");
-
-	c[25] = City("Istanbul", "black");
-
-	c[26] = City("Algers", "black");
-
-
-	c[27] = City("LeCaire", "black");
-	c[28] = City("Bagdad", "black");
-
-	c[29] = City("Teheran", "black");
-
-	c[30] = City("Karachi", "black");
-
-	c[31] = City("Ryad", "black");
-
-	c[32] = City("Dehli", "black");
-
-	c[33] = City("Mumbai", "black");
-
-	c[34] = City("Chennai", "black");
-
-
-	c[35] = City("Calcutta", "black");
-
-
-	//red
-	c[36] = City("Pekin", "red");
-	c[37] = City("Seoul", "red");
-	c[38] = City("Tokyo", "red");
-	c[39] = City("Shanghai" ,"red");
-	c[40] = City("Osaka", "red");
-	c[41] = City("Taipei" ,"red");
-
-	c[42] = City("Hong Kong", "red");
-
-
-	c[43] = City("Manville", "red");
-
-	c[44] = City("Bangkok", "red");
-
-	c[45] = City("Ho Chi Min City", "red");
-
-
-	c[46] = City("Jakarta", "red");
-
-	c[47] = City("Sydney", "red");
+	//copy cityarr objects into c
+	for (int i = 0; i < 48; i++) {
+		c[i] = *citiesarr[i];
+	}
     
 	vector <City*> v;
 

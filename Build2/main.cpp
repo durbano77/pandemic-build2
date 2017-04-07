@@ -22,13 +22,18 @@
 
 //ONLY FOR TEST (TO BE REMOVED)
 City* atlantacity = new City("Atlanta", "blue");
+
+void initCities() {
+	//vector of city object pointers
+	cities.insert(cities.end(), cityarr, cityarr + (sizeof(cityarr) / sizeof(cityarr[0])));
+}
 //END REMOVE HERE (SO WE KNOW EXACTLY WHERE TO STOP FOR ANY FURTHER TEST CASES WE MAY ADD)
 
 
 void initInfectionDeck() {
-    /*infectiondeck.insert(infectiondeck.end(), infectioncardarr, infectioncardarr + (sizeof(infectioncardarr) / sizeof(infectioncardarr[0])));
+    infectiondeck.insert(infectiondeck.end(), infectioncardarr, infectioncardarr + (sizeof(infectioncardarr) / sizeof(infectioncardarr[0])));
     
-    shuffle(infectiondeck.begin(), infectiondeck.end(), std::default_random_engine(std::random_device()()));*/
+    shuffle(infectiondeck.begin(), infectiondeck.end(), std::default_random_engine(std::random_device()()));
 }
 void setInitPlayerDeck(){
     playerdeck.insert(playerdeck.end(), citycardarr, citycardarr+(sizeof(citycardarr)/sizeof(citycardarr[0])));
@@ -192,7 +197,7 @@ void initialInfection() {
             string color = curr_inf->getCardTextFront();
             //infect the city
             for (int j = 1; j <= i; j++) {
-                //curr_inf->Infect(remainingDiseaseCubes, city, color);
+                curr_inf->Infect(remainingDiseaseCubes, curr_inf->getCity(), color);
             }
             //add drawn card to discard pile
             infectiondeck_discard.push_back(curr_inf);
@@ -220,7 +225,7 @@ void initGame(){
 
 	numPlayers = getPlayerCount();
     
-    //initInfectionDeck();
+    initInfectionDeck();
     
     setInitPlayerDeck();
     
@@ -278,7 +283,9 @@ int main(){
     
     Graph myGraph;
     GraphView gView(&myGraph);
-    myGraph.createMap();
+
+	initCities();
+    myGraph.createMap(cityarr);
     //myGraph.printGraph();
     
     cin.clear(); // reset any error flags

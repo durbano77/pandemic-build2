@@ -66,3 +66,6 @@ void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string col
 		//todo: handle gameover 
 	}
 }
+City* InfectionCard::getCity() {
+	return city;
+}
