@@ -19,8 +19,8 @@ const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
-//Infection rate, initialized to 1
-int infectionRate = 1;
+//Infection rate, initialized to 2 infection cards to be drawn
+int infectionRate = 2;
 //remaining disease cubes (blue, yellow, black, red)
 int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount};
 //cured diseases (blue, yellow, black, red)
@@ -68,6 +68,9 @@ std::vector <Player*> arrayofPlayers;
 
 //Creates <vector> of *PlayerView objects (Observers) [1 for each player]
 std::vector <PlayerView *> arrayofPlayerViews;
+
+//Creates <vector> of EventCard that can be used by the players
+std::vector<PlayerCard *> eventCardsAvail; //cast to base class PlayerCard for convenience
 
 
 //-----------PlayerCard CARDS------------------------------->
@@ -200,6 +203,9 @@ InfectionCard* jakarta_inf = new InfectionCard("jakarta", "Jakarta", "red", "");
 InfectionCard* sydney_inf = new InfectionCard("sydney", "Sydney", "red", "");
 
 InfectionCard* infectioncardarr[] = { sanfrancisco_inf,chicago_inf,atlanta_inf,montreal_inf, washington_inf, newyork_inf, londres_inf,madrid_inf,paris_inf,milan_inf,essen_inf,stpetersbourg_inf,losangeles_inf, mexico_inf, miami_inf, bogota_inf, lima_inf, santiago_inf, buesnosaires_inf, saopaulo_inf, lagos_inf, kinshasa_inf, johannesburg_inf, khartoum_inf, moscou_inf, istanbul_inf, alger_inf, lecaire_inf, bagdad_inf, teheran_inf, karachi_inf, ryad_inf, delhi_inf, mumbai_inf, chennai_inf, calcutta_inf, pekin_inf, seoul_inf, tokyo_inf, shanghai_inf, osaka_inf, taipei_inf, hongkong_inf, manille_inf, bangkok_inf, hochiminhville_inf, jakarta_inf, sydney_inf };
+
+
+
 
 // <<<-----------------------global objects--------------------------------------------------
 

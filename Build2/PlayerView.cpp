@@ -44,6 +44,18 @@ void PlayerView::display(int t){
         case 4:
             this->displayPawn();
             break;
+        case 5:
+            //graph view (cities that have adjency)
+            break;
+        case 6:
+            //graph view (cities connections)
+            break;
+        case 7:
+            //all cities info
+            break;
+        case 8:
+            //infection card display
+            break;
         default:
             std::cout<<"ERR: Player View - No display function selected."<<std::endl;
     

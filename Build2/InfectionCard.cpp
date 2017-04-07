@@ -12,17 +12,23 @@
 using namespace std;
 
 InfectionCard::InfectionCard() {
+    color="";
 	Cards();
 }
 InfectionCard::InfectionCard(string city, string title, string cardtextfront, string cardtextback) {
 	city = city;
 	card_name = title;
+    color = cardtextfront;
 	card_textfront = cardtextfront;		//holds the color to infect with
 	card_textback = cardtextback;
 	Cards(title, cardtextfront, cardtextback);
 }
 InfectionCard::~InfectionCard() {
 
+}
+
+std::string InfectionCard::getColor() const{
+    return color;
 }
 
 void InfectionCard::Infect(int* remainingDiseaseCubes, string city, string color) {

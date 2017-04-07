@@ -15,6 +15,7 @@
 
 #include "Subject.h"
 #include "Pawn.h"
+
 //#include "CardsPawnHeaders.h" (through Subject headers)
 
 class Player : public Subject{
@@ -51,13 +52,13 @@ public:
     void setHand(std::vector<PlayerCard*> &ha);
     void printHand();
     
-    void draw2pcards(std::vector<PlayerCard*> &plyrdeck);
+    void drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail);
     void discardCards();
     
     void action();
     void buildResearchStation();
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    void ShareKnowledge();
+    void ShareKnowledge(std::vector<Player*> vectorplayers);
     void discoverCure();
     
     void moveAnyPawn();

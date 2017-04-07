@@ -18,8 +18,12 @@ public:
 	InfectionCard();
 	InfectionCard(string city, string title, string cardtextfront, string cardtextback);
 	~InfectionCard();
+    string getColor() const;
 	
 
 	//action
 	void Infect(int* remainingDiseaseCubes,string city, string color);
+    
+protected:
+    std::string color="";
 };
