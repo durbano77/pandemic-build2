@@ -21,10 +21,12 @@ public:
 	~InfectionCard();
 
 	City* getCity();
+	string getColor() const;
 
 	//action
 	void Infect(int* remainingDiseaseCubes, City* theCity, string color);
 
 protected:
-	City* city;
+    std::string color="";
+		City* city;
 };

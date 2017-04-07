@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 
 
@@ -112,17 +113,31 @@ void Player::printHand(){
 }
 
 
-void Player::draw2pcards(std::vector<PlayerCard*> &plyrdeck){
+void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail){
     
-    for(int k=0;k<2;k++){
-        player_hand.push_back(plyrdeck.back());
-        plyrdeck.pop_back();
-        if((player_hand.back())->getCardName()=="Epidemic Card" ){
-            Notify(3); //Notify EpidemicCard;
-             //insert function triggers Epidemic Event
-            player_hand.pop_back(); //remove this epidemic card from player hand
-        };
-        
+    
+    for(int k=0;k<nbcardsdraw;k++){
+        if(plyrdeck.back()!=nullptr){
+            std::string s1=plyrdeck.back()->getCardName();
+            std::string s2="Event";
+            if(s1=="Epidemic Card" ){
+                Notify(3); //Notify EpidemicCard;
+                //insert function triggers Epidemic Event
+            }
+            else if(s1.std::string::find(s2) != std::string::npos){
+                eventCardsAvail.push_back(plyrdeck.back());
+                //Notify( ); std::cout<<"EVENT CARD FOUND"<<std::endl;
+                //note: eventcard is pushed to a vector of event cards that can be played anytime
+                //todo: when an eventcard is used by a player, discard it to the playercard discardpile
+            }
+            else{ //if it's not an epidemic card nor an event card, add it to player hand
+                player_hand.push_back(plyrdeck.back());
+            }
+            plyrdeck.pop_back();
+        }
+        else{
+            std::cout<<"ERR: player deck last card nullptr"<<std::endl;
+        }
     }
     Notify(4); //display pawn info to identify the player
     Notify(1); //display hand
@@ -133,8 +148,10 @@ void Player::draw2pcards(std::vector<PlayerCard*> &plyrdeck){
 
 }
 
+
+
+
 void Player::discardCards(){
-    //Player chooses which cards to discard
     
         int handsize=static_cast<int>(player_hand.size());
         while(handsize>7){
@@ -210,12 +227,33 @@ void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 	}
 	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
 	if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-		isEradicated[colorIndex] == true;
+		isEradicated[colorIndex] = true;
 		//TODO: if eradicated, no new cubes are placed when infecting.
 	}
 }
 
-void Player::ShareKnowledge(){
+void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
+    City* c=this->getPawn()->getPawnCity();
+    
+    for(int i=0;i<vectorplayers.size();i++){
+        City* cityotherplayer = vectorplayers[i]->getPawn()->getPawnCity();
+        
+        if(cityotherplayer==c){
+            //this player and another one are in the same city
+            //checking if one of them has the corresponding city card
+            string cname = c->getCityName();
+            
+            for(int j=0; j<player_hand.size();j++){
+                if(player_hand[j]->getCardName()==cname){
+                    //trigger event matching cards
+                }
+                    
+            }
+            //compare the inverse
+            
+        }
+    }
+    
 }
 
 void Player::discoverCure(){

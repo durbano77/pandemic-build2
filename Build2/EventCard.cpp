@@ -24,7 +24,7 @@ EventCard::~EventCard(){
 
 
 Airlift::Airlift(){
-    card_name="Airlift";
+    card_name="Event card: Airlift";
     card_textfront =
         "";
     card_textback="";
@@ -43,7 +43,7 @@ void Airlift::EventAction(){
 
 
 OneQuietNight::OneQuietNight(){
-    card_name="One Quiet Night";
+    card_name="Event card: One Quiet Night";
     card_textfront =
     "";
     card_textback="";
@@ -63,7 +63,7 @@ void OneQuietNight::EventAction(){
 
 
 GovernmentGrant::GovernmentGrant(){
-    card_name="Government Grant";
+    card_name="Event card: Government Grant";
     card_textfront =
     "";
     card_textback="";
@@ -83,7 +83,7 @@ void GovernmentGrant::EventAction(){
 
 
 ResilientPopulation::ResilientPopulation(){
-    card_name="Resilient Population";
+    card_name="Event card: Resilient Population";
     card_textfront =
     "";
     card_textback="";
@@ -104,7 +104,7 @@ void ResilientPopulation::EventAction(){
 
 
 Forecast::Forecast(){
-    card_name="Forecast";
+    card_name="Event card: Forecast";
     card_textfront =
     "";
     card_textback="";

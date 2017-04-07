@@ -12,17 +12,23 @@
 using namespace std;
 
 InfectionCard::InfectionCard() {
-	Cards();
+    color="";
+	   Cards();
 }
 InfectionCard::InfectionCard(City* theCity, string title, string cardtextfront, string cardtextback) {
 	city = theCity;
 	card_name = title;
+  color = cardtextfront;
 	card_textfront = cardtextfront;		//holds the color to infect with
 	card_textback = cardtextback;
 	Cards(title, cardtextfront, cardtextback);
 }
 InfectionCard::~InfectionCard() {
 
+}
+
+std::string InfectionCard::getColor() const{
+    return color;
 }
 
 void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string color) {
@@ -45,7 +51,7 @@ void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string col
 	else if (color == "red" && remainingDiseaseCubes[3] == 0) {
 		enoughCubes = false;
 		colorIndex = 3;
-	}	
+	}
 
 	if (enoughCubes) {
 		cout << "Infecting " << theCity->getCityName() << " with the " << color << " disease!" << endl;
@@ -63,7 +69,7 @@ void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string col
 	}
 	else {
 		cout << "There are no more " << color << " disease cubes! Game over!" << endl;
-		//todo: handle gameover 
+		//todo: handle gameover
 	}
 }
 City* InfectionCard::getCity() {

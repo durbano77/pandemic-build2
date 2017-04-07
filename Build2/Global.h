@@ -19,8 +19,8 @@ const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
-//Infection rate, initialized to 1
-int infectionRate = 1;
+//Infection rate, initialized to 2 infection cards to be drawn
+int infectionRate = 2;
 //remaining disease cubes (blue, yellow, black, red)
 int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount};
 //cured diseases (blue, yellow, black, red)
@@ -129,6 +129,9 @@ City *city_Sydney = new City("Sydney", "red");
 
 
 City* cityarr[] = {city_Atlanta,city_SanFrancisco,city_Chicago,city_Montreal,city_Washington,city_NewYork,city_London,city_Madrid,city_Paris,city_Milan,city_Essen,city_StPetersburg,city_LosAngeles,city_Mexico,city_Miami,city_Bogota,city_Lima,city_Santiago,city_BuenosAires,city_SaoPaolo,city_Lagos,city_Kinshasa,city_Johannesburg,city_Khartoum,city_Moscow,city_Istanbul,city_Algers,city_LeCaire,city_Bagdad,city_Teheran,city_Karachi,city_Ryad,city_Dehli,city_Mumbai,city_Chennai,city_Calcutta,city_Pekin,city_Seoul,city_Tokyo,city_Shanghai,city_Osaka,city_Taipei,city_HongKong,city_Manville,city_Bangkok,city_HoChiMinCity,city_Jakarta,city_Sydney};
+
+//Creates <vector> of EventCard that can be used by the players
+std::vector<PlayerCard *> eventCardsAvail; //cast to base class PlayerCard for convenience
 
 
 //-----------PlayerCard CARDS------------------------------->

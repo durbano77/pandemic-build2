@@ -41,12 +41,7 @@ void setInitPlayerDeck(){
     
     //Rnd Shuffle playerdeck
     shuffle(playerdeck.begin(), playerdeck.end(), std::default_random_engine(std::random_device()()));
-    //std::random_shuffle(playerdeck.begin(), playerdeck.end());
-    //    for(int i=0; i<playerdeck.size();i++){
-    //        playerdeck[i]->printCard();
-    //    }
-    
-    
+
 }
 
 void createRoles(){
@@ -89,6 +84,8 @@ void createRoles(){
             case 0:{
                 Pawn dispatcherpawn("pink", atlantacity);
                 Dispatcher* dispatcher = new Dispatcher(&dispatcherpawn, &referencecards[i], &dispatchercard1, dispatcherhand);
+                //This drawpcards function does not work here for each player.. will be implemented
+               // dispatcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for (int k = 0; k < nbcardsplayer; k++) {
                     dispatcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -101,6 +98,7 @@ void createRoles(){
             case 1:{
                 Pawn medicpawn("orange", atlantacity);
                 Medic* medic=new Medic(&medicpawn, &referencecards[i], &mediccard1, medichand);
+                //medic->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     medichand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -113,6 +111,7 @@ void createRoles(){
             case 2:{
                 Pawn scientistpawn("white", atlantacity);
                 Scientist* scientist=new Scientist(&scientistpawn, &referencecards[i], &scientistcard1, scientisthand);
+//                scientist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     scientisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -125,6 +124,7 @@ void createRoles(){
             case 3:{
                 Pawn researcherpawn("brown", atlantacity);
                 Researcher* researcher=new Researcher(&researcherpawn, &referencecards[i], &researchercard1, researcherhand);
+//                researcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     researcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -137,6 +137,7 @@ void createRoles(){
             case 4:{
                 Pawn operationsexpertpawn("palegreen", atlantacity);
                 Operationsexpert* operationsexpert=new Operationsexpert(&operationsexpertpawn, &referencecards[i], &operationsexpertcard1, operationsexperthand);
+               // operationsexpert->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     operationsexperthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -149,6 +150,7 @@ void createRoles(){
             case 5:{
                 Pawn quarantinespecialistpawn("darkgreen", atlantacity);
                 Quarantinespecialist* quarantinespecialist=new Quarantinespecialist(&quarantinespecialistpawn, &referencecards[i], &quarantinespecialistcard1, quarantinespecialisthand);
+              //  quarantinespecialist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     quarantinespecialisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -161,6 +163,7 @@ void createRoles(){
             case 6:{
                 Pawn contingencyplannerpawn("aqua", atlantacity);
                 Contingencyplanner* contingencyplanner=new Contingencyplanner(&contingencyplannerpawn, &referencecards[i], &contingencyplannercard1,  contingencyplannerhand);
+                //contingencyplanner->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
                 for(int k=0;k<nbcardsplayer;k++){
                     contingencyplannerhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
@@ -220,6 +223,49 @@ int getPlayerCount() {
 	//clear the screen
 	system("cls");
 	return pCount;
+}
+
+void turn(){
+    //check if there is an event card, if so: possibility to use event card
+    //action 1
+    //if there is an event card, possibility to use event card
+    //action 2
+    //if there is an event card, possibility to use event card
+    //action 3
+    //if there is an event card, possibility to use event card
+    //action 4
+    //if there is an event card, possibility to use event card
+    
+    //draw 2 cards arrayofPlayers[0]->draw2pcards(playerdeck);
+    //(check #2) if there is an event card, if so: possibility to use event card
+    
+    
+ //infection
+    for(int i=0;i<infectionRate;i++){
+        InfectionCard* ic=infectiondeck.back();
+        
+       // Notify(6);   display infection card and infection
+        ic->printCard();
+        
+        string iccolor=ic->getColor();
+        
+        for(int j=0;j<48;j++){
+            //c[j].getCityName();
+        }
+        
+       //HERE:
+        ic->Infect(remainingDiseaseCubes, "", iccolor);
+        
+        
+        infectiondeck.pop_back();
+    }
+    
+
+    //infect city 1
+    //(check #2) if there is an event card, possibility to use event card
+    //infect city 2
+    //(check #2) if there is an event card, possibility to use event card
+    //infect city 3
 }
 void initGame(){
 
@@ -301,9 +347,14 @@ int main(){
     initGame();
     
     //test lines (draw cards)
-   arrayofPlayers[0]->draw2pcards(playerdeck);
-    arrayofPlayers[0]->draw2pcards(playerdeck);
-    arrayofPlayers[0]->draw2pcards(playerdeck);
+   arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+
+    
+    //arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
     
    // Save savestate = Save();
    // savestate.save_game();
