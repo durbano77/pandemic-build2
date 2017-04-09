@@ -76,7 +76,7 @@ void PlayerView::display(int t){
 
 
 void PlayerView::displayAll(){
-        p->getPawn()->printPawn();
+        //p->getPawn()->printPawn();
         p->printRoleCard();
         p->printRefCard();
         p->printHand();
@@ -107,5 +107,5 @@ void PlayerView::displayEpidemicCard(){
 }
 
 void PlayerView::displayPawn(){  //could be called each time the player moves to another location?
-    p->getPawn()->printPawn();
+    //p->getPawn()->printPawn();
 }
