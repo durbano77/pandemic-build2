@@ -59,7 +59,7 @@ public:
     void buildResearchStation();
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
-    void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
     void moveAnyPawn();
     
@@ -94,7 +94,7 @@ public:
     Scientist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Scientist (Scientist const& scient);
     virtual ~Scientist();
-    void discoverCure(); //base method will be overridden
+    void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated); //base method will be overridden
     
 };
 

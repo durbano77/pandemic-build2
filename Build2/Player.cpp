@@ -305,22 +305,10 @@ void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 void action();
 void buildResearchStation();
 //if in same city as their player card, can build a research station there. if all research stations built, remove one from anywhere on the board
-void treatDisease();
-//remove 1 cube, if disease cured remove all 3 cubes
 
 void ShareKnowledge();
 //give the City card that matches the city you are in to another player
 //or take the City card that matches the city you are in from another player
-
-
-void discoverCure();
-//"At any research station, discard 5 City cards of the same color from your"
-//"hand to cure the disease of that color. Move the diseases cure marker to its"
-//"Cure Indicator."
-//"If no cubes of this color are on the board, this disease is now eradicated."
-//"Flip its cure marker from its vial side to its  side"
-
-
 
 //Class Implementations for each RolePlayer : Player
 //dispatcher, medic, scientist, researcher, operationsexpert, quarantinespecialist, contingencyplanner
@@ -360,7 +348,49 @@ Player(ppawn, refcard, rolecard, p_hand)
 {}
 Scientist::Scientist (Scientist const& scient){}
 Scientist::~Scientist(){}
-void Scientist::discoverCure(){} //base method will be overridden
+void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
+	//At any research station, discard 4 City cards of the same color from your hand to cure the disease of that color.
+	//Determine which city cards/color to discard (what color do they have 4 of?)
+	int cityColorCount[4] = { 0,0,0,0 };
+	int theColor;	//will contain the index of the color to cure
+	for (int j = 0; j<player_hand.size(); j++) {
+		if (dynamic_cast<BlueCity*>(player_hand[j])) {
+			cityColorCount[0]++;
+			if (cityColorCount[0] == 4) {
+				theColor = 0;
+				break;
+			}
+		}
+		else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+			cityColorCount[1]++;
+			if (cityColorCount[1] == 4) {
+				theColor = 1;
+				break;
+			}
+		}
+		else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+			cityColorCount[2]++;
+			if (cityColorCount[2] == 4) {
+				theColor = 2;
+				break;
+			}
+		}
+		else if (dynamic_cast<RedCity*>(player_hand[j])) {
+			cityColorCount[3]++;
+			if (cityColorCount[3] == 4) {
+				theColor = 3;
+				break;
+			}
+		}
+
+	}
+	//Move the disease’s cure marker to its Cure Indicator.
+	isCured[theColor] = true;
+	//	If no cubes of this color are on the board, this disease is now eradicated.
+	if (remainingDiseaseCubes[theColor] == 24) {
+		isEradicated[theColor] = true;
+	}
+}
 
 //Researcher
 Researcher::Researcher(){
