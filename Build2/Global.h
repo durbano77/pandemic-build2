@@ -69,6 +69,67 @@ std::vector <Player*> arrayofPlayers;
 //Creates <vector> of *PlayerView objects (Observers) [1 for each player]
 std::vector <PlayerView *> arrayofPlayerViews;
 
+//-----------CITY OBJECTS----------------------------------->
+std::vector <City *> cities;
+//blue
+City *city_Atlanta = new City("Atlanta", "blue");
+City *city_SanFrancisco = new City("San Francisco", "blue");
+City *city_Chicago = new City("Chicago", "blue");
+City *city_Montreal = new City("Montreal", "blue");
+City *city_Washington = new City("Washington", "blue");
+City *city_NewYork = new City("New York", "blue");
+City *city_London = new City("London", "blue");
+City *city_Madrid = new City("Madrid", "blue");
+City *city_Paris = new City("Paris", "blue");
+City *city_Milan = new City("Milan", "blue");
+City *city_Essen = new City("Essen", "blue");
+City *city_StPetersburg = new City("St Petersburg", "blue");
+
+//yellow
+City *city_LosAngeles = new City("Los Angeles", "yellow");
+City *city_Mexico = new City("Mexico", "yellow");
+City *city_Miami = new City("Miami", "yellow");
+City *city_Bogota = new City("Bogota", "yellow");
+City *city_Lima = new City("Lima", "yellow");
+City *city_Santiago = new City("Santiago", "yellow");
+City *city_BuenosAires = new City("Buenos Aires", "yellow");
+City *city_SaoPaolo = new City("Sao Paolo", "yellow");
+City *city_Lagos = new City("Lagos", "yellow");
+City *city_Kinshasa = new City("Kinshasa", "yellow");
+City *city_Johannesburg = new City("Johannesburg", "yellow");
+City *city_Khartoum = new City("Khartoum", "yellow");
+
+//black
+City *city_Moscow = new City("Moscow", "black");
+City *city_Istanbul = new City("Istanbul", "black");
+City *city_Algers = new City("Algers", "black");
+City *city_LeCaire = new City("LeCaire", "black");
+City *city_Bagdad = new City("Bagdad", "black");
+City *city_Teheran = new City("Teheran", "black");
+City *city_Karachi = new City("Karachi", "black");
+City *city_Ryad = new City("Ryad", "black");
+City *city_Dehli = new City("Dehli", "black");
+City *city_Mumbai = new City("Mumbai", "black");
+City *city_Chennai = new City("Chennai", "black");
+City *city_Calcutta = new City("Calcutta", "black");
+
+//red
+City *city_Pekin = new City("Pekin", "red");
+City *city_Seoul = new City("Seoul", "red");
+City *city_Tokyo = new City("Tokyo", "red");
+City *city_Shanghai = new City("Shanghai", "red");
+City *city_Osaka = new City("Osaka", "red");
+City *city_Taipei = new City("Taipei", "red");
+City *city_HongKong = new City("Hong Kong", "red");
+City *city_Manville = new City("Manville", "red");
+City *city_Bangkok = new City("Bangkok", "red");
+City *city_HoChiMinCity = new City("Ho Chi Min City", "red");
+City *city_Jakarta = new City("Jakarta", "red");
+City *city_Sydney = new City("Sydney", "red");
+
+
+City* cityarr[] = {city_Atlanta,city_SanFrancisco,city_Chicago,city_Montreal,city_Washington,city_NewYork,city_London,city_Madrid,city_Paris,city_Milan,city_Essen,city_StPetersburg,city_LosAngeles,city_Mexico,city_Miami,city_Bogota,city_Lima,city_Santiago,city_BuenosAires,city_SaoPaolo,city_Lagos,city_Kinshasa,city_Johannesburg,city_Khartoum,city_Moscow,city_Istanbul,city_Algers,city_LeCaire,city_Bagdad,city_Teheran,city_Karachi,city_Ryad,city_Dehli,city_Mumbai,city_Chennai,city_Calcutta,city_Pekin,city_Seoul,city_Tokyo,city_Shanghai,city_Osaka,city_Taipei,city_HongKong,city_Manville,city_Bangkok,city_HoChiMinCity,city_Jakarta,city_Sydney};
+
 //Creates <vector> of EventCard that can be used by the players
 std::vector<PlayerCard *> eventCardsAvail; //cast to base class PlayerCard for convenience
 
@@ -91,6 +152,9 @@ ResilientPopulation* resilientpopulationcard=new ResilientPopulation();
 Forecast* forecastcard=new Forecast();
 
 EventCard* eventcardarr[]={airliftcard, onequietnightcard, governmentgrantcard, resilientpopulationcard, forecastcard};
+
+//
+
 
 //---------City cards----------
 
@@ -149,63 +213,60 @@ RedCity* sydney=new RedCity("sydney", "Sydney", "", "");
 
 CityCard* citycardarr[]={sanfrancisco, chicago, atlanta, montreal, washington, newyork, londres, madrid, paris, milan, essen, stpetersbourg, losangeles, mexico, miami, bogota, lima, santiago, buesnosaires, saopaulo, lagos, kinshasa, johannesburg, khartoum, moscou, istanbul, alger, lecaire, bagdad, teheran, karachi, ryad, delhi, mumbai, chennai, calcutta, pekin, seoul, tokyo, shanghai, osaka, taipei, hongkong, manille, bangkok, hochiminhville, jakarta, sydney};
 
-//---------Infection cards----------
-InfectionCard* sanfrancisco_inf = new InfectionCard("sanfrancisco", "San Francisco", "blue", "");
-InfectionCard* chicago_inf = new InfectionCard("chicago", "Chicago", "blue", "");
-InfectionCard* atlanta_inf = new InfectionCard("atlanta", "Atlanta", "blue", "");
-InfectionCard* montreal_inf = new InfectionCard("montreal", "Montreal", "blue", "");
-InfectionCard* washington_inf = new InfectionCard("washington", "Washington", "blue", "");
-InfectionCard* newyork_inf = new InfectionCard("newyork", "New York", "blue", "");
-InfectionCard* londres_inf = new InfectionCard("londres", "Londres", "blue", "");
-InfectionCard* madrid_inf = new InfectionCard("madrid", "Madrid", "blue", "");
-InfectionCard* paris_inf = new InfectionCard("paris", "Paris", "blue", "");
-InfectionCard* milan_inf = new InfectionCard("milan", "Milan", "blue", "");
-InfectionCard* essen_inf = new InfectionCard("essen", "Essen", "blue", "");
-InfectionCard* stpetersbourg_inf = new InfectionCard("stpetersbourg", "St Petersbourg", "blue", "");
+////---------Infection cards----------
+InfectionCard* sanfrancisco_inf = new InfectionCard(city_SanFrancisco, "San Francisco", "blue", "");
+InfectionCard* chicago_inf = new InfectionCard(city_Chicago, "Chicago", "blue", "");
+InfectionCard* atlanta_inf = new InfectionCard(city_Atlanta, "Atlanta", "blue", "");
+InfectionCard* montreal_inf = new InfectionCard(city_Montreal, "Montreal", "blue", "");
+InfectionCard* washington_inf = new InfectionCard(city_Washington, "Washington", "blue", "");
+InfectionCard* newyork_inf = new InfectionCard(city_NewYork, "New York", "blue", "");
+InfectionCard* londres_inf = new InfectionCard(city_London, "London", "blue", "");
+InfectionCard* madrid_inf = new InfectionCard(city_Madrid, "Madrid", "blue", "");
+InfectionCard* paris_inf = new InfectionCard(city_Paris, "Paris", "blue", "");
+InfectionCard* milan_inf = new InfectionCard(city_Milan, "Milan", "blue", "");
+InfectionCard* essen_inf = new InfectionCard(city_Essen, "Essen", "blue", "");
+InfectionCard* stpetersbourg_inf = new InfectionCard(city_StPetersburg, "St Petersburg", "blue", "");
 //Yellow
-InfectionCard* losangeles_inf = new InfectionCard("losangeles", "Los Angeles", "yellow", "");
-InfectionCard* mexico_inf = new InfectionCard("mexico", "Mexico", "yellow", "");
-InfectionCard* miami_inf = new InfectionCard("miami", "Miami", "yellow", "");
-InfectionCard* bogota_inf = new InfectionCard("bogota", "Bogota", "yellow", "");
-InfectionCard* lima_inf = new InfectionCard("lima", "Lima", "yellow", "");
-InfectionCard* santiago_inf = new InfectionCard("santiago", "Santiago", "yellow", "");
-InfectionCard* buesnosaires_inf = new InfectionCard("buenosaires", "Buenos Aires", "yellow", "");
-InfectionCard* saopaulo_inf = new InfectionCard("saopaulo", "Sao Paulo", "yellow", "");
-InfectionCard* lagos_inf = new InfectionCard("lagos", "Lagos", "yellow", "");
-InfectionCard* kinshasa_inf = new InfectionCard("kinshasa", "Kinshasa", "yellow", "");
-InfectionCard* johannesburg_inf = new InfectionCard("johannesburg", "Johannesburg", "yellow", "");
-InfectionCard* khartoum_inf = new InfectionCard("khartoum", "Khartoum", "yellow", "");
+InfectionCard* losangeles_inf = new InfectionCard(city_LosAngeles, "Los Angeles", "yellow", "");
+InfectionCard* mexico_inf = new InfectionCard(city_Mexico, "Mexico", "yellow", "");
+InfectionCard* miami_inf = new InfectionCard(city_Miami, "Miami", "yellow", "");
+InfectionCard* bogota_inf = new InfectionCard(city_Bogota, "Bogota", "yellow", "");
+InfectionCard* lima_inf = new InfectionCard(city_Lima, "Lima", "yellow", "");
+InfectionCard* santiago_inf = new InfectionCard(city_Santiago, "Santiago", "yellow", "");
+InfectionCard* buesnosaires_inf = new InfectionCard(city_BuenosAires, "Buenos Aires", "yellow", "");
+InfectionCard* saopaulo_inf = new InfectionCard(city_SaoPaolo, "Sao Paolo", "yellow", "");
+InfectionCard* lagos_inf = new InfectionCard(city_Lagos, "Lagos", "yellow", "");
+InfectionCard* kinshasa_inf = new InfectionCard(city_Kinshasa, "Kinshasa", "yellow", "");
+InfectionCard* johannesburg_inf = new InfectionCard(city_Johannesburg, "Johannesburg", "yellow", "");
+InfectionCard* khartoum_inf = new InfectionCard(city_Khartoum, "Khartoum", "yellow", "");
 //Black
-InfectionCard* moscou_inf = new InfectionCard("moscou", "Moscou", "black", "");
-InfectionCard* istanbul_inf = new InfectionCard("istanbul", "Istanbul", "black", "");
-InfectionCard* alger_inf = new InfectionCard("alger", "Alger", "black", "");
-InfectionCard* lecaire_inf = new InfectionCard("lecaire", "Le Caire", "black", "");
-InfectionCard* bagdad_inf = new InfectionCard("bagdad", "Bagdad", "black", "");
-InfectionCard* teheran_inf = new InfectionCard("teheran", "Teheran", "black", "");
-InfectionCard* karachi_inf = new InfectionCard("karachi", "Karachi", "black", "");
-InfectionCard* ryad_inf = new InfectionCard("ryad", "Ryad", "black", "");
-InfectionCard* delhi_inf = new InfectionCard("delhi", "Delhi", "black", "");
-InfectionCard* mumbai_inf = new InfectionCard("mumbai", "Mumbai", "black", "");
-InfectionCard* chennai_inf = new InfectionCard("chennai", "Chennai", "black", "");
-InfectionCard* calcutta_inf = new InfectionCard("calcutta", "Calcutta", "black", "");
+InfectionCard* moscou_inf = new InfectionCard(city_Moscow, "Moscow", "black", "");
+InfectionCard* istanbul_inf = new InfectionCard(city_Istanbul, "Istanbul", "black", "");
+InfectionCard* alger_inf = new InfectionCard(city_Algers, "Algers", "black", "");
+InfectionCard* lecaire_inf = new InfectionCard(city_LeCaire, "Le Caire", "black", "");
+InfectionCard* bagdad_inf = new InfectionCard(city_Bagdad, "Bagdad", "black", "");
+InfectionCard* teheran_inf = new InfectionCard(city_Teheran, "Teheran", "black", "");
+InfectionCard* karachi_inf = new InfectionCard(city_Karachi, "Karachi", "black", "");
+InfectionCard* ryad_inf = new InfectionCard(city_Ryad, "Ryad", "black", "");
+InfectionCard* delhi_inf = new InfectionCard(city_Dehli, "Dehli", "black", "");
+InfectionCard* mumbai_inf = new InfectionCard(city_Mumbai, "Mumbai", "black", "");
+InfectionCard* chennai_inf = new InfectionCard(city_Chennai, "Chennai", "black", "");
+InfectionCard* calcutta_inf = new InfectionCard(city_Calcutta, "Calcutta", "black", "");
 //Red
-InfectionCard* pekin_inf = new InfectionCard("pekin", "Pekin", "red", "");
-InfectionCard* seoul_inf = new InfectionCard("seoul", "Seoul", "red", "");
-InfectionCard* tokyo_inf = new InfectionCard("tokyo", "Tokyo", "red", "");
-InfectionCard* shanghai_inf = new InfectionCard("shanghai", "Shanghai", "red", "");
-InfectionCard* osaka_inf = new InfectionCard("osaka", "Osaka", "red", "");
-InfectionCard* taipei_inf = new InfectionCard("taipei", "Taipei", "red", "");
-InfectionCard* hongkong_inf = new InfectionCard("hongkong", "Hong Kong", "red", "");
-InfectionCard* manille_inf = new InfectionCard("manille", "Manille", "red", "");
-InfectionCard* bangkok_inf = new InfectionCard("bangkok", "Bangkok", "red", "");
-InfectionCard* hochiminhville_inf = new InfectionCard("hochiminhville", "Ho Chi Minh Ville", "red", "");
-InfectionCard* jakarta_inf = new InfectionCard("jakarta", "Jakarta", "red", "");
-InfectionCard* sydney_inf = new InfectionCard("sydney", "Sydney", "red", "");
+InfectionCard* pekin_inf = new InfectionCard(city_Pekin, "Pekin", "red", "");
+InfectionCard* seoul_inf = new InfectionCard(city_Seoul, "Seoul", "red", "");
+InfectionCard* tokyo_inf = new InfectionCard(city_Tokyo, "Tokyo", "red", "");
+InfectionCard* shanghai_inf = new InfectionCard(city_Shanghai, "Shanghai", "red", "");
+InfectionCard* osaka_inf = new InfectionCard(city_Osaka, "Osaka", "red", "");
+InfectionCard* taipei_inf = new InfectionCard(city_Taipei, "Taipei", "red", "");
+InfectionCard* hongkong_inf = new InfectionCard(city_HongKong, "Hong Kong", "red", "");
+InfectionCard* manille_inf = new InfectionCard(city_Manville, "Manville", "red", "");
+InfectionCard* bangkok_inf = new InfectionCard(city_Bangkok, "Bangkok", "red", "");
+InfectionCard* hochiminhville_inf = new InfectionCard(city_HoChiMinCity,"Ho Chi Min City", "red", "");
+InfectionCard* jakarta_inf = new InfectionCard(city_Jakarta, "Jakarta", "red", "");
+InfectionCard* sydney_inf = new InfectionCard(city_Sydney, "Sydney", "red", "");
 
 InfectionCard* infectioncardarr[] = { sanfrancisco_inf,chicago_inf,atlanta_inf,montreal_inf, washington_inf, newyork_inf, londres_inf,madrid_inf,paris_inf,milan_inf,essen_inf,stpetersbourg_inf,losangeles_inf, mexico_inf, miami_inf, bogota_inf, lima_inf, santiago_inf, buesnosaires_inf, saopaulo_inf, lagos_inf, kinshasa_inf, johannesburg_inf, khartoum_inf, moscou_inf, istanbul_inf, alger_inf, lecaire_inf, bagdad_inf, teheran_inf, karachi_inf, ryad_inf, delhi_inf, mumbai_inf, chennai_inf, calcutta_inf, pekin_inf, seoul_inf, tokyo_inf, shanghai_inf, osaka_inf, taipei_inf, hongkong_inf, manille_inf, bangkok_inf, hochiminhville_inf, jakarta_inf, sydney_inf };
-
-
-
 
 // <<<-----------------------global objects--------------------------------------------------
 
