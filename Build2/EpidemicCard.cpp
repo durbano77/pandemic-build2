@@ -26,9 +26,9 @@ EpidemicCard::~EpidemicCard(){
 
 }
 
-void EpidemicCard::EventAction(int *remainingDiseaseCubes, int& infectionRate, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard) {
+void EpidemicCard::EventAction(int *remainingDiseaseCubes, bool* isEradicated, int& infectionRate, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard	) {
     Increase(infectionRate);
-    Infect(remainingDiseaseCubes, infectiondeck, infectiondeck_discard);
+    Infect(remainingDiseaseCubes, isEradicated, infectiondeck, infectiondeck_discard);
     Intensify(infectiondeck, infectiondeck_discard);
 
 }
@@ -38,13 +38,13 @@ void EpidemicCard::Increase(int& infectionRate){
 	infectionRate++;
 }
 
-void EpidemicCard::Infect(int *remainingDiseaseCubes, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard){
+void EpidemicCard::Infect(int* remainingDiseaseCubes, bool* isEradicated, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard){
 //Draw the bottom cards from the infection deck and put a cube on that city. Discard that card.
 	InfectionCard* curr_inf = infectiondeck.back();
-	string city = curr_inf->getCardName();
+	City* city = curr_inf->getCity();
 	string color = curr_inf->getCardTextFront();
 	//infect the city	
-	curr_inf->Infect(remainingDiseaseCubes, city, color);
+	curr_inf->Infect(remainingDiseaseCubes, isEradicated, city, color);
 	//add drawn card to discard pile
 	infectiondeck_discard.push_back(curr_inf);
 	//remove card from infection deck
