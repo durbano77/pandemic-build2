@@ -163,6 +163,8 @@ void Player::discardCards(){
             while (cardnb < 1 || cardnb > handsize) {
                 std::cout << "Enter a valid number from 1 to "<< handsize << ":";
                 std::cin >> cardnb;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
             
             if(cardnb>=0 && cardnb<=handsize){

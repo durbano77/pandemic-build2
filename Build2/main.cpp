@@ -22,7 +22,13 @@
 
 //ONLY FOR TEST (TO BE REMOVED)
 City* atlantacity = new City("Atlanta", "blue");
-//END REMOVE HERE (SO WE KNOW EXACTLY WHERE TO STOP FOR ANY FURTHER TEST CASES WE MAY ADD)
+//end remove
+
+void initCities() {
+	//vector of city object pointers
+	cities.insert(cities.end(), cityarr, cityarr + (sizeof(cityarr) / sizeof(cityarr[0])));
+}
+
 
 
 void initInfectionDeck() {
@@ -195,7 +201,7 @@ void initialInfection() {
             string color = curr_inf->getCardTextFront();
             //infect the city
             for (int j = 1; j <= i; j++) {
-                curr_inf->Infect(remainingDiseaseCubes, city, color);
+                curr_inf->Infect(remainingDiseaseCubes, curr_inf->getCity(), color);
             }
             //add drawn card to discard pile
             infectiondeck_discard.push_back(curr_inf);
@@ -211,9 +217,13 @@ int getPlayerCount() {
 	int pCount;	
 	cout << "Please enter the number of players (2-4):";
 	cin >> pCount;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	while (pCount < 2 || pCount > 4) {
 		cout << "Please enter a valid number of players (2-4):";
 		cin >> pCount;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	//clear the screen
 	system("cls");
@@ -249,7 +259,7 @@ void turn(){
         }
         
        //HERE:
-        ic->Infect(remainingDiseaseCubes, "", iccolor);
+        //ic->Infect(remainingDiseaseCubes, "", iccolor);   change "" to City object
         
         
         infectiondeck.pop_back();
@@ -313,6 +323,11 @@ void endGame(){
         infectiondeck_discard[i] = nullptr;
         delete infectiondeck_discard[i];
     }
+	// <vector> cities contains *City
+	for (int i = 0; i < cities.size(); i++) {
+		cities[i] = nullptr;
+		delete cities[i];
+	}
     
     
 }
@@ -324,7 +339,9 @@ int main(){
     
     Graph myGraph;
     GraphView gView(&myGraph);
-    myGraph.createMap();
+
+	initCities();
+    myGraph.createMap(cityarr);
     //myGraph.printGraph();
     
     cin.clear(); // reset any error flags
