@@ -304,67 +304,8 @@ Player(ppawn, refcard, rolecard, p_hand)
 {}
 Medic::Medic (Medic const& med){}
 Medic::~Medic(){}
-void Medic::treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-	//Remove all disease cubes from player's current city
-	//get current city
-	Pawn *pawn = this->getPawn();
-	City *currentCity = pawn->getPawnCity();
-	int cubesRemoved = currentCity->getCubes();
-	currentCity->removeAllCubes();
-	
-	//get disease color (blue 0, yellow 1, black 2, red 3)
-	string dColor = currentCity->getColor();
-	int colorIndex;
-	if (dColor == "blue") {
-		colorIndex = 0;
-	}
-	else if (dColor == "yellow") {
-		colorIndex = 1;
-	}
-	else if (dColor == "black") {
-		colorIndex = 2;
-	}
-	else {//red
-		colorIndex = 3;
-	}	
-	//Increment the diseasecube count of that color disease by however many removed
-	remainingDiseaseCubes[colorIndex] += cubesRemoved;
-	
-	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-	if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-		isEradicated[colorIndex] = true;
-	}
-}
-void Medic::removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-	//Whenever a medic visits a city, any cubes of a CURED DISEASE are automatically removed
-	int cityCubes = this->getPawn()->getPawnCity()->getCubes();
-	string dColor = this->getPawn()->getPawnCity()->getColor();
-	int colorIndex;
-	if (dColor == "blue") {
-		colorIndex = 0;
-	}
-	else if (dColor == "yellow") {
-		colorIndex = 1;
-	}
-	else if (dColor == "black") {
-		colorIndex = 2;
-	}
-	else {//red
-		colorIndex = 3;
-	}
-	if (cityCubes > 0 && isCured[colorIndex] == true) {
-		//medic is in a city with disease cubes, and cure exists for the disease
-		int cubesRemoved = this->getPawn()->getPawnCity()->getCubes();
-		this->getPawn()->getPawnCity()->removeAllCubes();
-		//add the removed cubes back to the pile
-		remainingDiseaseCubes[colorIndex] += cubesRemoved;
-
-		//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-		if (remainingDiseaseCubes[colorIndex] == 24) {
-			isEradicated[colorIndex] = true;
-		}
-	}
-}
+void Medic::removeCubesColor(){}
+void Medic::curedRemoveCubesColor(){}
 
 
 //Scientist
