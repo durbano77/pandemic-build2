@@ -59,7 +59,7 @@ public:
     void buildResearchStation();
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
-    void discoverCure();
+    void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
     void moveAnyPawn();
     

@@ -258,7 +258,48 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
     
 }
 
-void Player::discoverCure(){
+void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated){
+//At any research station, discard 5 City cards of the same color from your hand to cure the disease of that color.
+	//Determine which city cards/color to discard (what color do they have 5 of?)
+	int cityColorCount[4] = { 0,0,0,0 };
+	int theColor;	//will contain the index of the color to cure
+	for (int j = 0; j<player_hand.size(); j++) {
+		if (dynamic_cast<BlueCity*>(player_hand[j])) {
+			cityColorCount[0]++;
+			if (cityColorCount[0] == 5) {
+				theColor = 0;
+				break;
+			}
+		}
+		else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+			cityColorCount[1]++;
+			if (cityColorCount[1] == 5) {
+				theColor = 1;
+				break;
+			}
+		}
+		else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+			cityColorCount[2]++;
+			if (cityColorCount[2] == 5) {
+				theColor = 2;
+				break;
+			}
+		}
+		else if (dynamic_cast<RedCity*>(player_hand[j])) {
+			cityColorCount[3]++;
+			if (cityColorCount[3] == 5) {
+				theColor = 3;
+				break;
+			}
+		}
+		
+	}
+//Move the disease’s cure marker to its Cure Indicator.
+	isCured[theColor] = true;
+//	If no cubes of this color are on the board, this disease is now eradicated.
+	if (remainingDiseaseCubes[theColor] == 24) {
+		isEradicated[theColor] = true;
+	}
 }
 
 void action();
