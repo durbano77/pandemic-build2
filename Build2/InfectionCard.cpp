@@ -31,6 +31,7 @@ std::string InfectionCard::getColor() const{
     return color;
 }
 
+
 void InfectionCard::Infect(int* remainingDiseaseCubes, bool* isEradicated, City* theCity, string color) {
 	//takes a city object and color
 	//are there enough remaining disease cubes?
@@ -52,6 +53,7 @@ void InfectionCard::Infect(int* remainingDiseaseCubes, bool* isEradicated, City*
 		enoughCubes = false;
 		colorIndex = 3;
 	}
+
 	//Has disease been eradicated?
 	if (isEradicated[colorIndex] == true) {
 		//skip placing the cubes.

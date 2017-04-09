@@ -216,9 +216,13 @@ int getPlayerCount() {
 	int pCount;	
 	cout << "Please enter the number of players (2-4):";
 	cin >> pCount;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	while (pCount < 2 || pCount > 4) {
 		cout << "Please enter a valid number of players (2-4):";
 		cin >> pCount;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	//clear the screen
 	system("cls");
