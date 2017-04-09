@@ -31,7 +31,7 @@ std::string InfectionCard::getColor() const{
     return color;
 }
 
-void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string color) {
+void InfectionCard::Infect(int* remainingDiseaseCubes, bool* isEradicated, City* theCity, string color) {
 	//takes a city object and color
 	//are there enough remaining disease cubes?
 	bool enoughCubes = true;
@@ -52,24 +52,30 @@ void InfectionCard::Infect(int* remainingDiseaseCubes, City* theCity, string col
 		enoughCubes = false;
 		colorIndex = 3;
 	}
-
-	if (enoughCubes) {
-		cout << "Infecting " << theCity->getCityName() << " with the " << color << " disease!" << endl;
-		//outbreak scenario?
-		if(city->getCubes() == 3){
-			// outbreak
-
-		}
-		else{
-			//	increment city's disease counter by 1
-			city->addCubes();
-			//	decrease remaining disease cubes of COLOR by 1
-			remainingDiseaseCubes[colorIndex]--;
-		}
+	//Has disease been eradicated?
+	if (isEradicated[colorIndex] == true) {
+		//skip placing the cubes.
 	}
 	else {
-		cout << "There are no more " << color << " disease cubes! Game over!" << endl;
-		//todo: handle gameover
+		//place cubes (if enough remain)
+		if (enoughCubes) {
+			cout << "Infecting " << theCity->getCityName() << " with the " << color << " disease!" << endl;
+			//outbreak scenario?
+			if (city->getCubes() == 3) {
+				// outbreak
+
+			}
+			else {
+				//	increment city's disease counter by 1
+				city->addCubes();
+				//	decrease remaining disease cubes of COLOR by 1
+				remainingDiseaseCubes[colorIndex]--;
+			}
+		}
+		else {
+			cout << "There are no more " << color << " disease cubes! Game over!" << endl;
+			//todo: handle gameover
+		}
 	}
 }
 City* InfectionCard::getCity() {

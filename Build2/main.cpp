@@ -85,91 +85,91 @@ void createRoles(){
                 Pawn dispatcherpawn("pink", atlantacity);
                 Dispatcher* dispatcher = new Dispatcher(&dispatcherpawn, &referencecards[i], &dispatchercard1, dispatcherhand);
                 //This drawpcards function does not work here for each player.. will be implemented
-               // dispatcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for (int k = 0; k < nbcardsplayer; k++) {
+                dispatcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for (int k = 0; k < nbcardsplayer; k++) {
                     dispatcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
                 arrayofPlayerViews.push_back(new PlayerView(dispatcher));
-                dispatcher->setHand(dispatcherhand);
+                //dispatcher->setHand(dispatcherhand);
                 arrayofPlayers.push_back(dispatcher);
                 break;
             }
             case 1:{
                 Pawn medicpawn("orange", atlantacity);
                 Medic* medic=new Medic(&medicpawn, &referencecards[i], &mediccard1, medichand);
-                //medic->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                medic->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     medichand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(medic));
-                medic->setHand(medichand);
+                //medic->setHand(medichand);
                 arrayofPlayers.push_back(medic);
                 break;
             }
             case 2:{
                 Pawn scientistpawn("white", atlantacity);
                 Scientist* scientist=new Scientist(&scientistpawn, &referencecards[i], &scientistcard1, scientisthand);
-//                scientist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                scientist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     scientisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(scientist));
-                scientist->setHand(scientisthand);
+                //scientist->setHand(scientisthand);
                 arrayofPlayers.push_back(scientist);
                 break;
             }
             case 3:{
                 Pawn researcherpawn("brown", atlantacity);
                 Researcher* researcher=new Researcher(&researcherpawn, &referencecards[i], &researchercard1, researcherhand);
-//                researcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                researcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     researcherhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(researcher));
-                researcher->setHand(researcherhand);
+                //researcher->setHand(researcherhand);
                 arrayofPlayers.push_back(researcher);
                 break;
             }
             case 4:{
                 Pawn operationsexpertpawn("palegreen", atlantacity);
                 Operationsexpert* operationsexpert=new Operationsexpert(&operationsexpertpawn, &referencecards[i], &operationsexpertcard1, operationsexperthand);
-               // operationsexpert->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                operationsexpert->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     operationsexperthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(operationsexpert));
-                operationsexpert->setHand(operationsexperthand);
+                //operationsexpert->setHand(operationsexperthand);
                 arrayofPlayers.push_back(operationsexpert);
                 break;
             }
             case 5:{
                 Pawn quarantinespecialistpawn("darkgreen", atlantacity);
                 Quarantinespecialist* quarantinespecialist=new Quarantinespecialist(&quarantinespecialistpawn, &referencecards[i], &quarantinespecialistcard1, quarantinespecialisthand);
-              //  quarantinespecialist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                quarantinespecialist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     quarantinespecialisthand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(quarantinespecialist));
-                quarantinespecialist->setHand(quarantinespecialisthand);
+                //quarantinespecialist->setHand(quarantinespecialisthand);
                 arrayofPlayers.push_back(quarantinespecialist);
                 break;
             }
             case 6:{
                 Pawn contingencyplannerpawn("aqua", atlantacity);
                 Contingencyplanner* contingencyplanner=new Contingencyplanner(&contingencyplannerpawn, &referencecards[i], &contingencyplannercard1,  contingencyplannerhand);
-                //contingencyplanner->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
-                for(int k=0;k<nbcardsplayer;k++){
+                contingencyplanner->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                /*for(int k=0;k<nbcardsplayer;k++){
                     contingencyplannerhand.push_back(playerdeck.back());
                     playerdeck.pop_back();
-                }
+                }*/
 				arrayofPlayerViews.push_back(new PlayerView(contingencyplanner));
-                contingencyplanner->setHand(contingencyplannerhand);
+                //contingencyplanner->setHand(contingencyplannerhand);
                 arrayofPlayers.push_back(contingencyplanner);
                 break;
             }
@@ -200,7 +200,7 @@ void initialInfection() {
             string color = curr_inf->getCardTextFront();
             //infect the city
             for (int j = 1; j <= i; j++) {
-                curr_inf->Infect(remainingDiseaseCubes, curr_inf->getCity(), color);
+                curr_inf->Infect(remainingDiseaseCubes, isEradicated, curr_inf->getCity(), color);
             }
             //add drawn card to discard pile
             infectiondeck_discard.push_back(curr_inf);
@@ -254,7 +254,7 @@ void turn(){
         }
         
        //HERE:
-        ic->Infect(remainingDiseaseCubes, "", iccolor);
+        ic->Infect(remainingDiseaseCubes, isEradicated,ic->getCity(), iccolor);
         
         
         infectiondeck.pop_back();

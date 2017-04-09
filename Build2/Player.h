@@ -57,7 +57,7 @@ public:
     
     void action();
     void buildResearchStation();
-    void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    void virtual treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
     void discoverCure();
     
@@ -84,8 +84,8 @@ public:
     Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Medic (Medic const& med);
     virtual ~Medic();
-    void removeCubesColor();
-    void curedRemoveCubesColor();
+	void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+	void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
 };
 
 class Scientist : public Player{

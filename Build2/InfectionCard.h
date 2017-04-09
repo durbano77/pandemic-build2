@@ -24,7 +24,7 @@ public:
 	string getColor() const;
 
 	//action
-	void Infect(int* remainingDiseaseCubes, City* theCity, string color);
+	void Infect(int* remainingDiseaseCubes, bool* isEradicated, City* theCity, string color);
 
 protected:
     std::string color="";
