@@ -76,7 +76,7 @@ void PlayerView::display(int t){
 
 
 void PlayerView::displayAll(){
-        //p->getPawn()->printPawn();
+        p->getPawn()->printPawn();
         p->printRoleCard();
         p->printRefCard();
         p->printHand();
