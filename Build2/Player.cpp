@@ -97,8 +97,12 @@ void Player::printPlayerName() {
 }
 
 
-std::vector<PlayerCard*>  Player::getHand() const{
+std::vector<PlayerCard*>  Player::getHand(){
     return player_hand;
+}
+
+void Player::addCardtoHand(PlayerCard* pc){
+    player_hand.push_back(pc);
 }
 
 void Player::setHand(std::vector<PlayerCard*> &ha){
@@ -258,7 +262,8 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
             string cname = cityplayer->getCityName();
             
             //checks if the current player has the matching card in their hand
-            for(int j=0; j<player_hand.size();j++){
+            int phs=player_hand.size();
+            for(int j=0; j<phs;j++){
                 if(player_hand[j]->getCardName()==cname){
                     Notify(4); //display pawn info
                     //trigger event matching cards
@@ -272,10 +277,10 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
                     while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
                     
                     if(response=='y' || response=='Y'){
-                        std::vector<PlayerCard*> v=vectorplayers[i]->getHand();
-                        v.push_back(player_hand[j]);
+                        vectorplayers[i]->addCardtoHand(player_hand[j]);
                         delete player_hand[j];
                         player_hand.erase(player_hand.begin() + (j));
+                        phs=player_hand.size(); //change size
                         std::cout<<"City card: "<<cname<<" was successfully given to "<<vectorplayers[i]->getPlayerName()<<std::endl;
                     }
                     else{
@@ -283,18 +288,45 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
                     }
                         
                 }
-                    
-            }
-            //now, compare the inverse [checks if other player has the matching card in their hand]
-            for(int j=0; j<vectorplayers[i]->getHand().size();j++){
-                std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
-                if(otherplayershand[j]->getCardName()==cname){
-                    //trigger event matching cards
-                }
-                
-            }
+             //phs=player_hand.size();
+            }//for
             
+            //now, compare the inverse [checks if other player has the matching card in their hand]
+            int phs2=vectorplayers[i]->getHand().size();
+            for(int k=0; k<phs2;k++){
+                std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
+                if(otherplayershand[k]->getCardName()==cname){
+                    //trigger event matching cards
+                    
+//                    std::cout<< vectorplayers[i]->getPlayerName()<< "has the City card '"<<cname<<"' that matches the city you both are in."<<std::endl;
+//                    char response='a';
+//                    do
+//                    {
+//                        std::cout<< "Do you want take this card from "<< vectorplayers[i]->getPlayerName()<<"? [y/n]"<<std::endl;
+//                        std::cin >> response;
+//                    }
+//                    while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
+//                    
+//                    if(response=='y' || response=='Y'){
+//                        this->addCardtoHand(otherplayershand[k]);
+//                        //delete otherplayershand[k];
+//                        otherplayershand.erase(otherplayershand.begin() + (k));
+//                        phs2=vectorplayers[i]->getHand().size(); //change size
+//                        std::cout<<"City card: "<<cname<<" was successfully taken from "<<vectorplayers[i]->getPlayerName()<<std::endl;
+//                    }
+//                    else{
+//                        //player doesnt want to take the city card
+//                    }
+
+                    
+                }//if
+    
+                
+            }//for
+           
         }
+        
+
     }
     
 }
