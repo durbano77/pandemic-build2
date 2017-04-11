@@ -20,9 +20,7 @@
 #include "Global.h"
 
 
-//ONLY FOR TEST (TO BE REMOVED)
-City* atlantacity = new City("Atlanta", "blue");
-//END REMOVE HERE (SO WE KNOW EXACTLY WHERE TO STOP FOR ANY FURTHER TEST CASES WE MAY ADD)
+BlueCity* atlantatest=new BlueCity("atlanta", "Atlanta", "", ""); //test city card for player actions
 
 
 void initInfectionDeck() {
@@ -34,8 +32,9 @@ void setInitPlayerDeck(){
     playerdeck.insert(playerdeck.end(), citycardarr, citycardarr+(sizeof(citycardarr)/sizeof(citycardarr[0])));
     playerdeck.insert(playerdeck.end(), eventcardarr, eventcardarr+(sizeof(eventcardarr)/sizeof(eventcardarr[0])));
     
-    //Rnd Shuffle playerdeck
     shuffle(playerdeck.begin(), playerdeck.end(), std::default_random_engine(std::random_device()()));
+    
+    playerdeck.push_back(atlantatest);
 
 }
 
@@ -63,17 +62,16 @@ void createRoles(){
             
         } while(!check);
         arrcheck[i] = nb;
-        // std::cout<<arrcheck[i]<<std::endl;    // test method output rand nb
     }
     
     
     // FOR EACH PAWN (PLAYER)...
     // Distributes actual role with switch(rndnumber)
     // Call corresponding Role Player constructor
-    // then distribute PlayerCard's from the <vector> playerdeck to the <vector> player hand
+    // then distribute PlayerCard's with drawpcards
     // arrayOfPlayer[i] points to the role player object created to keep track of all players
     // creates playerview object (observer) for each player (subject)
-    // Set playercard*'s in player_hand's  - Then NOTIFY();
+    // Then NOTIFY();
     for (int i = 0; i < numPlayers; i++) {        
         switch(arrcheck[i]){
             case 0:{
@@ -138,7 +136,6 @@ void createRoles(){
 void addEpCardsPlayerDeck(){
     //insert Epidemic card after initial PlayerCard's were distributed to players
     playerdeck.insert(playerdeck.end(), epcardarr, epcardarr+(sizeof(epcardarr)/sizeof(epcardarr[0])));
-    
     //Rnd Shuffle PlayerDeck
     shuffle(playerdeck.begin(), playerdeck.end(), std::default_random_engine(std::random_device()()));
 }
@@ -299,12 +296,19 @@ int main(){
     //test lines (draw cards)
    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
     arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+
 
     
-    //arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
+    arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
+    arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
     
    // Save savestate = Save();
    // savestate.save_game();

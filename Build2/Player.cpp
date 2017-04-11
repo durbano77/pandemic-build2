@@ -55,6 +55,7 @@ Player::~Player() {
 
 //ACCESSORS & MUTATORS for Member Variables of Class PLAYER
 
+
 Pawn * Player::getPawn() const{
     return playerpawn;
 }
@@ -240,23 +241,54 @@ void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 }
 
 void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
-    City* c=this->getPawn()->getPawnCity();
+//give the City card that matches the city you are in to another player
+//or take the City card that matches the city you are in from another player
+
+    City* cityplayer=this->getPawn()->getPawnCity();
     
     for(int i=0;i<vectorplayers.size();i++){
         City* cityotherplayer = vectorplayers[i]->getPawn()->getPawnCity();
         
-        if(cityotherplayer==c){
-            //this player and another one are in the same city
+        if(cityotherplayer==cityplayer && this!=vectorplayers[i]){
+            //this player and another one are in the same city/they're not the same player
             //checking if one of them has the corresponding city card
-            string cname = c->getCityName();
+            string cname = cityplayer->getCityName();
             
+            //checks if the current player has the matching card in their hand
             for(int j=0; j<player_hand.size();j++){
                 if(player_hand[j]->getCardName()==cname){
+                    Notify(4); //display pawn info
                     //trigger event matching cards
+                    std::cout<< "You have the City card '"<<cname<<"' that matches the city you are in."<<std::endl;
+                    char response='a';
+                    do
+                    {
+                        std::cout<< "Do you want to give it to "<< vectorplayers[i]->getPlayerName()<<"? [y/n]"<<std::endl;
+                        std::cin >> response;
+                    }
+                    while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
+                    
+                    if(response=='y' || response=='Y'){
+                        vectorplayers[i]->getHand().push_back(player_hand[j]);
+                        delete player_hand.at(player_hand.size()-1);
+                        player_hand.erase(player_hand.begin() + (player_hand.size()-1));
+                        std::cout<<"City card: "<<cname<<" was successfully given to "<<vectorplayers[i]->getPlayerName()<<std::endl;
+                    }
+                    else{
+                        //player doesnt want to give the city card
+                    }
+                        
                 }
                     
             }
-            //compare the inverse
+            //now, compare the inverse [checks if other player has the matching card in their hand]
+            for(int j=0; j<vectorplayers[i]->getHand().size();j++){
+                std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
+                if(otherplayershand[j]->getCardName()==cname){
+                    //trigger event matching cards
+                }
+                
+            }
             
         }
     }
@@ -307,13 +339,12 @@ void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 	}
 }
 
-void action();
+
 void buildResearchStation();
 //if in same city as their player card, can build a research station there. if all research stations built, remove one from anywhere on the board
 
-void ShareKnowledge();
-//give the City card that matches the city you are in to another player
-//or take the City card that matches the city you are in from another player
+
+
 
 //Class Implementations for each RolePlayer : Player
 //dispatcher, medic, scientist, researcher, operationsexpert, quarantinespecialist, contingencyplanner
@@ -324,7 +355,7 @@ Dispatcher::Dispatcher( ){
 }
 Dispatcher::Dispatcher(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Dispatcher";}
 Dispatcher::Dispatcher(Dispatcher const& disp){}
 Dispatcher::~Dispatcher(){}
 void Dispatcher::moveAnyPawn(){}
@@ -337,7 +368,7 @@ Medic::Medic(){
 }
 Medic::Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Medic";}
 Medic::Medic (Medic const& med){}
 Medic::~Medic(){}
 void Medic::removeCubesColor(){}
@@ -350,7 +381,7 @@ Scientist::Scientist(){
 }
 Scientist::Scientist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Scientist";}
 Scientist::Scientist (Scientist const& scient){}
 Scientist::~Scientist(){}
 void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
@@ -403,7 +434,7 @@ Researcher::Researcher(){
 }
 Researcher::Researcher(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Researcher";}
 Researcher::Researcher(Researcher const& research){}
 Researcher::~Researcher(){}
 void Researcher::giveCityCard(){} //argument: Citycard to give
@@ -415,7 +446,7 @@ Operationsexpert::Operationsexpert(){
 }
 Operationsexpert::Operationsexpert(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Operations Expert";}
 Operationsexpert::Operationsexpert(Operationsexpert const& opexpert){}
 Operationsexpert::~Operationsexpert(){}
 void Operationsexpert::buildResearchStation(){}
@@ -427,7 +458,7 @@ Quarantinespecialist::Quarantinespecialist(){
 }
 Quarantinespecialist::Quarantinespecialist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Quarantine Specialist";}
 Quarantinespecialist::Quarantinespecialist(Quarantinespecialist const& qspecialist){}
 Quarantinespecialist::~Quarantinespecialist(){}
 void Quarantinespecialist::preventOutbreaks(){}
@@ -439,7 +470,7 @@ Contingencyplanner::Contingencyplanner(){
 }
 Contingencyplanner::Contingencyplanner(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
 Player(ppawn, refcard, rolecard, p_hand)
-{}
+{playername="Contingency Planner";}
 Contingencyplanner::Contingencyplanner(Contingencyplanner const& cplanner){}
 Contingencyplanner::~Contingencyplanner(){}
 void Contingencyplanner::takeEventCard(){}
