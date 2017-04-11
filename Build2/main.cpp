@@ -310,6 +310,8 @@ int main(){
     arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
     arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
     
+    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
    // Save savestate = Save();
    // savestate.save_game();
    // system("pause");

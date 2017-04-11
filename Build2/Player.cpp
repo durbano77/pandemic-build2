@@ -269,9 +269,10 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
                     while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
                     
                     if(response=='y' || response=='Y'){
-                        vectorplayers[i]->getHand().push_back(player_hand[j]);
-                        delete player_hand.at(player_hand.size()-1);
-                        player_hand.erase(player_hand.begin() + (player_hand.size()-1));
+                        std::vector<PlayerCard*> v=vectorplayers[i]->getHand();
+                        v.push_back(player_hand[j]);
+                        delete player_hand[j];
+                        player_hand.erase(player_hand.begin() + (j));
                         std::cout<<"City card: "<<cname<<" was successfully given to "<<vectorplayers[i]->getPlayerName()<<std::endl;
                     }
                     else{
