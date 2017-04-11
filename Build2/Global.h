@@ -35,8 +35,6 @@ int numPlayers = 2;
 RefCard refcard1, refcard2, refcard3, refcard4;
 RefCard referencecards[] = { refcard1, refcard2, refcard3, refcard4 };
 
-//Pawn pink("Pink"), orange("Orange"), white ("White"), brown("Brown"), palegreen("Pale Green"), darkgreen("Dark Green"), aqua("Aqua");
-
 //Creates Role Cards (inherited from Cards)
 DispatcherCard dispatchercard1;
 MedicCard mediccard1;
@@ -129,6 +127,16 @@ City *city_Sydney = new City("Sydney", "red");
 
 
 City* cityarr[] = {city_Atlanta,city_SanFrancisco,city_Chicago,city_Montreal,city_Washington,city_NewYork,city_London,city_Madrid,city_Paris,city_Milan,city_Essen,city_StPetersburg,city_LosAngeles,city_Mexico,city_Miami,city_Bogota,city_Lima,city_Santiago,city_BuenosAires,city_SaoPaolo,city_Lagos,city_Kinshasa,city_Johannesburg,city_Khartoum,city_Moscow,city_Istanbul,city_Algers,city_LeCaire,city_Bagdad,city_Teheran,city_Karachi,city_Ryad,city_Dehli,city_Mumbai,city_Chennai,city_Calcutta,city_Pekin,city_Seoul,city_Tokyo,city_Shanghai,city_Osaka,city_Taipei,city_HongKong,city_Manville,city_Bangkok,city_HoChiMinCity,city_Jakarta,city_Sydney};
+
+//Pawns initializations (do not move.. shoud be put after cities objects)
+Pawn dispatcherpawn("pink", city_Atlanta);
+Pawn medicpawn("orange", city_Atlanta);
+Pawn scientistpawn("white", city_Atlanta);
+Pawn researcherpawn("brown", city_Atlanta);
+Pawn operationsexpertpawn("palegreen", city_Atlanta);
+Pawn quarantinespecialistpawn("darkgreen", city_Atlanta);
+Pawn contingencyplannerpawn("aqua", city_Atlanta);
+
 
 //Creates <vector> of EventCard that can be used by the players
 std::vector<PlayerCard *> eventCardsAvail; //cast to base class PlayerCard for convenience

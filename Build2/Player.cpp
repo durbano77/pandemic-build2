@@ -115,7 +115,7 @@ void Player::printHand(){
 
 void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail){
     
-    
+    Notify(4); //display pawn info to identify the player
     for(int k=0;k<nbcardsdraw;k++){
         if(plyrdeck.back()!=nullptr){
             std::string s1=plyrdeck.back()->getCardName();
@@ -126,7 +126,7 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
             }
             else if(s1.std::string::find(s2) != std::string::npos){
                 eventCardsAvail.push_back(plyrdeck.back());
-                //Notify( ); std::cout<<"EVENT CARD FOUND"<<std::endl;
+                //Notify( );
                 //note: eventcard is pushed to a vector of event cards that can be played anytime
                 //todo: when an eventcard is used by a player, discard it to the playercard discardpile
             }
@@ -139,9 +139,14 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
             std::cout<<"ERR: player deck last card nullptr"<<std::endl;
         }
     }
-    Notify(4); //display pawn info to identify the player
-    Notify(1); //display hand
-    
+   Notify(1); //display hand
+    if(eventCardsAvail.size()>0){
+        for(int j=0;j<eventCardsAvail.size();j++){
+            eventCardsAvail[j]->printCard();
+        }
+    }
+       
+       
     if(player_hand.size()>7){
         discardCards();
     }

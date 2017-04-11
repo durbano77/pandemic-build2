@@ -106,6 +106,7 @@ void PlayerView::displayEpidemicCard(){
     
 }
 
+
 void PlayerView::displayPawn(){  //could be called each time the player moves to another location?
-    //p->getPawn()->printPawn();
+    p->getPawn()->printPawn();
 }

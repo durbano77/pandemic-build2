@@ -44,7 +44,10 @@ City::~City()
 }
 
 string City::getCityName(){
-    return cityname;
+    if(cityname!="")
+        return this->cityname;
+    else
+        return "ERR: city name is void ";
 }
 
 string City::getColor(){
