@@ -16,19 +16,22 @@
 class Pawn {
 public:
     Pawn();
-    Pawn(std::string color, City* c);
+    Pawn(std::string color, City* c, string playerName);
    // Pawn(std::string color, Player* p);
     ~Pawn();
     void printPawn();
     std::string getPawnColor();
 	City* getPawnCity();
     void setPawnCity(City* newpawncity);
+	string getPlayerName();
+	void setPlayerName(string playerName);
     //Player* getPawnPlayer();
     //Player* p;
     
 protected:
     std::string color;
     City* pawncity;
+	string playerName;
     
 };
 

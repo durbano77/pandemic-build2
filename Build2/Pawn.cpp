@@ -14,9 +14,10 @@
 
 Pawn::Pawn(){}
 
-Pawn::Pawn(std::string color, City* c) {
+Pawn::Pawn(std::string color, City* c, string playerName) {
     this->color=color;
     this->pawncity=c;
+	this->playerName = playerName;
 }
 
 
@@ -52,3 +53,9 @@ void Pawn::setPawnCity(City* newpawncity){
     pawncity=newpawncity;
 }
 
+string Pawn::getPlayerName() {
+	return playerName;
+}
+void Pawn::setPlayerName(string playerName) {
+	this->playerName = playerName;
+}
