@@ -127,6 +127,7 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
             }
             else if(s1.std::string::find(s2) != std::string::npos){
                 eventCardsAvail.push_back(plyrdeck.back());
+                player_hand.push_back(plyrdeck.back());
                 //Notify( );
                 //note: eventcard is pushed to a vector of event cards that can be played anytime
                 //todo: when an eventcard is used by a player, discard it to the playercard discardpile
@@ -141,12 +142,14 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
         }
     }
    Notify(1); //display hand
-    if(eventCardsAvail.size()>0){
-        for(int j=0;j<eventCardsAvail.size();j++){
-            eventCardsAvail[j]->printCard();
-        }
-    }
-       
+    
+    //Display all the event cards in the eventCardsAvail vector
+//    if(eventCardsAvail.size()>0){
+//        for(int j=0;j<eventCardsAvail.size();j++){
+//            eventCardsAvail[j]->printCard();
+//        }
+//    }
+    
        
     if(player_hand.size()>7){
         discardCards();
