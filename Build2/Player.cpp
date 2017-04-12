@@ -201,6 +201,23 @@ void Player::action(){
 }
 
 void Player::buildResearchStation(){
+	
+	for (unsigned i = 0; i < player_hand.size(); i++)
+	{
+		
+			if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+			{
+				
+				player_hand.erase(player_hand.begin() + i);
+				playerpawn->getPawnCity()->addResearchStation();
+				playerpawn->getPawnCity()->print();
+				
+				return;
+			}
+		
+	}
+	
+	
 }
 
 void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
@@ -367,7 +384,7 @@ void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 		}
 		
 	}
-//Move the disease’s cure marker to its Cure Indicator.
+//Move the diseaseÂ’s cure marker to its Cure Indicator.
 	isCured[theColor] = true;
 //	If no cubes of this color are on the board, this disease is now eradicated.
 	if (remainingDiseaseCubes[theColor] == 24) {
@@ -456,7 +473,7 @@ void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* is
 		}
 
 	}
-	//Move the disease’s cure marker to its Cure Indicator.
+	//Move the diseaseÂ’s cure marker to its Cure Indicator.
 	isCured[theColor] = true;
 	//	If no cubes of this color are on the board, this disease is now eradicated.
 	if (remainingDiseaseCubes[theColor] == 24) {
@@ -485,7 +502,27 @@ Player(ppawn, refcard, rolecard, p_hand)
 {playername="Operations Expert";}
 Operationsexpert::Operationsexpert(Operationsexpert const& opexpert){}
 Operationsexpert::~Operationsexpert(){}
-void Operationsexpert::buildResearchStation(){}
+void Operationsexpert::buildResearchStation()
+{
+	
+	for (unsigned i = 0; i < player_hand.size(); i++)
+	{
+		
+		
+		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+		{
+			
+			//player_hand.erase(player_hand.begin() + i);
+			playerpawn->getPawnCity()->addResearchStation();
+			playerpawn->getPawnCity()->print();
+			return;
+		}
+
+	}
+
+
+
+}
 void Operationsexpert::moveResearchstationCity(){}
 
 //Quarantinespecialist::
