@@ -46,6 +46,8 @@ public:
 	void createMap();
 	bool operator==(City&);
 
+	bool isNear(City * c);
+
 
 };
 

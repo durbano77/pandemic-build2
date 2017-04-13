@@ -21,3 +21,8 @@ PlayerCard::PlayerCard(std::string title, std::string cardtextfront, std::string
 void PlayerCard::EventAction(){
 
 }
+
+string PlayerCard::tester1() {
+	string s = playercardname;
+	return s;
+}

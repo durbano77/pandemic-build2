@@ -19,6 +19,8 @@ public:
     PlayerCard();
     PlayerCard(std::string playercardname, std::string cardtextfront, std::string cardtextback);
     virtual void EventAction();
+
+	string tester1();
 };
 
 #endif /* PLAYERCARD_H_ */

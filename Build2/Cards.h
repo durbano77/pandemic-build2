@@ -11,6 +11,8 @@
 
 #include <string>
 
+using namespace std;
+
 class Cards{
 protected:
     std::string card_name;
@@ -31,6 +33,8 @@ public:
     void printCard();
     void printCardFront();
     void printCardBack();
+
+	string tester1();
     
 };
 

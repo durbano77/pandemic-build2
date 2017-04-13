@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <string>
 #include "Cards.h"
 
 Cards::Cards(){
@@ -65,3 +66,9 @@ void Cards::printCardBack(){
     std::cout<<this->getCardTextBack();
 }
 
+string Cards::tester1() {
+	string s = card_name;
+	s += card_textfront;
+	s += card_textback;
+	return s;
+}

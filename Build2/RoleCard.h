@@ -16,6 +16,8 @@ private:
 public:
     RoleCard();
     RoleCard(std::string rolename, std::string cardtextfront, std::string cardtextback);
+	
+	string tester1();
 };
 
 class DispatcherCard : public RoleCard{

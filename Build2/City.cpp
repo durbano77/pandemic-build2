@@ -122,3 +122,11 @@ void City::print()
 
 }
 
+string City::tester1() {
+	string s = cityname;
+	s += color;
+	s += to_string(cubes);
+	s += to_string(researchstation);
+	return s;
+}
+

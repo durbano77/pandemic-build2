@@ -63,6 +63,14 @@ public:
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
     void moveAnyPawn();
+
+	string tester1();
+
+	void moveAnywhere();
+	//insert city card above as passed object
+
+
+	void moveNearby(City c);
     
 };
 

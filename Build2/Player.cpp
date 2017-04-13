@@ -9,6 +9,7 @@
 #include "Player.h"
 #include <iostream>
 #include <typeinfo>
+#include "CityCard.h"
 using namespace std;
 
 
@@ -50,6 +51,15 @@ Player::~Player() {
     }
     
     player_hand.clear();
+}
+//======================================
+//save player
+
+string Player::tester1() {
+	string s = playername;
+	//s += playerpawn->tester1();
+	//s += role_card->tester1();
+	return s;
 }
 
 
@@ -548,3 +558,22 @@ Contingencyplanner::Contingencyplanner(Contingencyplanner const& cplanner){}
 Contingencyplanner::~Contingencyplanner(){}
 void Contingencyplanner::takeEventCard(){}
 
+void Player::moveAnywhere() {
+	//insert city card above as passed object
+	//to be implemented when CityCard.h takes a city instead of a string
+	//playerpawn->setPawnCity(//insert city here);
+}
+
+void Player::moveNearby(City c) {
+	bool cont = false;
+	do{
+		bool cont = false;
+		if (playerpawn->getPawnCity == c) {
+			cout << "you are already there, please try again";
+			cont = true;
+		}
+		if(playerpawn->getPawnCity)
+
+	} while (cont);
+
+}

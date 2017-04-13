@@ -27,7 +27,9 @@ public:
 	void setPlayerName(string playerName);
     //Player* getPawnPlayer();
     //Player* p;
-    
+
+	string tester1();
+
 protected:
     std::string color;
     City* pawncity;

@@ -17,6 +17,7 @@
 #include "PlayerView.h"
 //#include "CardsHeaders.h" (through PlayerView - Player - Subject - CardsHeaders)
 //#include "SaveLoad.h"
+#include "SaveBuilder.h"
 #include "Global.h"
 
 
@@ -275,7 +276,28 @@ void endGame(){
     
     
 }
+class SavePlayer : public SaveBuilder {
+public:
+	virtual void buildString(Player* p) {
+		m_save->setString(p->tester1());
+	}
+};
 
+class SaveGame {
+private:
+	SaveBuilder* m_saveBuilder;
+public:
+	void setSaveBuilder(SaveBuilder* sb) {
+		m_saveBuilder = sb;
+	}
+	Save* getSave() {
+		return m_saveBuilder->getSave();
+	}
+	void constructSave(Player* p) {
+		m_saveBuilder->buildString(p);
+
+	}
+};
 
 
 
@@ -316,6 +338,22 @@ int main(){
    // savestate.save_game();
    // system("pause");
    // savestate.load_game();
+
+   //=================================================================
+   //saving
+   //=================================================================
+	SaveGame sg;
+	SaveBuilder* sb = new SavePlayer;
+
+	sg.setSaveBuilder(sb);
+	sg.constructSave(arrayofPlayers[0]);
+	Save* savePlayer = sg.getSave();
+	savePlayer->write();
+
+
+	system("pause");
+
+
     endGame();
     
 }

@@ -188,6 +188,22 @@ void Graph::cityAdjacency(City* c){
 
 }
 
+bool Graph::isNear(City* c) {
+	vertex *from = cityMap.find(c)->second;
+	vector<vertex*> v = from->adj;
+	if (v.empty())
+	{
+		cout << "The city you chose is not nearby, to access it please use a City Card";
+		return false;
+	}
+	else {
+		cout << "You have moved to " << c;
+		return true;
+	}
+		
+
+}
+
 
 Graph::~Graph()
 {

@@ -40,6 +40,7 @@ public:
     //void printListPlayersInCity();
     void print();
 
+	string tester1();
 	
 private:
     string cityname;

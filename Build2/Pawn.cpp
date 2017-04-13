@@ -9,7 +9,11 @@
 #include "Pawn.h"
 #include <string>
 
-
+string Pawn::tester1() {
+	string s = color;
+	s += pawncity->tester1();
+	return s;
+}
 
 
 Pawn::Pawn(){}
@@ -59,3 +63,4 @@ string Pawn::getPlayerName() {
 void Pawn::setPlayerName(string playerName) {
 	this->playerName = playerName;
 }
+
