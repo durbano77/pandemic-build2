@@ -6,11 +6,9 @@ class SaveBuilder {
 protected:
 	Save* m_save;
 public:
-	Save* getSave() {
-		return m_save;
-	}
-	void createNewSave() {
-		m_save = new Save;
-	}
+	Save* getSave();
+
+	void createNewSave();
+
 	virtual void buildString(Player* p) = 0;
 };

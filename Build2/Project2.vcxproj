@@ -148,6 +148,8 @@
     <ClCompile Include="PlayerView.cpp" />
     <ClCompile Include="RefCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
+    <ClCompile Include="SaveBuilder.cpp" />
+    <ClCompile Include="SaveLoad.cpp" />
     <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
