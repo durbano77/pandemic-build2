@@ -122,7 +122,22 @@ public:
     Operationsexpert(Operationsexpert const& opexpert);
     virtual ~Operationsexpert();
     void buildResearchStation();
-    void moveResearchstationCity();
+    void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
+
+class Researcher : public Player{
+public:
+    Researcher();
+    Researcher(Pawn *ppawn, RefCard *refcar){ };
+
+
+
+
+class Researcher : public Player{
+public:
+    Researcher();
+    Researcher(Pawn *ppawn, RefCard *refcar);
+
+
     
 };
 
