@@ -43,7 +43,7 @@ public:
 	void move(City* f, City* t);
 	void addedge(City* from, City* to);
 	void getCityEdge(City*);
-	void createMap();
+	void createMap(City** citiesarr);
 	bool operator==(City&);
 
 
