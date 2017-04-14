@@ -61,7 +61,8 @@ public:
     void CharterFlight(City* acities[]);
         
     
-    void buildResearchStation();
+    void buildResearchStation(std::vector<PlayerCard*> *discardPile);
+);
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
