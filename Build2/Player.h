@@ -59,7 +59,7 @@ public:
     void action();
     void DirectFlight(City* acities[]);
     void CharterFlight(City* acities[]);
-    void shuttleFlight( vector<City*> citVec);
+    void shuttleFlight( City* acities[]);
  
     
     void buildResearchStation(std::vector<PlayerCard*> *discardPile);
