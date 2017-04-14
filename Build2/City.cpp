@@ -57,7 +57,10 @@ string City::getColor(){
 int City::getCubes(){
     return cubes;
 }
-
+bool City::getResearchStation()
+{
+	return researchstation;
+}
 //vector<Pawn*> City::getPawnsInCity()
 //{
 //    return pawnsincity;
