@@ -31,17 +31,30 @@ void Graph::addCityToGraph(City *name)
 	cout << "\nCity already exists!";
 }
 
-void Graph::move(City* f, City* t)
+vector<City*> Graph::adjoiningCities(City* c)
 {
-	/*cMap::iterator itr = cityMap.find(f);
-	cMap::iterator it = cityMap.find(f->getCardName());
-	//vector<City>::iterator it = cityInGraph.begin();
-
-	itr->second->adj;
-	while (itr != cityMap.end())
+	vertex *from = cityMap.find(c)->second;
+	vector<vertex*> v = from->adj;
+	vector <City*> cityVector;
+	if (v.empty())
 	{
+		cout <<c->getCityName()<< "has no connetion\n";
+		return cityVector;
+	}
+	else
+	{
+		cout << "\n City " << from->name->getCityName() << " connected to: " << endl;
+		//vector<vertex*> ::iterator itr = v.begin();
 
-	}*/
+		for (int i = 0; i < v.size(); i++) {
+			cityVector.push_back(v[i]->name);
+		}
+		cout << "\n City " << from->name->getCityName() << " has "<< cityVector.size() ;
+		return cityVector;
+
+	}
+	
+	
 }
 void Graph::addedge(City* f, City* t)
 {
