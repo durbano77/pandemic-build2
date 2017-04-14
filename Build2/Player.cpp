@@ -260,14 +260,17 @@ void Player::CharterFlight(City* acities[]){
 
 }
 
-void Player::buildResearchStation(){
+
+
+void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 	
 	for (unsigned i = 0; i < player_hand.size(); i++)
 	{
 		
 			if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
-			{
-				
+			{			
+
+				discardPile->push_back(player_hand[i]);
 				player_hand.erase(player_hand.begin() + i);
 				playerpawn->getPawnCity()->addResearchStation();
 				playerpawn->getPawnCity()->print();
@@ -643,7 +646,38 @@ void Operationsexpert::buildResearchStation()
 
 
 }
-void Operationsexpert::moveResearchstationCity(){}
+// moves from a city with researchstation to any city
+void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
+{
+	for (unsigned i = 0; i < player_hand.size(); i++)
+
+	{
+		if (toCity->getCityName() == player_hand[i]->getCardName())
+		{
+		
+			discardPile->push_back(player_hand[i]);
+
+			player_hand.erase(player_hand.begin() + i);
+
+			playerpawn->setPawnCity(toCity);
+
+			playerpawn->getPawnCity()->print();
+
+			return;
+
+		}
+			
+		if (i == player_hand.size() - 1)
+
+		{
+
+			cout << "you dont have the city card of " << toCity->getCityName();
+
+		}
+	}
+
+
+}
 
 //Quarantinespecialist::
 Quarantinespecialist::Quarantinespecialist(){
