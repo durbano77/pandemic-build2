@@ -210,26 +210,26 @@ void Player::DirectFlight(City* acities[]){
                 std::cout<<"["<<k+1<<"] "<<acities[k]->getCityName()<<std::endl;
             }
             
-            do
+            while(citychoice>48 || citychoice<1)
             {
                 std::cout<<"Enter the number corresponding to the city you want to fly to: "<<std::endl;
                 std::cin>>citychoice;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
-            while(!std::cin.fail() && citychoice>player_hand.size() && citychoice<1);
-
+            
+            
             string stringcity=acities[citychoice-1]->getCityName();
             this->getPawn()->setPawnCityString(stringcity, acities);
             
             delete player_hand[i];
-           player_hand.erase(player_hand.begin() + (i));
+            player_hand.erase(player_hand.begin() + (i));
         }
         
     }
-
-
-
+    
+    
+    
 }
 
 void Player::CharterFlight(City* acities[]){
@@ -240,25 +240,28 @@ void Player::CharterFlight(City* acities[]){
         std::cout<<"["<<i+1<<"] " <<player_hand[i]->getCardName()<<std::endl;
     }
     int choice=0;
-
-    do
+    
+    while( choice>player_hand.size() || choice<1)
     {
         std::cout<<"Enter the number corresponding to the city you want to fly to: "<<std::endl;
         std::cin>>choice;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    while( !std::cin.fail() && choice>player_hand.size() && choice<1);
     
-
-
+    
+    
     
     string choicecity=player_hand[choice-1]->getCardName();
     this->getPawn()->setPawnCityString(choicecity, acities);
-
+    
     delete player_hand[choice-1];
     player_hand.erase(player_hand.begin() + (choice-1));
-   
-
+    
+    
 }
+
+
 //onlt to move to city with research station
 void Player::shuttleFlight( vector<City*> citVec){
 	vector<City*> cityWithResearchStation;
