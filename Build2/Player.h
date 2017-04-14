@@ -57,6 +57,10 @@ public:
     void discardCards();
     
     void action();
+    void DirectFlight(City* acities[]);
+    void CharterFlight(City* acities[]);
+        
+    
     void buildResearchStation();
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);

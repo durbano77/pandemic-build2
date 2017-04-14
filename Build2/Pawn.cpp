@@ -53,6 +53,17 @@ void Pawn::setPawnCity(City* newpawncity){
     pawncity=newpawncity;
 }
 
+void Pawn::setPawnCityString(string citystringname, City* acities[]){
+
+    for(int i=0;i<48;i++){
+        if(citystringname==acities[i]->getCityName()){
+           this->setPawnCity(acities[i]);
+        }
+    }
+    
+}
+
+
 string Pawn::getPlayerName() {
 	return playerName;
 }

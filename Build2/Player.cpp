@@ -200,6 +200,66 @@ void Player::discardCards(){
 void Player::action(){
 }
 
+void Player::DirectFlight(City* acities[]){
+    string currentcity=this->getPawn()->getPawnCity()->getCityName();
+    for(int i=0;i<player_hand.size();i++){
+        if(currentcity==player_hand[i]->getCardName()){
+            int citychoice=0;
+            std::cout<<"Direct Flight - What city do you want to fly to?"<<std::endl;
+            for(int k=0; k<48;k++){
+                std::cout<<"["<<k+1<<"] "<<acities[k]->getCityName()<<std::endl;
+            }
+            
+            do
+            {
+                std::cout<<"Enter the number corresponding to the city you want to fly to: "<<std::endl;
+                std::cin>>citychoice;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+            while(!std::cin.fail() && citychoice>player_hand.size() && citychoice<1);
+
+            string stringcity=acities[citychoice-1]->getCityName();
+            this->getPawn()->setPawnCityString(stringcity, acities);
+            
+            delete player_hand[i];
+           player_hand.erase(player_hand.begin() + (i));
+        }
+        
+    }
+
+
+
+}
+
+void Player::CharterFlight(City* acities[]){
+    
+    std::cout<<"Charter Flight - What city do you want to fly to?"<<std::endl;
+    std::cout<<"You can choose any city corresponding to one of your city cards in your hand."<<std::endl;
+    for(int i=0;i<player_hand.size();i++){
+        std::cout<<"["<<i+1<<"] " <<player_hand[i]->getCardName()<<std::endl;
+    }
+    int choice=0;
+
+    do
+    {
+        std::cout<<"Enter the number corresponding to the city you want to fly to: "<<std::endl;
+        std::cin>>choice;
+    }
+    while( !std::cin.fail() && choice>player_hand.size() && choice<1);
+    
+
+
+    
+    string choicecity=player_hand[choice-1]->getCardName();
+    this->getPawn()->setPawnCityString(choicecity, acities);
+
+    delete player_hand[choice-1];
+    player_hand.erase(player_hand.begin() + (choice-1));
+   
+
+}
+
 void Player::buildResearchStation(){
 	
 	for (unsigned i = 0; i < player_hand.size(); i++)
