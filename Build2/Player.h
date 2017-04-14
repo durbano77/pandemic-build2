@@ -59,10 +59,10 @@ public:
     void action();
     void DirectFlight(City* acities[]);
     void CharterFlight(City* acities[]);
-    void shuttleFlight( City* acities[]);
+    //void shuttleFlight( City* acities[]);
  
-    
-    void buildResearchStation(std::vector<PlayerCard*> *discardPile);
+    void buildResearchStation
+   // void buildResearchStation(std::vector<PlayerCard*> *discardPile);
 
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
@@ -123,7 +123,8 @@ public:
     Operationsexpert(Operationsexpert const& opexpert);
     virtual ~Operationsexpert();
     void buildResearchStation();
-    void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
+    void moveResearchstationCity();
+  //void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
 
 
 };
