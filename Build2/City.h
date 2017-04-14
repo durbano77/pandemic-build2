@@ -26,6 +26,7 @@ public:
     string getCityName();
     string getColor();
     int getCubes();
+    bool getResearchStation();
     //vector<Pawn*> getPawnsInCity();
     
     void addCubes();
