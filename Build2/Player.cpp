@@ -263,7 +263,7 @@ void Player::CharterFlight(City* acities[]){
 
 
 //onlt to move to city with research station
-void Player::shuttleFlight( vector<City*> citVec){
+/*void Player::shuttleFlight( vector<City*> citVec){
 	vector<City*> cityWithResearchStation;
 	int cityNum;
 	for (int i = 0; i < citVec.size(); i++) {
@@ -331,8 +331,9 @@ void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 	}
 	
 	
-}
-
+}*/
+void Player::buildResearchStation()
+{}
 void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
 	//Remove 1 disease cube from player's current city
 	//get current city
@@ -697,7 +698,8 @@ void Operationsexpert::buildResearchStation()
 
 }
 // moves from a city with researchstation to any city
-void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
+void Operationsexpert::moveResearchstationCity(){}
+/*void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
 {
 	for (unsigned i = 0; i < player_hand.size(); i++)
 
@@ -727,7 +729,7 @@ void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerC
 	}
 
 
-}
+}*/
 
 //Quarantinespecialist::
 Quarantinespecialist::Quarantinespecialist(){
