@@ -44,7 +44,7 @@ public:
 	void addedge(City* from, City* to);
 	void getCityEdge(City*);
 	void createMap(City** citiesarr);
-	vector<CCity*> adjoiningCities(City*);
+	vector<City*> adjoiningCities(City*);
 	bool operator==(City&);
 
 
