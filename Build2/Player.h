@@ -127,14 +127,7 @@ public:
 
 
 };
-class Researcher : public Player{
-public:
-    Researcher();
-    Researcher(Pawn *ppawn, RefCard *refcar);
 
-
-    
-};
 
 class Quarantinespecialist : public Player{
 public:
