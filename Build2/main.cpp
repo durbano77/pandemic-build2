@@ -228,12 +228,13 @@ void initGame(){
     initInfectionDeck();
     
     setInitPlayerDeck();
+
+	initialInfection();
     
     createRoles();
     
     addEpCardsPlayerDeck();
     
-    initialInfection();
     
 }
 
@@ -283,7 +284,7 @@ int main(){
     
     Graph myGraph;
     GraphView gView(&myGraph);
-    myGraph.createMap();
+    myGraph.createMap(cityarr);
     //myGraph.printGraph();
     
     cin.clear(); // reset any error flags
