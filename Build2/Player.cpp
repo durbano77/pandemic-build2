@@ -259,16 +259,63 @@ void Player::CharterFlight(City* acities[]){
    
 
 }
+//onlt to move to city with research station
+void Player::shuttleFlight( vector<City*> citVec){
+	vector<City*> cityWithResearchStation;
+	int cityNum;
+	for (int i = 0; i < citVec.size(); i++) {
+		if (citVec[i]->getResearchStation())
+		{
+			
+			cityWithResearchStation.push_back(citVec[i]);
+		}
+		
+	}
+	cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
+	
+	if (cityWithResearchStation.size() > 0)
+	{
+		cout << "these are these cities with researchStation" << endl;
+		for (int i = 0; i < cityWithResearchStation.size(); i++) {
+			cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
 
+		}
+		
+		do{
+			cout << "enter the number  the city # you want to go to\n";
+			cin >> cityNum; 
+			while (cin.fail()) 
+			{ 
+				cout << "Integer wanted \n";
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+			    //return; 
+			}
+			
+		} while (cityNum <0 || cityNum > cityWithResearchStation.size() );
+		
+		playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
+		cout << "players new city is: "<< playerpawn->getPawnCity()->getCityName()<<endl;
+
+　
+	}
+	else
+	{
+		cout << "no cities with research station" << endl;
+	}
+	
+	
+	
+}
 
 
 void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
-	
+
 	for (unsigned i = 0; i < player_hand.size(); i++)
 	{
-		
-			if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
-			{			
+		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+
+		{			
 
 				discardPile->push_back(player_hand[i]);
 				player_hand.erase(player_hand.begin() + i);
@@ -276,7 +323,7 @@ void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 				playerpawn->getPawnCity()->print();
 				
 				return;
-			}
+		}
 		
 	}
 	
