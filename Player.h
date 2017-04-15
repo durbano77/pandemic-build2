@@ -48,7 +48,7 @@ public:
     std::string getPlayerName() const;
     void printPlayerName();
     
-    std::vector<PlayerCard*>&  getHand();
+    std::vector<PlayerCard*>  getHand();
     void addCardtoHand(PlayerCard* pc);
     void setHand(std::vector<PlayerCard*> &ha);
     void printHand();
@@ -59,10 +59,10 @@ public:
     void action();
     void DirectFlight(City* acities[]);
     void CharterFlight(City* acities[]);
-    //void shuttleFlight( City* acities[]);
+    void shuttleFlight( vector<City*> citVec);
  
-    void buildResearchStation();
-   // void buildResearchStation(std::vector<PlayerCard*> *discardPile);
+    
+    void buildResearchStation(std::vector<PlayerCard*> *discardPile);
 
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void ShareKnowledge(std::vector<Player*> vectorplayers);
@@ -123,8 +123,7 @@ public:
     Operationsexpert(Operationsexpert const& opexpert);
     virtual ~Operationsexpert();
     void buildResearchStation();
-    void moveResearchstationCity();
-  //void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
+    void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
 
 
 };

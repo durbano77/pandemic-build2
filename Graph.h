@@ -22,6 +22,7 @@ class Graph: public Subject
 {
 protected:
 	typedef map<City*, vertex *> cMap;
+	//vmap work;
 	cMap cityMap;
 	vector <City*> cityInGraph;
 public:
