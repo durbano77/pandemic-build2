@@ -42,7 +42,7 @@ public:
 	void move(City* f, City* t);
 	void addedge(City* from, City* to);
 	void getCityEdge(City*);
-	void createMap(City** citiesarr);
+	void createMap(City* citiesarr);
 	vector<City*> adjoiningCities(City*);
 	bool operator==(City&);
 
