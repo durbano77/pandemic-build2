@@ -219,83 +219,74 @@ Graph::~Graph()
 
 
 }
-void  Graph::createMap(City** citiesarr)
+void  Graph::createMap(City* citiesarr)
 {
-
-	City c[48];
-
-
-	//copy cityarr objects into c
-	for (int i = 0; i < 48; i++) {
-		c[i] = *citiesarr[i];
-	}
-
-    
-	vector <City*> v;
+	
+	
+vector <City*> v;
 
 	for (int i = 0; i < 48; i++) {
-		v.push_back(&c[i]);
+		v.push_back(citiesarr[i]);
 	}
 	addC(v);
 
-	addedge(&c[2], &c[14]);
-	addedge(&c[0], &c[14]);
-	addedge(&c[2], &c[12]);
-	addedge(&c[2], &c[13]);
-	addedge(&c[14], &c[13]);
-	addedge(&c[16], &c[13]);
-	addedge(&c[15], &c[13]);
-	addedge(&c[10], &c[11]);
-	addedge(&c[6], &c[10]);
-	addedge(&c[10], &c[9]);
-	addedge(&c[7], &c[8]);
-	addedge(&c[6], &c[8]);
-	addedge(&c[5], &c[7]);
-	addedge(&c[19], &c[7]);
-	addedge(&c[5], &c[6]);
-	addedge(&c[7], &c[6]);
-	addedge(&c[4], &c[5]);
-	addedge(&c[3], &c[5]);
-	addedge(&c[2], &c[1]);
-	addedge(&c[0], &c[2]);
-	addedge(&c[2], &c[3]);
-	addedge(&c[4], &c[3]);
-	addedge(&c[0], &c[4]);
-	addedge(&c[11], &c[25]);
-	addedge(&c[9], &c[25]);
-	addedge(&c[24], &c[25]);
-	addedge(&c[11], &c[24]);
-	addedge(&c[19], &c[20]);
-	addedge(&c[15], &c[19]);
-	addedge(&c[7], &c[19]);
-	addedge(&c[15], &c[18]);
-	addedge(&c[15], &c[16]);
-	addedge(&c[14], &c[15]);
-	addedge(&c[29], &c[30]);
-	addedge(&c[32], &c[30]);
-	addedge(&c[24], &c[29]);
-	addedge(&c[29], &c[28]);
-	addedge(&c[25], &c[26]);
-	addedge(&c[7], &c[26]);
-	addedge(&c[44], &c[46]);
-	addedge(&c[44], &c[45]);
-	addedge(&c[46], &c[45]);
-	addedge(&c[35], &c[44]);
-	addedge(&c[45], &c[43]);
-	addedge(&c[35], &c[42]);
-	addedge(&c[46], &c[42]);
-	addedge(&c[30], &c[33]);
-	addedge(&c[32], &c[33]);
-	addedge(&c[29], &c[32]);
-	addedge(&c[28], &c[32]);
-	addedge(&c[28], &c[31]);
-	addedge(&c[30], &c[31]);
-	addedge(&c[32], &c[34]);
-	addedge(&c[33], &c[34]);
-	addedge(&c[32], &c[35]);
+	addedge(citiesarr[2], citiesarr[14]);
+	addedge(citiesarr[0], citiesarr[14]);
+	addedge(citiesarr[2], citiesarr[12]);
+	addedge(citiesarr[2], citiesarr[13]);
+	addedge(citiesarr[14], citiesarr[13]);
+	addedge(citiesarr[16], citiesarr[13]);
+	addedge(citiesarr[15], citiesarr[13]);
+	addedge(citiesarr[10], citiesarr[11]);
+	addedge(citiesarr[6], citiesarr[10]);
+	addedge(citiesarr[10], citiesarr[9]);
+	addedge(citiesarr[7], citiesarr[8]);
+	addedge(citiesarr[6], citiesarr[8]);
+	addedge(citiesarr[5], citiesarr[7]);
+	addedge(citiesarr[19], citiesarr[7]);
+	addedge(citiesarr[5], citiesarr[6]);
+	addedge(citiesarr[7], citiesarr[6]);
+	addedge(citiesarr[4], citiesarr[5]);
+	addedge(citiesarr[3], citiesarr[5]);
+	addedge(citiesarr[2], citiesarr[1]);
+	addedge(citiesarr[0], citiesarr[2]);
+	addedge(citiesarr[2], citiesarr[3]);
+	addedge(citiesarr[4], citiesarr[3]);
+	addedge(citiesarr[0], citiesarr[4]);
+	addedge(citiesarr[11], citiesarr[25]);
+	addedge(citiesarr[9], citiesarr[25]);
+	addedge(citiesarr[24], citiesarr[25]);
+	addedge(citiesarr[11], citiesarr[24]);
+	addedge(citiesarr[19], citiesarr[20]);
+	addedge(citiesarr[15], citiesarr[19]);
+	addedge(citiesarr[7], citiesarr[19]);
+	addedge(citiesarr[15], citiesarr[18]);
+	addedge(citiesarr[15], citiesarr[16]);
+	addedge(citiesarr[14], citiesarr[15]);
+	addedge(citiesarr[29], citiesarr[30]);
+	addedge(citiesarr[32], citiesarr[30]);
+	addedge(citiesarr[24], citiesarr[29]);
+	addedge(citiesarr[29], citiesarr[28]);
+	addedge(citiesarr[25], citiesarr[26]);
+	addedge(citiesarr[7], citiesarr[26]);
+	addedge(citiesarr[44], citiesarr[46]);
+	addedge(citiesarr[44], citiesarr[45]);
+	addedge(citiesarr[46], citiesarr[45]);
+	addedge(citiesarr[35], citiesarr[44]);
+	addedge(citiesarr[45], citiesarr[43]);
+	addedge(citiesarr[35], citiesarr[42]);
+	addedge(citiesarr[46], citiesarr[42]);
+	addedge(citiesarr[30], citiesarr[33]);
+	addedge(citiesarr[32], citiesarr[33]);
+	addedge(citiesarr[29], citiesarr[32]);
+	addedge(citiesarr[28], citiesarr[32]);
+	addedge(citiesarr[28], citiesarr[31]);
+	addedge(citiesarr[30], citiesarr[31]);
+	addedge(citiesarr[32], citiesarr[34]);
+	addedge(citiesarr[33], citiesarr[34]);
+	addedge(citiesarr[32], citiesarr[35]);
 
-	//getCityEdge(&c[32]);
-	///showCityInfo(&c[47]);
+
 
 	Notify(5);
 	cout << endl;
