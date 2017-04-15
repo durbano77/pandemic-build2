@@ -97,7 +97,7 @@ void Player::printPlayerName() {
 }
 
 
-std::vector<PlayerCard*>  Player::getHand(){
+std::vector<PlayerCard*>&  Player::getHand(){
     return player_hand;
 }
 
@@ -233,12 +233,27 @@ void Player::DirectFlight(City* acities[]){
 }
 
 void Player::CharterFlight(City* acities[]){
-    
+    //TODO: if event card
     std::cout<<"Charter Flight - What city do you want to fly to?"<<std::endl;
     std::cout<<"You can choose any city corresponding to one of your city cards in your hand."<<std::endl;
+    
+    //get all the city cards from player hand
+    std::string strevent="Event";
+    std::vector<int> vcitycardsphand; //vector of index of city cards (to discard event cards) in p_hand
     for(int i=0;i<player_hand.size();i++){
-        std::cout<<"["<<i+1<<"] " <<player_hand[i]->getCardName()<<std::endl;
+        string pcardname=player_hand[i]->getCardName();
+        if(pcardname.std::string::find(strevent) != std::string::npos){
+            ;
+        }else{
+            vcitycardsphand.push_back(i);
+        }
+       
     }
+    
+    for(int j=0;j<vcitycardsphand.size();j++){ //display city cards in a menu
+        std::cout<<"["<<j+1<<"] " <<player_hand[vcitycardsphand[j]]->getCardName()<<std::endl;
+    }
+    
     int choice=0;
     
     while( choice>player_hand.size() || choice<1)
@@ -249,14 +264,13 @@ void Player::CharterFlight(City* acities[]){
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     
+    int indexphand=vcitycardsphand[choice-1];
     
-    
-    
-    string choicecity=player_hand[choice-1]->getCardName();
+    string choicecity=player_hand[indexphand]->getCardName();
     this->getPawn()->setPawnCityString(choicecity, acities);
     
-    delete player_hand[choice-1];
-    player_hand.erase(player_hand.begin() + (choice-1));
+    delete player_hand[indexphand];
+    player_hand.erase(player_hand.begin() + indexphand);
     
     
 }
@@ -377,6 +391,7 @@ void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 	}
 }
 
+
 void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
 //give the City card that matches the city you are in to another player
 //or take the City card that matches the city you are in from another player
@@ -408,7 +423,7 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
                     
                     if(response=='y' || response=='Y'){
                         vectorplayers[i]->addCardtoHand(player_hand[j]);
-                        delete player_hand[j];
+                        
                         player_hand.erase(player_hand.begin() + (j));
                         phs=player_hand.size(); //change size
                         std::cout<<"City card: "<<cname<<" was successfully given to "<<vectorplayers[i]->getPlayerName()<<std::endl;
@@ -424,29 +439,29 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
             //now, compare the inverse [checks if other player has the matching card in their hand]
             int phs2=vectorplayers[i]->getHand().size();
             for(int k=0; k<phs2;k++){
-                std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
-                if(otherplayershand[k]->getCardName()==cname){
+                //std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
+                if((vectorplayers[i]->getHand())[k]->getCardName()==cname){
                     //trigger event matching cards
                     
-//                    std::cout<< vectorplayers[i]->getPlayerName()<< "has the City card '"<<cname<<"' that matches the city you both are in."<<std::endl;
-//                    char response='a';
-//                    do
-//                    {
-//                        std::cout<< "Do you want take this card from "<< vectorplayers[i]->getPlayerName()<<"? [y/n]"<<std::endl;
-//                        std::cin >> response;
-//                    }
-//                    while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
-//                    
-//                    if(response=='y' || response=='Y'){
-//                        this->addCardtoHand(otherplayershand[k]);
-//                        //delete otherplayershand[k];
-//                        otherplayershand.erase(otherplayershand.begin() + (k));
-//                        phs2=vectorplayers[i]->getHand().size(); //change size
-//                        std::cout<<"City card: "<<cname<<" was successfully taken from "<<vectorplayers[i]->getPlayerName()<<std::endl;
-//                    }
-//                    else{
-//                        //player doesnt want to take the city card
-//                    }
+                    std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<cname<<"' that matches the city you both are in."<<std::endl;
+                    char response='a';
+                    do
+                    {
+                        std::cout<< "Do you want take this card from "<< vectorplayers[i]->getPlayerName()<<"? [y/n]"<<std::endl;
+                        std::cin >> response;
+                    }
+                    while( !std::cin.fail() && response!='y' && response!='n' && response!='Y' && response!='N' );
+                    
+                    if(response=='y' || response=='Y'){
+                        this->addCardtoHand((vectorplayers[i]->getHand())[k]);
+                       
+                        (vectorplayers[i]->getHand()).erase((vectorplayers[i]->getHand()).begin() + (k));
+                        phs2=vectorplayers[i]->getHand().size(); //change size
+                        std::cout<<"City card: "<<cname<<" was successfully taken from "<<vectorplayers[i]->getPlayerName()<<std::endl;
+                    }
+                    else{
+                        //player doesnt want to take the city card
+                    }
 
                     
                 }//if

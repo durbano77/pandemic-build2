@@ -298,9 +298,21 @@ int main(){
     //string sa=arrayofPlayers[0]->getPawn()->getPawnCity()->getCityName();
     //std::cout<<sa<<std::endl;
     
-    arrayofPlayers[0]->CharterFlight(cityarr);
+    arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
+    arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
     arrayofPlayers[0]->getPawn()->printPawn();
     arrayofPlayers[0]->printHand();
+    arrayofPlayers[1]->getPawn()->printPawn();
+    arrayofPlayers[1]->printHand();
+    
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+//    arrayofPlayers[0]->CharterFlight(cityarr);
+//    arrayofPlayers[0]->getPawn()->printPawn();
+//    arrayofPlayers[0]->printHand();
     
     //test lines (draw cards)
  //  arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
@@ -316,8 +328,6 @@ int main(){
 
 
     
-  //  arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
-  //  arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
     
   //  arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
   //  arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);

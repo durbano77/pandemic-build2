@@ -48,7 +48,7 @@ public:
     std::string getPlayerName() const;
     void printPlayerName();
     
-    std::vector<PlayerCard*>  getHand();
+    std::vector<PlayerCard*>&  getHand();
     void addCardtoHand(PlayerCard* pc);
     void setHand(std::vector<PlayerCard*> &ha);
     void printHand();
