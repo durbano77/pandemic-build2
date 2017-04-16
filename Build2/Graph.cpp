@@ -5,23 +5,23 @@ Graph::Graph(){
 
 }
 
-void Graph::addC(vector<City*>cityVector){
-
-	//vector<City*>::iterator it = cityVector.begin();
-	for (unsigned i = 0; i < cityVector.size(); i++)
-	{
-		addCityToGraph(cityVector[i]);
-	}
-
-	//Notify();
-}
-void Graph::addCityToGraph(City *name)
+//void Graph::addC(vector<City*>cityVector){
+//
+//	//vector<City*>::iterator it = cityVector.begin();
+//	for (unsigned i = 0; i < cityVector.size(); i++)
+//	{
+//		addCityToGraph(cityVector[i]);
+//	}
+//
+//	//Notify();
+//}
+void Graph::addCityToGraph(City *name, vertex* v)
 {
 	cMap::iterator itr = cityMap.find(name);
 	if (itr == cityMap.end())
 	{
-		vertex *v;
-		v = new vertex(name);
+		//vertex *v;
+		//v = new vertex(name);
 		cityMap[name] = v;
 		cityInGraph.push_back(name);
 		return;
@@ -43,30 +43,33 @@ vector<City*> Graph::adjoiningCities(City* c)
 	}
 	else
 	{
-		cout << "\n City " << from->name->getCityName() << " connected to: " << endl;
+		//cout << "\n City " << from->name->getCityName() << " connected to: " << endl;
 		//vector<vertex*> ::iterator itr = v.begin();
 
 		for (int i = 0; i < v.size(); i++) {
 			cityVector.push_back(v[i]->name);
 		}
-		cout << "\n City " << from->name->getCityName() << " has "<< cityVector.size() ;
+		//cout << "\n City " << from->name->getCityName() << " has " << cityVector.size() << " cities it is connected to" << endl;;
 		return cityVector;
 
 	}
 	
 	
 }
-void Graph::addedge(City* f, City* t)
+void Graph::addedge(City* f, City* t) //OK
 {
+    
 	//cMap::iterator itr = cityMap.find(f)->second; //find(f);
-	vertex *from = (cityMap.find(f)->second);
-	vertex *to = (cityMap.find(t)->second);
-	vertex *edge = to;
+    //vertex *from = (cityMap.find(f)->second);
+     //   vertex *to = (cityMap.find(t)->second);
+    //    vertex *edge = to;
 	//cityMap.
-	from->adj.push_back(edge);
-	to->adj.push_back(from);
+	cityMap.find(f)->second->adj.push_back(cityMap.find(t)->second);
+	cityMap.find(t)->second->adj.push_back(cityMap.find(f)->second);
 	//Notify();
+    
 }
+
 void Graph::printGraph()
 {
 	cMap::iterator itr = cityMap.begin();
@@ -136,7 +139,7 @@ void Graph::getCityEdge(City* c) {
 /*
 	display the cities and therir connections
 */
-void Graph::cityAndConnection()
+void Graph::cityAndConnection() //OK
 {
 	cMap::iterator itr = cityMap.begin();
 	cout << "\nCity with connection\n" << endl;
@@ -151,7 +154,7 @@ void Graph::cityAndConnection()
 	
 
 }
-void Graph::cityConnection(City* c) {
+void Graph::cityConnection(City* c) { //OK
 
 	vertex *from = cityMap.find(c)->second;
 	vector<vertex*> v = from->adj;
@@ -161,11 +164,11 @@ void Graph::cityConnection(City* c) {
 	}
 	else
 	{
-		cout << "\n City " << from->name->getCityName() << " connected to: " << endl;
+		//cout << "\n City " << from->name->getCityName() << " connected to: " << endl;
 		//vector<vertex*> ::iterator itr = v.begin();
-
+		cout << "\n City " << from->name->getCityName() << " has " << v.size() << " cities it is connected to" << endl;;
 		for (int i = 0; i < v.size(); i++) {
-			cout << v[i]->name->getCityName() << endl;
+			cout <<i+1 << " "<< v[i]->name->getCityName() << endl;
 		}
 
 
@@ -219,16 +222,30 @@ Graph::~Graph()
 
 
 }
-void  Graph::createMap(City* citiesarr)
+vector <City*>  Graph::getCityInGraph()
 {
-	
-	
-vector <City*> v;
+	return cityInGraph;
+
+}
+void  Graph::createMap(City* citiesarr[], vertex* vertexarr[])
+{
+
+	//City c[48];
+
+
+	//copy cityarr objects into c
+	for (int i = 0; i < 48; i++) {
+		//c[i] = *citiesarr[i];
+	}
+
+    
+	vector <City*> v;
 
 	for (int i = 0; i < 48; i++) {
-		v.push_back(citiesarr[i]);
+		addCityToGraph(citiesarr[i], vertexarr[i]);
+		//v.push_back(citiesarr[i]);
 	}
-	addC(v);
+	//addC(v);
 
 	addedge(citiesarr[2], citiesarr[14]);
 	addedge(citiesarr[0], citiesarr[14]);
@@ -286,7 +303,8 @@ vector <City*> v;
 	addedge(citiesarr[33], citiesarr[34]);
 	addedge(citiesarr[32], citiesarr[35]);
 
-
+	//getCityEdge(&c[32]);
+	///showCityInfo(&c[47]);
 
 	Notify(5);
 	cout << endl;

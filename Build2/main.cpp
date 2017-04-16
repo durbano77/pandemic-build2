@@ -238,6 +238,8 @@ void initGame(){
     
 }
 
+
+
 void endGame(){
     
     // <vector> arrayofPlayerViews contains all *PlayerView (1 per player)
@@ -277,60 +279,104 @@ void endGame(){
     
 }
 
+//move to Player::drive
+void drive(Player* p, Graph* graph)
+{
+    
+    vector<City*> cit = graph->adjoiningCities(p->getPawn()->getPawnCity());
+    //graph->cityConnection(p->getPawn()->getPawnCity());
+    //cout << cit.size() << " city adjoining to " << p->getPawn()->getPawnCity()->getCityName() << endl;
+    
+    graph->cityConnection(p->getPawn()->getPawnCity());
+    int cityNum;
+    
+    
+    if (cit.size() > 0)
+    {
+        
+        do{
+            cout << "enter the city # you want to drive to\n";
+            cin >> cityNum;
+            while (cin.fail())
+            {
+                cout << "Integer wanted please enter the city number \n";
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                //return;
+            }
+            
+        } while (cityNum <0 || cityNum > cit.size());
+        
+        p->getPawn()->setPawnCity(cit[cityNum - 1]);
+        cout << "players is now in new city : " << p->getPawn()->getPawnCity()->getCityName() << endl;
+        
+        
+        
+    }
+    
+    
+}
 
 
 
 int main(){
     
-    Graph myGraph;
-    GraphView gView(&myGraph);
-    myGraph.createMap(cityarr);
-    //myGraph.printGraph();
-    
+    //  Graph myGraph;
+   // GraphView gView(&myGraph);
+  //  myGraph.createMap(cityarr);
+
+    myGraph->createMap(cityarr, vertexarr);
+    myGraph->cityAndConnection();
     cin.clear(); // reset any error flags
-   // cin.ignore(32767, '\n'); // ignore any characters in the input buffer until we find an enter character
-   // cin.get(); // get one more char from the user
+
 
     
     initGame();
     
-    //arrayofPlayers[0]->getPawn()->setPawnCityString("Pekin", cityarr);
-    //string sa=arrayofPlayers[0]->getPawn()->getPawnCity()->getCityName();
-    //std::cout<<sa<<std::endl;
+    vector <City*> vtest = vertexarr[0]->getAdjCities();
+    vector <City*> vtest1 = vertexarr[1]->getAdjCities();
+    drive(arrayofPlayers[0], myGraph);
     
-    arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
-    arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
-    arrayofPlayers[0]->getPawn()->printPawn();
-    arrayofPlayers[0]->printHand();
-    arrayofPlayers[1]->getPawn()->printPawn();
-    arrayofPlayers[1]->printHand();
+    //vertex_Atlanta->getAdjCities();
+    city_Atlanta->addResearchStation();
+    city_Bagdad->addResearchStation();
+
+    system("pause");
     
+//SetPawnCityString : moving the pawn to a city with arg string city name
+//arrayofPlayers[0]->getPawn()->setPawnCityString("Pekin", cityarr);
+//string sa=arrayofPlayers[0]->getPawn()->getPawnCity()->getCityName();
+//std::cout<<sa<<std::endl;
+    
+    
+//Charter Flight & Direct Flight (OK)
+//    arrayofPlayers[0]->DirectFlight(cityarr);
+//    arrayofPlayers[0]->getPawn()->printPawn();
+//    
+//    arrayofPlayers[1]->CharterFlight(cityarr);
+//    arrayofPlayers[1]->getPawn()->printPawn();
+//    
+    
+//Share Knowledge (OK)
+//    arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
+//    arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
+//    arrayofPlayers[0]->getPawn()->printPawn();
+//    arrayofPlayers[0]->printHand();
+//    arrayofPlayers[1]->getPawn()->printPawn();
+//    arrayofPlayers[1]->printHand();
+    
+//Draw player card (OK)
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->CharterFlight(cityarr);
 //    arrayofPlayers[0]->getPawn()->printPawn();
 //    arrayofPlayers[0]->printHand();
     
-    //test lines (draw cards)
- //  arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
- //   arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
 
 
-    
-    
-  //  arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-  //  arrayofPlayers[1]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+
    // Save savestate = Save();
    // savestate.save_game();
    // system("pause");

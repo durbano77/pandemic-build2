@@ -13,7 +13,8 @@
 
 //----------- GLOBAL OBJECTS---------------------------------------------------->>>
 //Contains only global objects (cards, pawns, player hands, array of players, array of playerviews, playerdeck, discard pile, etc.)
-
+//Graph* myGraph;
+//vertex* myVertex[];
 const int nbplayers = 4;
 const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
@@ -68,7 +69,7 @@ std::vector <Player*> arrayofPlayers;
 std::vector <PlayerView *> arrayofPlayerViews;
 
 //-----------CITY OBJECTS----------------------------------->
-std::vector <City *> cities;
+std::vector <City *> citiesInGraph;
 //blue
 City *city_Atlanta = new City("Atlanta", "blue");
 City *city_SanFrancisco = new City("San Francisco", "blue");
@@ -275,6 +276,67 @@ InfectionCard* jakarta_inf = new InfectionCard(city_Jakarta, "Jakarta", "red", "
 InfectionCard* sydney_inf = new InfectionCard(city_Sydney, "Sydney", "red", "");
 
 InfectionCard* infectioncardarr[] = { sanfrancisco_inf,chicago_inf,atlanta_inf,montreal_inf, washington_inf, newyork_inf, londres_inf,madrid_inf,paris_inf,milan_inf,essen_inf,stpetersbourg_inf,losangeles_inf, mexico_inf, miami_inf, bogota_inf, lima_inf, santiago_inf, buesnosaires_inf, saopaulo_inf, lagos_inf, kinshasa_inf, johannesburg_inf, khartoum_inf, moscou_inf, istanbul_inf, alger_inf, lecaire_inf, bagdad_inf, teheran_inf, karachi_inf, ryad_inf, delhi_inf, mumbai_inf, chennai_inf, calcutta_inf, pekin_inf, seoul_inf, tokyo_inf, shanghai_inf, osaka_inf, taipei_inf, hongkong_inf, manille_inf, bangkok_inf, hochiminhville_inf, jakarta_inf, sydney_inf };
+//-----------------------------------------------------------------------------------------------//
+std::vector <vertex *> verticies;
+//blue
+Graph* myGraph = new Graph(); 
+vertex *vertex_Atlanta = new vertex(city_Atlanta);// , myGraph);
+vertex*vertex_SanFrancisco = new vertex(city_SanFrancisco);
+vertex*vertex_Chicago = new vertex(city_Chicago);
+vertex*vertex_Montreal = new vertex(city_Montreal);
+vertex*vertex_Washington = new vertex(city_Washington);
+vertex*vertex_NewYork = new vertex(city_NewYork);
+vertex*vertex_London = new vertex(city_London);
+vertex*vertex_Madrid = new vertex(city_Madrid);
+vertex *vertex_Paris = new vertex(city_Paris);
+vertex *vertex_Milan = new vertex(city_Milan);
+vertex *vertex_Essen = new vertex(city_Essen);
+vertex *vertex_StPetersburg = new vertex(city_StPetersburg);
+
+//yellow
+vertex *vertex_LosAngeles = new vertex(city_LosAngeles);
+vertex *vertex_Mexico = new vertex(city_Mexico);
+vertex *vertex_Miami = new vertex(city_Miami);
+vertex *vertex_Bogota = new vertex(city_Bogota);
+vertex *vertex_Lima = new vertex(city_Lima);
+vertex *vertex_Santiago = new vertex(city_Santiago);
+vertex *vertex_BuenosAires = new vertex(city_BuenosAires);
+vertex *vertex_SaoPaolo = new vertex(city_SaoPaolo);
+vertex *vertex_Lagos = new vertex(city_Lagos);
+vertex *vertex_Kinshasa = new vertex(city_Kinshasa);
+vertex *vertex_Johannesburg = new vertex(city_Johannesburg);
+vertex *vertex_Khartoum = new vertex(city_Khartoum);
+
+//black
+vertex *vertex_Moscow = new vertex(city_Moscow);
+vertex *vertex_Istanbul = new vertex(city_Istanbul);
+vertex *vertex_Algers = new vertex(city_Algers);
+vertex *vertex_LeCaire = new vertex(city_LeCaire);
+vertex *vertex_Bagdad = new vertex(city_Bagdad);
+vertex *vertex_Teheran = new vertex(city_Teheran);
+vertex *vertex_Karachi = new vertex(city_Karachi);
+vertex *vertex_Ryad = new vertex(city_Ryad);
+vertex *vertex_Dehli = new vertex(city_Dehli);
+vertex *vertex_Mumbai = new vertex(city_Mumbai);
+vertex *vertex_Chennai = new vertex(city_Chennai);
+vertex *vertex_Calcutta = new vertex(city_Calcutta);
+
+//red
+vertex *vertex_Pekin = new vertex(city_Pekin);
+vertex *vertex_Seoul = new vertex(city_Seoul);
+vertex *vertex_Tokyo = new vertex(city_Tokyo);
+vertex *vertex_Shanghai = new vertex(city_Shanghai);
+vertex *vertex_Osaka = new vertex(city_Osaka);
+vertex *vertex_Taipei = new vertex(city_Taipei);
+vertex *vertex_HongKong = new vertex(city_HongKong);
+vertex *vertex_Manville = new vertex(city_Manville);
+vertex *vertex_Bangkok = new vertex(city_Bangkok);
+vertex *vertex_HoChiMinCity = new vertex(city_HoChiMinCity);
+vertex *vertex_Jakarta = new vertex(city_Jakarta);
+vertex *vertex_Sydney = new vertex(city_Sydney);
+
+
+vertex* vertexarr[] = { vertex_Atlanta, vertex_SanFrancisco, vertex_Chicago, vertex_Montreal, vertex_Washington, vertex_NewYork, vertex_London, vertex_Madrid, vertex_Paris, vertex_Milan, vertex_Essen, vertex_StPetersburg, vertex_LosAngeles, vertex_Mexico, vertex_Miami, vertex_Bogota, vertex_Lima, vertex_Santiago, vertex_BuenosAires, vertex_SaoPaolo, vertex_Lagos, vertex_Kinshasa, vertex_Johannesburg, vertex_Khartoum, vertex_Moscow, vertex_Istanbul, vertex_Algers, vertex_LeCaire, vertex_Bagdad, vertex_Teheran, vertex_Karachi, vertex_Ryad, vertex_Dehli, vertex_Mumbai, vertex_Chennai, vertex_Calcutta, vertex_Pekin, vertex_Seoul, vertex_Tokyo, vertex_Shanghai, vertex_Osaka, vertex_Taipei, vertex_HongKong, vertex_Manville, vertex_Bangkok, vertex_HoChiMinCity, vertex_Jakarta, vertex_Sydney };
 
 // <<<-----------------------global objects--------------------------------------------------
 
