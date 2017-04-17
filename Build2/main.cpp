@@ -280,44 +280,6 @@ void endGame(){
     
 }
 
-//move to Player::drive
-void drive(Player* p, Graph* graph)
-{
-    
-    vector<City*> cit = graph->adjoiningCities(p->getPawn()->getPawnCity());
-    //graph->cityConnection(p->getPawn()->getPawnCity());
-    //cout << cit.size() << " city adjoining to " << p->getPawn()->getPawnCity()->getCityName() << endl;
-    
-    graph->cityConnection(p->getPawn()->getPawnCity());
-    int cityNum;
-    
-    
-    if (cit.size() > 0)
-    {
-        
-        do{
-            cout << "enter the city # you want to drive to\n";
-            cin >> cityNum;
-            while (cin.fail())
-            {
-                cout << "Integer wanted please enter the city number \n";
-                cin.clear();
-                cin.ignore(INT_MAX, '\n');
-                //return;
-            }
-            
-        } while (cityNum <0 || cityNum > cit.size());
-        
-        p->getPawn()->setPawnCity(cit[cityNum - 1]);
-        cout << "players is now in new city : " << p->getPawn()->getPawnCity()->getCityName() << endl;
-        
-        
-        
-    }
-    
-    
-}
-
 
 
 int main(){
@@ -335,11 +297,10 @@ int main(){
     initGame();
     
     Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
-    m.displayMenu(cityarr);
+    m.doMenu(cityarr);
     
     vector <City*> vtest = vertexarr[0]->getAdjCities();
     vector <City*> vtest1 = vertexarr[1]->getAdjCities();
-    drive(arrayofPlayers[0], myGraph);
     
     //vertex_Atlanta->getAdjCities();
     city_Atlanta->addResearchStation();
