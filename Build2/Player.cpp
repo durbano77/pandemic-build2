@@ -277,27 +277,22 @@ void Player::CharterFlight(City* acities[]){
 
 
 //onlt to move to city with research station
-/*void Player::shuttleFlight( vector<City*> citVec){
+void Player::shuttleFlight(City* acities[]){
 	vector<City*> cityWithResearchStation;
 	int cityNum;
-	for (int i = 0; i < citVec.size(); i++) {
-		if (citVec[i]->getResearchStation())
+	for (int i = 0; i < 48; i++) {
+		if (acities[i]->getResearchStation())
 		{
-			
-			cityWithResearchStation.push_back(citVec[i]);
-		}
-		
+			cityWithResearchStation.push_back(acities[i]);
+	        }
 	}
-	cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
-	
+  	cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
 	if (cityWithResearchStation.size() > 0)
 	{
 		cout << "these are these cities with researchStation" << endl;
 		for (int i = 0; i < cityWithResearchStation.size(); i++) {
 			cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
-
 		}
-		
 		do{
 			cout << "enter the number  the city # you want to go to\n";
 			cin >> cityNum; 
@@ -308,23 +303,15 @@ void Player::CharterFlight(City* acities[]){
 				cin.ignore(INT_MAX, '\n');
 			    //return; 
 			}
-			
 		} while (cityNum <0 || cityNum > cityWithResearchStation.size() );
-		
-		playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
+ 		playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
 		cout << "players new city is: "<< playerpawn->getPawnCity()->getCityName()<<endl;
-
-　
 	}
 	else
 	{
-		cout << "no cities with research station" << endl;
+		cout << "  There are no cities with research station" << endl;
 	}
-	
-	
-	
 }
-
 
 void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 
@@ -333,7 +320,6 @@ void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
 
 		{			
-
 				discardPile->push_back(player_hand[i]);
 				player_hand.erase(player_hand.begin() + i);
 				playerpawn->getPawnCity()->addResearchStation();
@@ -344,10 +330,8 @@ void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 		
 	}
 	
-	
-}*/
-void Player::buildResearchStation()
-{}
+}
+
 void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
 	//Remove 1 disease cube from player's current city
 	//get current city
@@ -660,7 +644,6 @@ void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* is
 				break;
 			}
 		}
-
 	}
 	//Move the diseases cure marker to its Cure Indicator.
 	isCured[theColor] = true;
@@ -693,58 +676,37 @@ Operationsexpert::Operationsexpert(Operationsexpert const& opexpert){}
 Operationsexpert::~Operationsexpert(){}
 void Operationsexpert::buildResearchStation()
 {
-	
 	for (unsigned i = 0; i < player_hand.size(); i++)
 	{
-		
-		
 		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
 		{
-			
-			//player_hand.erase(player_hand.begin() + i);
 			playerpawn->getPawnCity()->addResearchStation();
 			playerpawn->getPawnCity()->print();
 			return;
 		}
-
 	}
-
-
-
 }
 // moves from a city with researchstation to any city
-void Operationsexpert::moveResearchstationCity(){}
-/*void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
+void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
 {
 	for (unsigned i = 0; i < player_hand.size(); i++)
-
 	{
 		if (toCity->getCityName() == player_hand[i]->getCardName())
 		{
-		
+
 			discardPile->push_back(player_hand[i]);
-
 			player_hand.erase(player_hand.begin() + i);
-
 			playerpawn->setPawnCity(toCity);
-
 			playerpawn->getPawnCity()->print();
-
 			return;
-
 		}
-			
+		
 		if (i == player_hand.size() - 1)
-
 		{
-
 			cout << "you dont have the city card of " << toCity->getCityName();
-
 		}
 	}
-
-
-}*/
+}
 
 //Quarantinespecialist::
 Quarantinespecialist::Quarantinespecialist(){
