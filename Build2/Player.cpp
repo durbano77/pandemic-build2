@@ -396,49 +396,63 @@ bool Player::buildResearchStation(vector<PlayerCard*> *discardPile, bool toexecu
     return false;
 }
 
-void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
-    //Remove 1 disease cube from player's current city
-    //get current city
-    Pawn *pawn = this->getPawn();
-    City *currentCity = pawn->getPawnCity();
-    currentCity->removeCubes();
-    
-    //Increment the diseasecube count of that color disease by 1
-    //get disease color (blue 0, yellow 1, black 2, red 3)
-    string dColor = currentCity->getColor();
-    int colorIndex;
-    if (dColor == "blue") {
-        colorIndex = 0;
-    }
-    else if (dColor == "yellow") {
-        colorIndex = 1;
-    }
-    else if (dColor == "black") {
-        colorIndex = 2;
-    }
-    else {//red
-        colorIndex = 3;
-    }
-    if (remainingDiseaseCubes[colorIndex] < 24) {
-        //re-add a disease cube to the "pile" of its color
-        remainingDiseaseCubes[colorIndex]++;
-    }
-    //If this disease color is cured, remove all cubes of that color from player's current city
-    int cubesRemoved = 1;
-    if (isCured[colorIndex] == true) {
-        cubesRemoved = currentCity->getCubes();
-        currentCity->removeAllCubes();
-        remainingDiseaseCubes[colorIndex] += cubesRemoved;
-        if (remainingDiseaseCubes[colorIndex] > 24) {
-            remainingDiseaseCubes[colorIndex] = 24;
-        }
-    }
-    //If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-    if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-        isEradicated[colorIndex] = true;
-        //TODO: if eradicated, no new cubes are placed when infecting.
-    }
+bool Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute) {
+	bool conditionsMet = false;
+	//conditions for treat disease:
+	if (this->getPawn()->getPawnCity()->getCubes() > 0) {
+		conditionsMet = true;
+	}
+	if (conditionsMet) {//conditions
+		if (toExecute) {
+			//Remove 1 disease cube from player's current city
+			//get current city
+			Pawn *pawn = this->getPawn();
+			City *currentCity = pawn->getPawnCity();
+			currentCity->removeCubes();
+
+			//Increment the diseasecube count of that color disease by 1
+			//get disease color (blue 0, yellow 1, black 2, red 3)
+			string dColor = currentCity->getColor();
+			int colorIndex;
+			if (dColor == "blue") {
+				colorIndex = 0;
+			}
+			else if (dColor == "yellow") {
+				colorIndex = 1;
+			}
+			else if (dColor == "black") {
+				colorIndex = 2;
+			}
+			else {//red
+				colorIndex = 3;
+			}
+			if (remainingDiseaseCubes[colorIndex] < 24) {
+				//re-add a disease cube to the "pile" of its color
+				remainingDiseaseCubes[colorIndex]++;
+			}
+			//If this disease color is cured, remove all cubes of that color from player's current city
+			int cubesRemoved = 1;
+			if (isCured[colorIndex] == true) {
+				cubesRemoved = currentCity->getCubes();
+				currentCity->removeAllCubes();
+				remainingDiseaseCubes[colorIndex] += cubesRemoved;
+				if (remainingDiseaseCubes[colorIndex] > 24) {
+					remainingDiseaseCubes[colorIndex] = 24;
+				}
+			}
+			//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+			if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
+				isEradicated[colorIndex] = true;
+			}
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
 }
+
+
 
 
 
@@ -534,62 +548,70 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
     return false;
 }
 
-void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated){
-    //At any research station, discard 5 City cards of the same color from your hand to cure the disease of that color.
-    //Determine which city cards/color to discard (what color do they have 5 of?)
-    int cityColorCount[4] = { 0,0,0,0 };
-    int theColor;	//will contain the index of the color to cure
-    for (int j = 0; j<player_hand.size(); j++) {
-        if (dynamic_cast<BlueCity*>(player_hand[j])) {
-            cityColorCount[0]++;
-            if (cityColorCount[0] == 5) {
-                theColor = 0;
-                break;
-            }
-        }
-        else if (dynamic_cast<YellowCity*>(player_hand[j])) {
-            cityColorCount[1]++;
-            if (cityColorCount[1] == 5) {
-                theColor = 1;
-                break;
-            }
-        }
-        else if (dynamic_cast<BlackCity*>(player_hand[j])) {
-            cityColorCount[2]++;
-            if (cityColorCount[2] == 5) {
-                theColor = 2;
-                break;
-            }
-        }
-        else if (dynamic_cast<RedCity*>(player_hand[j])) {
-            cityColorCount[3]++;
-            if (cityColorCount[3] == 5) {
-                theColor = 3;
-                break;
-            }
-        }
-        
-    }
-    //Move the diseases cure marker to its Cure Indicator.
-    isCured[theColor] = true;
-    //	If no cubes of this color are on the board, this disease is now eradicated.
-    if (remainingDiseaseCubes[theColor] == 24) {
-        isEradicated[theColor] = true;
-    }
+bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute) {
+	bool conditionsMet = false;
+	int theColor = -1;    //will contain the index of the color to cure
+	//conditions for discoverCure:
+	//curr city must have research station    
+	if (this->getPawn()->getPawnCity()->getResearchStation()) {
+		//player hand must have 5 city cards of the same color
+		int cityColorCount[4] = { 0,0,0,0 };
+		for (int j = 0; j < player_hand.size(); j++) {
+			if (dynamic_cast<BlueCity*>(player_hand[j])) {
+				cityColorCount[0]++;
+				if (cityColorCount[0] == 5) {
+					theColor = 0;
+					break;
+				}
+			}
+			else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+				cityColorCount[1]++;
+				if (cityColorCount[1] == 5) {
+					theColor = 1;
+					break;
+				}
+			}
+			else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+				cityColorCount[2]++;
+				if (cityColorCount[2] == 5) {
+					theColor = 2;
+					break;
+				}
+			}
+			else if (dynamic_cast<RedCity*>(player_hand[j])) {
+				cityColorCount[3]++;
+				if (cityColorCount[3] == 5) {
+					theColor = 3;
+					break;
+				}
+			}
+		}
+		if (theColor != -1) {
+			conditionsMet = true;
+		}
+		if (conditionsMet) {//conditions
+			if (toExecute) {
+				//Determine which city cards/color to discard (what color do they have 5 of?)            
+				//Move the diseases cure marker to its Cure Indicator.
+				isCured[theColor] = true;
+				//If no cubes of this color are on the board, this disease is now eradicated.
+				if (remainingDiseaseCubes[theColor] == 24) {
+					isEradicated[theColor] = true;
+				}
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
-
-
-void buildResearchStation();
-//if in same city as their player card, can build a research station there. if all research stations built, remove one from anywhere on the board
-
-
-
 
 //Class Implementations for each RolePlayer : Player
 //dispatcher, medic, scientist, researcher, operationsexpert, quarantinespecialist, contingencyplanner
 
 //Dispatcher
-Dispatcher::Dispatcher( ){
+Dispatcher::Dispatcher(){
     Player();
 }
 Dispatcher::Dispatcher(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand):
@@ -610,37 +632,51 @@ Player(ppawn, refcard, rolecard, p_hand)
 {playername="Medic";}
 Medic::Medic (Medic const& med){}
 Medic::~Medic(){}
-void Medic::treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-    //Remove all disease cubes from player's current city
-    //get current city
-    Pawn *pawn = this->getPawn();
-    City *currentCity = pawn->getPawnCity();
-    int cubesRemoved = currentCity->getCubes();
-    currentCity->removeAllCubes();
-    
-    //get disease color (blue 0, yellow 1, black 2, red 3)
-    string dColor = currentCity->getColor();
-    int colorIndex;
-    if (dColor == "blue") {
-        colorIndex = 0;
-    }
-    else if (dColor == "yellow") {
-        colorIndex = 1;
-    }
-    else if (dColor == "black") {
-        colorIndex = 2;
-    }
-    else {//red
-        colorIndex = 3;
-    }
-    //Increment the diseasecube count of that color disease by however many removed
-    remainingDiseaseCubes[colorIndex] += cubesRemoved;
-    
-    //If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-    if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-        isEradicated[colorIndex] = true;
-    }
+bool Medic::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute) {
+	bool conditionsMet = false;
+	//conditions for treat disease:
+	if (this->getPawn()->getPawnCity()->getCubes() > 0) {
+		conditionsMet = true;
+	}
+	if (conditionsMet) {//conditions
+		if (toExecute) {
+			//Remove all disease cubes from player's current city
+			//get current city
+			Pawn *pawn = this->getPawn();
+			City *currentCity = pawn->getPawnCity();
+			int cubesRemoved = currentCity->getCubes();
+			currentCity->removeAllCubes();
+
+			//get disease color (blue 0, yellow 1, black 2, red 3)
+			string dColor = currentCity->getColor();
+			int colorIndex;
+			if (dColor == "blue") {
+				colorIndex = 0;
+			}
+			else if (dColor == "yellow") {
+				colorIndex = 1;
+			}
+			else if (dColor == "black") {
+				colorIndex = 2;
+			}
+			else {//red
+				colorIndex = 3;
+			}
+			//Increment the diseasecube count of that color disease by however many removed
+			remainingDiseaseCubes[colorIndex] += cubesRemoved;
+
+			//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+			if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
+				isEradicated[colorIndex] = true;
+			}
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
 }
+
 void Medic::removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
     //Whenever a medic visits a city, any cubes of a CURED DISEASE are automatically removed
     int cityCubes = this->getPawn()->getPawnCity()->getCubes();
@@ -683,47 +719,63 @@ Player(ppawn, refcard, rolecard, p_hand)
 {playername="Scientist";}
 Scientist::Scientist (Scientist const& scient){}
 Scientist::~Scientist(){}
-void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-    //At any research station, discard 4 City cards of the same color from your hand to cure the disease of that color.
-    //Determine which city cards/color to discard (what color do they have 4 of?)
-    int cityColorCount[4] = { 0,0,0,0 };
-    int theColor;	//will contain the index of the color to cure
-    for (int j = 0; j<player_hand.size(); j++) {
-        if (dynamic_cast<BlueCity*>(player_hand[j])) {
-            cityColorCount[0]++;
-            if (cityColorCount[0] == 4) {
-                theColor = 0;
-                break;
-            }
-        }
-        else if (dynamic_cast<YellowCity*>(player_hand[j])) {
-            cityColorCount[1]++;
-            if (cityColorCount[1] == 4) {
-                theColor = 1;
-                break;
-            }
-        }
-        else if (dynamic_cast<BlackCity*>(player_hand[j])) {
-            cityColorCount[2]++;
-            if (cityColorCount[2] == 4) {
-                theColor = 2;
-                break;
-            }
-        }
-        else if (dynamic_cast<RedCity*>(player_hand[j])) {
-            cityColorCount[3]++;
-            if (cityColorCount[3] == 4) {
-                theColor = 3;
-                break;
-            }
-        }
-    }
-    //Move the diseases cure marker to its Cure Indicator.
-    isCured[theColor] = true;
-    //	If no cubes of this color are on the board, this disease is now eradicated.
-    if (remainingDiseaseCubes[theColor] == 24) {
-        isEradicated[theColor] = true;
-    }
+bool Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute) {
+	bool conditionsMet = false;
+	int theColor = -1;    //will contain the index of the color to cure
+						  //conditions for discoverCure:
+						  //curr city must have research station    
+	if (this->getPawn()->getPawnCity()->getResearchStation()) {
+		//player hand must have 4 city cards of the same color
+		int cityColorCount[4] = { 0,0,0,0 };
+		for (int j = 0; j < player_hand.size(); j++) {
+			if (dynamic_cast<BlueCity*>(player_hand[j])) {
+				cityColorCount[0]++;
+				if (cityColorCount[0] == 4) {
+					theColor = 0;
+					break;
+				}
+			}
+			else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+				cityColorCount[1]++;
+				if (cityColorCount[1] == 4) {
+					theColor = 1;
+					break;
+				}
+			}
+			else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+				cityColorCount[2]++;
+				if (cityColorCount[2] == 4) {
+					theColor = 2;
+					break;
+				}
+			}
+			else if (dynamic_cast<RedCity*>(player_hand[j])) {
+				cityColorCount[3]++;
+				if (cityColorCount[3] == 4) {
+					theColor = 3;
+					break;
+				}
+			}
+		}
+		if (theColor != -1) {
+			conditionsMet = true;
+		}
+		if (conditionsMet) {//conditions
+			if (toExecute) {
+				//Determine which city cards/color to discard (what color do they have 5 of?)            
+				//Move the diseases cure marker to its Cure Indicator.
+				isCured[theColor] = true;
+				//If no cubes of this color are on the board, this disease is now eradicated.
+				if (remainingDiseaseCubes[theColor] == 24) {
+					isEradicated[theColor] = true;
+				}
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
 
 //Researcher

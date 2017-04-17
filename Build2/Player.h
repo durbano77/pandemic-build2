@@ -63,8 +63,8 @@ public:
     bool buildResearchStation(std::vector<PlayerCard*> *discardPile, bool toexecute);
     bool shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute);
     
-    virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    virtual bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
+    virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
 
     void ShareKnowledge(std::vector<Player*> vectorplayers);
     
@@ -91,7 +91,7 @@ public:
     Medic (Medic const& med);
     virtual ~Medic();
 
-    void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
     void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
 
 
@@ -103,7 +103,7 @@ public:
     Scientist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Scientist (Scientist const& scient);
     virtual ~Scientist();
-    void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated); //base method will be overridden
+    bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute); //base method will be overridden
     
 };
 
