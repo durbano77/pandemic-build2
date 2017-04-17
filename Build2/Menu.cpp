@@ -61,6 +61,7 @@ void Menu::doMenu(City* acities[]){
 
 void Menu::displayMenu(City* acities[]){
     cout.clear();
+    int vps=vectorplayers.size();
     
     p->getPawn()->printPawn();
     p->printHandTitles();
@@ -74,66 +75,65 @@ void Menu::displayMenu(City* acities[]){
     std::cout<<"[2] Role card"<<std::endl;
     std::cout<<"[3] Player hand\n"<<std::endl;
     
-    int a=4;
+
     std::cout<<"Players information"<<std::endl;
     for(int i=0;i<vectorplayers.size();i++){
-        std::cout<<"["<<a<<"] "<<vectorplayers[i]->getPlayerName()<<std::endl;
-        a++;
+        std::cout<<"["<<4+i<<"] "<<vectorplayers[i]->getPlayerName()<<std::endl;
     }
     
     std::cout<<"\nCity information"<<std::endl;
-    std::cout<<"["<<a<<"] One city to display"<<std::endl; a++;
-    std::cout<<"["<<a<<"] All the cities"<<std::endl; a++;
+    std::cout<<"["<<vps+4<<"] One city to display"<<std::endl;
+    std::cout<<"["<<vps+5<<"] All the cities"<<std::endl;
 
     std::cout<<"-----ACTIONS-----\n"<<std::endl;
     if(nbactionstodo>0){
         std::cout<<"You can still perform "<<nbactionstodo<<" actions.\n"<<std::endl;
-        std::cout<<"["<<a<<"] Drive"<<std::endl; a++;
+        std::cout<<"["<<vps+6<<"] Drive"<<std::endl;
         //    if(!p->drive(vertex, false)){
         //        std::cout<<"This option is not available to you right now"<<std::endl;
-        //    }else{possible.push_back(a);}
+        //    }else{possible.push_back(vps+6);}
         
         
-        std::cout<<"["<<a<<"] Direct Flight"<<std::endl; a++;
+        std::cout<<"["<<vps+7<<"] Direct Flight"<<std::endl;
         if(!p->directFlight(acities, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(a);}
+        }else{possible.push_back(vps+7);}
         
         
-        std::cout<<"["<<a<<"] Charter Flight"<<std::endl; a++;
+        std::cout<<"["<<vps+8<<"] Charter Flight"<<std::endl;
         if(!p->charterFlight(acities, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(a);}
+        }else{possible.push_back(vps+8);}
         
         
-        std::cout<<"["<<a<<"] Shuttle Flight"<<std::endl; a++;
+        std::cout<<"["<<vps+9<<"] Shuttle Flight"<<std::endl;
         if(!p->shuttleFlight(acities, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(a);}
+        }else{possible.push_back(vps+9);}
         
         
-        std::cout<<"["<<a<<"] Build a Research Station"<<std::endl; a++;
+        std::cout<<"["<<vps+10<<"] Build a Research Station"<<std::endl;
         if(!p->buildResearchStation(discardPile, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(a);}
+        }else{possible.push_back(vps+10);}
         
         
-        std::cout<<"["<<a<<"] Treat Disease"<<std::endl; a++;
+        std::cout<<"["<<vps+11<<"] Treat Disease"<<std::endl;
         //    if(!p->   (  , false)){
         //
-        //    }else{possible.push_back(a);}
+        //    }else{possible.push_back(vps+11);}
         
         
-        std::cout<<"["<<a<<"] Share Knowledge"<<std::endl; a++;
+        std::cout<<"["<<vps+12<<"] Share Knowledge"<<std::endl;
         if(!p->shareKnowledge(vectorplayers, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(a);}
+        }else{possible.push_back(vps+12);}
         
         
-        std::cout<<"["<<a<<"] Discover a Cure"<<std::endl; a++;
+        std::cout<<"["<<vps+13<<"] Discover a Cure"<<std::endl;
         //    if(!p->   (  , false)){
         //
-        //    }else{possible.push_back(a);}
+        //    }else{possible.push_back(vps+13);}
     
     
     }
@@ -142,7 +142,7 @@ void Menu::displayMenu(City* acities[]){
     
 //    cout<<"POSSIBLE AFTER ORIGINAL DISPLAY: "<<possible.size();
 //    for(int i=0;i<possible.size();i++){
-//        cout<<possible[i];
+//        cout<<possible[i]<<"  ";
 //        
 //    }
 
