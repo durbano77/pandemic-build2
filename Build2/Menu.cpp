@@ -49,7 +49,9 @@ Player* Menu::getPlayer(){
 void Menu::doMenu(City* acities[]){
 
     displayMenu(acities);
+
     int choice=inChoice();
+    
     doAction(choice, acities);
 
   
@@ -58,57 +60,92 @@ void Menu::doMenu(City* acities[]){
 
 
 void Menu::displayMenu(City* acities[]){
-    std::cout<<"**********MENU**********"<<std::endl;
-    std::cout<<"Select one of the following options:"<<std::endl;
+    cout.clear();
     
+    p->getPawn()->printPawn();
+    p->printHandTitles();
+    
+    std::cout<<"\n\n***************MENU***************"<<std::endl;
+    std::cout<<"Select one of the following options:\n\n\n"<<std::endl;
+    
+    std::cout<<"-----DISPLAY-----\n"<<std::endl;
+    std::cout<<p->getPlayerName()<<" information"<<std::endl;
+    std::cout<<"[1] Reference card"<<std::endl;
+    std::cout<<"[2] Role card"<<std::endl;
+    std::cout<<"[3] Player hand\n"<<std::endl;
+    
+    int a=4;
+    std::cout<<"Players information"<<std::endl;
+    for(int i=0;i<vectorplayers.size();i++){
+        std::cout<<"["<<a<<"] "<<vectorplayers[i]->getPlayerName()<<std::endl;
+        a++;
+    }
+    
+    std::cout<<"\nCity information"<<std::endl;
+    std::cout<<"["<<a<<"] One city to display"<<std::endl; a++;
+    std::cout<<"["<<a<<"] All the cities"<<std::endl; a++;
 
+    std::cout<<"-----ACTIONS-----\n"<<std::endl;
+    if(nbactionstodo>0){
+        std::cout<<"You can still perform "<<nbactionstodo<<" actions.\n"<<std::endl;
+        std::cout<<"["<<a<<"] Drive"<<std::endl; a++;
+        //    if(!p->drive(vertex, false)){
+        //        std::cout<<"This option is not available to you right now"<<std::endl;
+        //    }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Direct Flight"<<std::endl; a++;
+        if(!p->directFlight(acities, false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Charter Flight"<<std::endl; a++;
+        if(!p->charterFlight(acities, false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Shuttle Flight"<<std::endl; a++;
+        if(!p->shuttleFlight(acities, false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Build a Research Station"<<std::endl; a++;
+        if(!p->buildResearchStation(discardPile, false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Treat Disease"<<std::endl; a++;
+        //    if(!p->   (  , false)){
+        //
+        //    }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Share Knowledge"<<std::endl; a++;
+        if(!p->shareKnowledge(vectorplayers, false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(a);}
+        
+        
+        std::cout<<"["<<a<<"] Discover a Cure"<<std::endl; a++;
+        //    if(!p->   (  , false)){
+        //
+        //    }else{possible.push_back(a);}
     
-   std::cout<<"[1] Action Drive"<<std::endl;
-//    if(!p->drive(vertex, false)){
-//        std::cout<<"This option is not available to you right now"<<std::endl;
-//    }else{possible.push_back(1);}
-    std::cout<<std::endl;
     
-    std::cout<<"[2] Action Direct Flight"<<std::endl;
-    if(!p->directFlight(acities, false)){
-        std::cout<<"This option is not available to you right now"<<std::endl;
-    }else{possible.push_back(2);}
-     std::cout<<std::endl;
+    }
+    else{
+        std::cout<<"You dont have any actions left.\n"<<std::endl;}
     
-    std::cout<<"[3] Action Charter Flight"<<std::endl;
-    if(!p->charterFlight(acities, false)){
-        std::cout<<"This option is not available to you right now"<<std::endl;
-    }else{possible.push_back(3);}
-     std::cout<<std::endl;
-    
-    std::cout<<"[4] Action Shuttle Flight"<<std::endl;
-    if(!p->shuttleFlight(acities, false)){
-        std::cout<<"This option is not available to you right now"<<std::endl;
-    }else{possible.push_back(4);}
-    std::cout<<std::endl;
-    
-    std::cout<<"[5] Action Build a Research Station"<<std::endl;
-    if(!p->buildResearchStation(discardPile, false)){
-        std::cout<<"This option is not available to you right now"<<std::endl;
-    }else{possible.push_back(5);}
-    std::cout<<std::endl;
-    
-    std::cout<<"[6] Action Treat Disease"<<std::endl;
-//    if(!p->   (  , false)){
+//    cout<<"POSSIBLE AFTER ORIGINAL DISPLAY: "<<possible.size();
+//    for(int i=0;i<possible.size();i++){
+//        cout<<possible[i];
 //        
-//    }else{possible.push_back(6);}
-    std::cout<<std::endl;
-    
-    std::cout<<"[7] Action Share Knowledge"<<std::endl;
-    if(!p->shareKnowledge(vectorplayers, false)){
-        std::cout<<"This option is not available to you right now"<<std::endl;
-    }else{possible.push_back(7);}
-    std::cout<<std::endl;
-    
-    std::cout<<"[8] Action Discover a Cure"<<std::endl;
-    //    if(!p->   (  , false)){
-    //
-    //    }else{possible.push_back(8);}
+//    }
+
 }
 
 int Menu::inChoice(){
@@ -131,45 +168,73 @@ int Menu::inChoice(){
         }
     } while(!setofchoices.count(actionchoice));
     
-    
-    possible.clear();
+   
+    //possible.clear();
+//     cout<<"POSSIBLE AFTER GETTING INCHOICE: "<<possible.size();
+//    for(int i=0;i<possible.size();i++){
+//        cout<<possible[i];
+//    
+//    }
     
     return actionchoice;
 }
 
 void Menu::doAction(int a, City* acities[]){
-
-    switch(a){
-        case 1:
-           // p->drive(vertex, true);
-            break;
-        case 2:
-            p->directFlight(acities, true);
-             break;
-        case 3:
-            p->charterFlight(acities, true);
-            break;
-        case 4:
-            p->shuttleFlight(acities, true);
-            break;
-        case 5:
-            p->buildResearchStation(discardPile, true);
-            break;
-        case 6:
-            //treat disease
-            break;
-        case 7:
-            p->shareKnowledge(vectorplayers, true);
-            break;
-        case 8:
-           //discover cure
-            break;
-        default:
-            cout<<"Menu ERROR: Cannot execute player action"<<endl;
+    int ai=vectorplayers.size()+4;
     
+    if(a==1){  p->printRefCard();}
+    else if(a==2){ p->printRoleCard();}
+    else if(a==3){p->printHand();}
+    
+    for(int i=0;i<vectorplayers.size();i++){
+        if(a==4+i){
+            vectorplayers[i]->getPawn()->printPawn();
+            vectorplayers[i]->printRoleCard();
+            vectorplayers[i]->printHand();
+        }
+    }
+    
+    ai-=1;
+    
+    if(a==ai+1){/*function to show one city info*/}
+    else if(a==ai+2){/*function to show all the cities info*/}
+    
+    else if(a==ai+3){
+        // p->drive(vertex, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+4){
+         p->directFlight(acities, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+5){
+        p->charterFlight(acities, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+6){
+        p->shuttleFlight(acities, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+7){
+         p->buildResearchStation(discardPile, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+8){
+        //treat disease
+        nbactionstodo-=1;
+    }
+    else if(a==ai+9){
+        p->shareKnowledge(vectorplayers, true);
+        nbactionstodo-=1;
+    }
+    else if(a==ai+10){
+        //discover cure
+        nbactionstodo-=1;
     }
     
     p->getPawn()->printPawn();
     p->printHandTitles();
+    
+    doMenu(acities);
 
 }

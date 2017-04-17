@@ -14,8 +14,7 @@
 City::City()
 {
     cityname="";
-    //color="";
-    //pcitycard=nullptr;
+    color="";
     cubes=0;
     researchstation=false;
 }
@@ -117,11 +116,10 @@ void City::print()
 {
 	//cardColor;
     cout << " City Card: "<< cityname << endl;
-//	//RefCard ref = getPlayerInCity();
-//    cout << "List of players in city :"<<endl;
-//    printListPlayersInCity();
-
-	cout << "the number of infection in city:" << cubes <<endl;
+    cout <<"Color: "<<color <<endl;
+	cout << "Number of infection cubes in city:" << cubes <<endl;
+    if(researchstation){cout<<"City has a research station"<<endl;}
+    else{cout<<"City does not have a research station"<<endl;}
 
 }
 

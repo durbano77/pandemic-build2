@@ -22,7 +22,7 @@
 class Menu{
 protected:
     Player* p;
-    int nbactionsdone=4;
+    int nbactionstodo=4;
     vector<City*> vcities;
  //  vector<City*> vertex;  //to pass vertex of the city where the player is
     std::vector<Player*> vectorplayers;
