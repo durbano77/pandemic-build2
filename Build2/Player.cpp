@@ -403,7 +403,7 @@ void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 	City *currentCity = pawn->getPawnCity();
 	currentCity->removeCubes();
 	
-	//Increment the diseasecube count of that color disease by 1
+	//Increment the disease cube count of that color disease by 1
 	//get disease color (blue 0, yellow 1, black 2, red 3)
 	string dColor = currentCity->getColor();
 	int colorIndex;
