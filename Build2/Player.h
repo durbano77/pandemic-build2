@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
-//#include "Action.h"
+
 #include "Subject.h"
 #include "Pawn.h"
 
@@ -62,13 +62,11 @@ public:
     bool drive(vector<City*>, bool toexecute);
     bool buildResearchStation(std::vector<PlayerCard*> *discardPile, bool toexecute);
     bool shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute);
-    
-    virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+
     virtual bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute);
-    void ShareKnowledge(std::vector<Player*> vectorplayers);
     virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute);
     
+    void moveAnyPawn();
     
 };
 
