@@ -69,6 +69,7 @@ public:
 	void createMap(City** citiesarr, vertex** vertexarr);
 	vector<City*> adjoiningCities(City*);
 	bool operator==(City&);
+    
 
 
 };
