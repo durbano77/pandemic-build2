@@ -197,10 +197,32 @@ void Player::discardCards(){
 
 }
 
-void Player::action(){
+void Player:: drive(vector<City*> cVec)  //vector of adj cities (vertex)
+{
+    int cityNum;
+    for (int i = 0; i < cVec.size(); i++) {
+        cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+    }
+    if (cVec.size() > 0)
+    {
+        do{
+            cout << "enter the city # you want to drive to\n";
+            cin >> cityNum;
+            while (cin.fail())
+            {
+                cout << "Integer wanted please enter the city number \n";
+                cin.clear();
+                cin.ignore(INT_MAX, '\n');
+                //return;
+            }
+            
+        } while (cityNum <0 || cityNum > cVec.size());
+        getPawn()->setPawnCity(cVec[cityNum - 1]);
+        cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+    }
 }
 
-void Player::DirectFlight(City* acities[]){
+void Player::directFlight(City* acities[]){
     string currentcity=this->getPawn()->getPawnCity()->getCityName();
     for(int i=0;i<player_hand.size();i++){
         if(currentcity==player_hand[i]->getCardName()){
@@ -232,7 +254,7 @@ void Player::DirectFlight(City* acities[]){
     
 }
 
-void Player::CharterFlight(City* acities[]){
+void Player::charterFlight(City* acities[]){
     //TODO: if event card
     std::cout<<"Charter Flight - What city do you want to fly to?"<<std::endl;
     std::cout<<"You can choose any city corresponding to one of your city cards in your hand."<<std::endl;
@@ -313,30 +335,7 @@ void Player::shuttleFlight(City* acities[]){
 	}
 }
 
-void Player:: drive(vector<City*> cVec)
-{
-	int cityNum;
-	for (int i = 0; i < cVec.size(); i++) {
-		cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
-	}
-	if (cVec.size() > 0)
-	{
-		do{
-			cout << "enter the city # you want to drive to\n";
-			cin >> cityNum;
-			while (cin.fail())
-			{
-				cout << "Integer wanted please enter the city number \n";
-				cin.clear();
-				cin.ignore(INT_MAX, '\n');
-				//return;
-			}
 
-		} while (cityNum <0 || cityNum > cVec.size());
-		getPawn()->setPawnCity(cVec[cityNum - 1]);
-		cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
-	}
-}
 
 void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 
@@ -402,7 +401,7 @@ void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 }
 
 
-void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
+void Player::shareKnowledge(std::vector<Player*> vectorplayers){
 //give the City card that matches the city you are in to another player
 //or take the City card that matches the city you are in from another player
 

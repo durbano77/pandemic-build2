@@ -56,19 +56,18 @@ public:
     void drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail);
     void discardCards();
     
-    void action();
-    void DirectFlight(City* acities[]);
-    void CharterFlight(City* acities[]);
+    void directFlight(City* acities[]);
+    void charterFlight(City* acities[]);
     void shuttleFlight( City* acities[]);
     void drive(vector<City*>);
     void buildResearchStation();
     void buildResearchStation(std::vector<PlayerCard*> *discardPile);
 
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    void ShareKnowledge(std::vector<Player*> vectorplayers);
+    void shareKnowledge(std::vector<Player*> vectorplayers);
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
-    void moveAnyPawn();
+    //void moveAnyPawn();
     
 };
 
