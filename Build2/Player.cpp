@@ -117,6 +117,16 @@ void Player::printHand(){
     }
 }
 
+void Player::printHandTitles(){
+    std::cout<<playername <<" has the following cards in their hand: ";
+    for(int i=0; i<player_hand.size();i++){
+        if (player_hand[i] != nullptr){
+            string cardname=player_hand[i]->getCardName();
+            std::cout<<cardname<<" ";
+        }
+    }
+
+}
 
 void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail){
     
@@ -601,10 +611,9 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+
 	}
+    return false;
 }
 
 //Class Implementations for each RolePlayer : Player
@@ -772,10 +781,9 @@ bool Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* is
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+
 	}
+    return false;
 }
 
 //Researcher

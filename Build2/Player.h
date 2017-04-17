@@ -52,6 +52,7 @@ public:
     void addCardtoHand(PlayerCard* pc);
     void setHand(std::vector<PlayerCard*> &ha);
     void printHand();
+    void printHandTitles();
     
     void drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail);
     void discardCards();
