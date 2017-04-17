@@ -11,7 +11,7 @@
 
 #include "GraphView.h"
 #include "PlayerView.h"
-
+#include "Player.h"
 #include <stdio.h>
 
 class Action{

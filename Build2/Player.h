@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
-
+//#include "Action.h"
 #include "Subject.h"
 #include "Pawn.h"
 
@@ -56,15 +56,15 @@ public:
     void drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std::vector<PlayerCard*> &discardpile, std::vector<PlayerCard*> &eventCardsAvail);
     void discardCards();
     
-    void directFlight(City* acities[]);
-    void charterFlight(City* acities[]);
+    bool directFlight(City* acities[], bool toexecute);
+    bool charterFlight(City* acities[], bool toexecute);
     void shuttleFlight( City* acities[]);
     void drive(vector<City*>);
-    void buildResearchStation();
-    void buildResearchStation(std::vector<PlayerCard*> *discardPile);
+   // void buildResearchStation();
+    bool buildResearchStation(std::vector<PlayerCard*> *discardPile, bool toexecute);
 
     virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    void ShareKnowledge(std::vector<Player*> vectorplayers);
+    bool shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute);
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
     //void moveAnyPawn();
