@@ -10,14 +10,15 @@
 
 Menu::Menu(){}
 
-Menu::Menu(Player* pl, vector<City*> &vc,  std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile){
+Menu::Menu(Player* pl, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile){
     this->p=pl;
-    this->vcities=vc;
+    //this->adjcities;
     
     this->vectorplayers=vectorplayer;
     this->discardPile=dPile;
-  
-  
+    
+//    vertex* x = cityMap.at(p->getPawn()->getPawnCity());
+ //   vector <City*> adjCities = x->getAdjCities();
 }
 
 
@@ -28,6 +29,14 @@ Menu::~Menu(){
 }
 
 
+int Menu::getnbactionstodo(){
+    return nbactionstodo;
+
+}
+
+void Menu::setAdjCity(vector<City*> &vc){
+    adjcities=vc;
+}
 
 void Menu::setPlayer(Player* pl){
     this->p=pl;
@@ -87,9 +96,9 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     if(nbactionstodo>0){
         std::cout<<"You can still perform "<<nbactionstodo<<" actions.\n"<<std::endl;
         std::cout<<"["<<vps+6<<"] Drive"<<std::endl;
-        //    if(!p->drive(vertex, false)){
-        //        std::cout<<"This option is not available to you right now"<<std::endl;
-        //    }else{possible.push_back(vps+6);}
+            if(!p->drive(adjcities, false)){
+                std::cout<<"This option is not available to you right now"<<std::endl;
+            }else{possible.push_back(vps+6);}
         
         
         std::cout<<"["<<vps+7<<"] Direct Flight"<<std::endl;
@@ -182,16 +191,16 @@ int Menu::inChoice(){
 void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
     int ai=vectorplayers.size()+4;
     
-    if(a==1){  p->printRefCard();}
-    else if(a==2){ p->printRoleCard();}
-    else if(a==3){p->printHand();}
+    if(a==1){  p->printRefCard(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
+    else if(a==2){ p->printRoleCard(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
+    else if(a==3){p->printHand(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
     
     for(int i=0;i<vectorplayers.size();i++){
         if(a==4+i){
             vectorplayers[i]->getPawn()->printPawn();
             vectorplayers[i]->printRoleCard();
             vectorplayers[i]->printHand();
-
+            doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
         }
     }
     
@@ -199,11 +208,15 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     
     if(a==ai+1){
         
-        /*function to show one city info*/}
-    else if(a==ai+2){/*function to show all the cities info*/}
+        /*function to show one city info*/
+    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    }
+    else if(a==ai+2){/*function to show all the cities info*/
+    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    }
     
     else if(a==ai+3){
-        // p->drive(vertex, true);
+         p->drive(adjcities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+4){
@@ -238,6 +251,6 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     p->getPawn()->printPawn();
     p->printHandTitles();
     
-    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    //doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
 
 }

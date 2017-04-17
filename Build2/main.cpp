@@ -296,8 +296,21 @@ int main(){
     
     initGame();
     
-    Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
-    m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+    for(int i=0;i<numPlayers;i++){
+        Menu m(arrayofPlayers[i], arrayofPlayers, &discardpile);
+        vertex* x;
+        
+        while(m.getnbactionstodo()>0){
+            x = cityMap.at(arrayofPlayers[i]->getPawn()->getPawnCity()); //update adj cities
+            vector <City*> adjCities = x->getAdjCities();
+            m.setAdjCity(adjCities);
+
+            m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+        }
+    }
+    
+
+    
     
     vector <City*> vtest = vertexarr[0]->getAdjCities();
     vector <City*> vtest1 = vertexarr[1]->getAdjCities();

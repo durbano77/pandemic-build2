@@ -25,7 +25,7 @@ class Menu{
 protected:
     Player* p;
     int nbactionstodo=4;
-    vector<City*> vcities;
+    vector<City*> adjcities;
 
     std::vector<Player*> vectorplayers;
     std::vector<PlayerCard*> *discardPile;
@@ -36,8 +36,12 @@ protected:
     
 public:
     Menu();
-    Menu(Player* p, vector<City*> &vc, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile);
+    Menu(Player* p, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile);
     virtual ~Menu();
+    
+    int getnbactionstodo();
+    void setAdjCity(vector<City*> &vc);
+    
     void setPlayer(Player* pl);
     Player* getPlayer();
     
