@@ -297,7 +297,7 @@ int main(){
     initGame();
     
     Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
-    m.doMenu(cityarr);
+    m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
     
     vector <City*> vtest = vertexarr[0]->getAdjCities();
     vector <City*> vtest1 = vertexarr[1]->getAdjCities();

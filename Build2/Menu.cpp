@@ -2,9 +2,7 @@
 //  Menu.cpp
 //  Build2
 //
-//  Created by Jasmine Leblond-Chartrand on 2017-04-17.
-//  Copyright © 2017 Jasmine Leblond-Chartrand. All rights reserved.
-//
+
 
 #include "Menu.h"
 
@@ -15,12 +13,11 @@ Menu::Menu(){}
 Menu::Menu(Player* pl, vector<City*> &vc,  std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile){
     this->p=pl;
     this->vcities=vc;
-
+    
     this->vectorplayers=vectorplayer;
     this->discardPile=dPile;
   
-    //cityMap.find(p->getPawn()->getPawnCity())->second;  to be called from main
-    
+  
 }
 
 
@@ -46,25 +43,26 @@ Player* Menu::getPlayer(){
 
 //display options graph, player, cities
 
-void Menu::doMenu(City* acities[]){
+void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
 
-    displayMenu(acities);
+    displayMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
 
     int choice=inChoice();
     
-    doAction(choice, acities);
+    doAction(choice, acities, remainingDiseaseCubes, isCured, isEradicated);
 
   
 }
 
 
 
-void Menu::displayMenu(City* acities[]){
+void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
     cout.clear();
     int vps=vectorplayers.size();
     
     p->getPawn()->printPawn();
     p->printHandTitles();
+    p->getPawn()->getPawnCity()->print();
     
     std::cout<<"\n\n***************MENU***************"<<std::endl;
     std::cout<<"Select one of the following options:\n\n\n"<<std::endl;
@@ -119,9 +117,9 @@ void Menu::displayMenu(City* acities[]){
         
         
         std::cout<<"["<<vps+11<<"] Treat Disease"<<std::endl;
-        //    if(!p->   (  , false)){
-        //
-        //    }else{possible.push_back(vps+11);}
+        if(!p->treatDisease(remainingDiseaseCubes, isCured, isEradicated , false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(vps+11);}
         
         
         std::cout<<"["<<vps+12<<"] Share Knowledge"<<std::endl;
@@ -131,14 +129,16 @@ void Menu::displayMenu(City* acities[]){
         
         
         std::cout<<"["<<vps+13<<"] Discover a Cure"<<std::endl;
-        //    if(!p->   (  , false)){
-        //
-        //    }else{possible.push_back(vps+13);}
+        if(!p->discoverCure(remainingDiseaseCubes, isCured, isEradicated , false)){
+            std::cout<<"This option is not available to you right now"<<std::endl;
+        }else{possible.push_back(vps+13);}
     
     
     }
     else{
         std::cout<<"You dont have any actions left.\n"<<std::endl;}
+    
+    //std::cout<<"-----EVENT ACTIONS-----\n"<<std::endl;
     
 //    cout<<"POSSIBLE AFTER ORIGINAL DISPLAY: "<<possible.size();
 //    for(int i=0;i<possible.size();i++){
@@ -179,7 +179,7 @@ int Menu::inChoice(){
     return actionchoice;
 }
 
-void Menu::doAction(int a, City* acities[]){
+void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
     int ai=vectorplayers.size()+4;
     
     if(a==1){  p->printRefCard();}
@@ -191,12 +191,15 @@ void Menu::doAction(int a, City* acities[]){
             vectorplayers[i]->getPawn()->printPawn();
             vectorplayers[i]->printRoleCard();
             vectorplayers[i]->printHand();
+
         }
     }
     
     ai-=1;
     
-    if(a==ai+1){/*function to show one city info*/}
+    if(a==ai+1){
+        
+        /*function to show one city info*/}
     else if(a==ai+2){/*function to show all the cities info*/}
     
     else if(a==ai+3){
@@ -220,7 +223,7 @@ void Menu::doAction(int a, City* acities[]){
         nbactionstodo-=1;
     }
     else if(a==ai+8){
-        //treat disease
+        p->treatDisease(remainingDiseaseCubes, isCured, isEradicated , true);
         nbactionstodo-=1;
     }
     else if(a==ai+9){
@@ -228,13 +231,13 @@ void Menu::doAction(int a, City* acities[]){
         nbactionstodo-=1;
     }
     else if(a==ai+10){
-        //discover cure
+        p->discoverCure(remainingDiseaseCubes, isCured, isEradicated , true);
         nbactionstodo-=1;
     }
     
     p->getPawn()->printPawn();
     p->printHandTitles();
     
-    doMenu(acities);
+    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
 
 }

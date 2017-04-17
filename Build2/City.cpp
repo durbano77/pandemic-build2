@@ -114,12 +114,12 @@ void City::removeResearchStation(){
 
 void City::print()
 {
-	//cardColor;
-    cout << " City Card: "<< cityname << endl;
-    cout <<"Color: "<<color <<endl;
-	cout << "Number of infection cubes in city:" << cubes <<endl;
+    cout<<"----------------------------------------"<<endl;
+    cout <<"City: "<< cityname <<" (" <<color<<") " << endl;
+	cout <<cubes << " infection cubes in city " <<endl;
     if(researchstation){cout<<"City has a research station"<<endl;}
     else{cout<<"City does not have a research station"<<endl;}
+    cout<<"----------------------------------------"<<endl;
 
 }
 
