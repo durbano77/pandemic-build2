@@ -197,14 +197,18 @@ void Player::discardCards(){
 
 }
 
-void Player:: drive(vector<City*> cVec)  //vector of adj cities (vertex)
+bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities (vertex)
 {
     int cityNum;
-    for (int i = 0; i < cVec.size(); i++) {
-        cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
-    }
+
     if (cVec.size() > 0)
     {
+        std::cout<<"List of adjacent cities you can drive to: "<<std::endl;
+        for (int i = 0; i < cVec.size(); i++) {
+            cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+        }
+        
+        if(toexecute){
         do{
             cout << "enter the city # you want to drive to\n";
             cin >> cityNum;
@@ -219,7 +223,12 @@ void Player:: drive(vector<City*> cVec)  //vector of adj cities (vertex)
         } while (cityNum <0 || cityNum > cVec.size());
         getPawn()->setPawnCity(cVec[cityNum - 1]);
         cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+        }//if toexecute
+        
+        return true;
     }
+    
+    return false;
 }
 
 bool Player::directFlight(City* acities[], bool toexecute){
@@ -315,7 +324,7 @@ bool Player::charterFlight(City* acities[], bool toexecute){
 
 
 //onlt to move to city with research station
-void Player::shuttleFlight(City* acities[]){
+bool Player::shuttleFlight(City* acities[], bool toexecute){
 	vector<City*> cityWithResearchStation;
 	int cityNum;
 	for (int i = 0; i < 48; i++) {
@@ -327,28 +336,37 @@ void Player::shuttleFlight(City* acities[]){
   	cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
 	if (cityWithResearchStation.size() > 0)
 	{
+        
 		cout << "these are these cities with researchStation" << endl;
 		for (int i = 0; i < cityWithResearchStation.size(); i++) {
 			cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
 		}
-		do{
-			cout << "enter the number  the city # you want to go to\n";
-			cin >> cityNum; 
-			while (cin.fail()) 
-			{ 
-				cout << "Integer wanted \n";
-				cin.clear();
-				cin.ignore(INT_MAX, '\n');
-			    //return; 
-			}
-		} while (cityNum <0 || cityNum > cityWithResearchStation.size() );
- 		playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
-		cout << "players new city is: "<< playerpawn->getPawnCity()->getCityName()<<endl;
-	}
+        
+        if(toexecute){
+            do{
+                cout << "enter the number  the city # you want to go to\n";
+                cin >> cityNum;
+                while (cin.fail())
+                {
+                    cout << "Integer wanted \n";
+                    cin.clear();
+                    cin.ignore(INT_MAX, '\n');
+                    //return;
+                }
+            } while (cityNum <0 || cityNum > cityWithResearchStation.size() );
+            playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
+            cout << "players new city is: "<< playerpawn->getPawnCity()->getCityName()<<endl;
+        }
+        
+        return true;
+    }
+    
 	else
 	{
 		cout << "  There are no cities with research station" << endl;
 	}
+    
+    return false;
 }
 
 

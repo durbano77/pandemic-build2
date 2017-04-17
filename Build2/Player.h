@@ -58,16 +58,14 @@ public:
     
     bool directFlight(City* acities[], bool toexecute);
     bool charterFlight(City* acities[], bool toexecute);
-    void shuttleFlight( City* acities[]);
-    void drive(vector<City*>);
-   // void buildResearchStation();
+    bool shuttleFlight( City* acities[], bool toexecute);
+    bool drive(vector<City*>, bool toexecute);
     bool buildResearchStation(std::vector<PlayerCard*> *discardPile, bool toexecute);
-
-    virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     bool shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute);
+    
+    virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     
-    //void moveAnyPawn();
     
 };
 
