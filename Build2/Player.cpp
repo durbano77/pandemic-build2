@@ -611,10 +611,9 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+
 	}
+    return false;
 }
 
 //Class Implementations for each RolePlayer : Player
@@ -782,10 +781,9 @@ bool Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* is
 			}
 			return true;
 		}
-		else {
-			return false;
-		}
+
 	}
+    return false;
 }
 
 //Researcher
