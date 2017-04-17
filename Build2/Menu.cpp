@@ -76,7 +76,7 @@ void Menu::displayMenu(City* acities[]){
     
 
     
-//    std::cout<<"[1] Action Drive"<<std::endl;
+   std::cout<<"[1] Action Drive"<<std::endl;
 //    if(!p->drive(vertex, false)){
 //        std::cout<<"This option is not available to you right now"<<std::endl;
 //    }
@@ -84,29 +84,39 @@ void Menu::displayMenu(City* acities[]){
     
     std::cout<<"[2] Action Direct Flight"<<std::endl;
     if(!p->directFlight(acities, false)){
-        
+        std::cout<<"This option is not available to you right now"<<std::endl;
     }
      std::cout<<std::endl;
     std::cout<<"[3] Action Charter Flight"<<std::endl;
     if(!p->charterFlight(acities, false)){
-    
+        std::cout<<"This option is not available to you right now"<<std::endl;
     }
      std::cout<<std::endl;
     std::cout<<"[4] Action Shuttle Flight"<<std::endl;
     if(!p->shuttleFlight(acities, false)){
-    
+        std::cout<<"This option is not available to you right now"<<std::endl;
     }
     
     std::cout<<std::endl;
-    std::cout<<"[5] Action Build Research Station"<<std::endl;
-    if(p->buildResearchStation(discardPile, false)){
-        
+    std::cout<<"[5] Action Build a Research Station"<<std::endl;
+    if(!p->buildResearchStation(discardPile, false)){
+        std::cout<<"This option is not available to you right now"<<std::endl;
     }
-     std::cout<<std::endl;
-    std::cout<<"[8] Action Share Knowledge"<<std::endl;
-    if(p->shareKnowledge(vectorplayers, false)){
-    
+    std::cout<<std::endl;
+    std::cout<<"[6] Action Treat Disease"<<std::endl;
+//    if(!p->   (  , false)){
+//        
+//    }
+    std::cout<<std::endl;
+    std::cout<<"[7] Action Share Knowledge"<<std::endl;
+    if(!p->shareKnowledge(vectorplayers, false)){
+        std::cout<<"This option is not available to you right now"<<std::endl;
     }
+    std::cout<<std::endl;
+    std::cout<<"[8] Action Discover a Cure"<<std::endl;
+    //    if(!p->   (  , false)){
+    //
+    //    }
 }
 
 
@@ -130,11 +140,13 @@ void Menu::doAction(int a, City* acities[]){
             p->buildResearchStation(discardPile, true);
             break;
         case 6:
+            //treat disease
             break;
         case 7:
+            p->shareKnowledge(vectorplayers, true);
             break;
         case 8:
-            p->shareKnowledge(vectorplayers, true);
+           //discover cure
             break;
         default:
             cout<<"Menu ERROR: Cannot execute player action"<<endl;

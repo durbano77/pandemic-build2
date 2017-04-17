@@ -228,10 +228,6 @@ vector <City*>  Graph::getCityInGraph()
 
 }
 
-map<City*, vertex *> Graph::getcityMap(){
-return cityMap;
-
-}
 
 void  Graph::createMap(City* citiesarr[], vertex* vertexarr[])
 {

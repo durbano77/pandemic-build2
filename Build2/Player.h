@@ -65,6 +65,8 @@ public:
     
     virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+
+    void ShareKnowledge(std::vector<Player*> vectorplayers);
     
     
 };
@@ -88,9 +90,11 @@ public:
     Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Medic (Medic const& med);
     virtual ~Medic();
+
     void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
     void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-    
+
+
 };
 
 class Scientist : public Player{

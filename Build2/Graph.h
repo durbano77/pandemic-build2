@@ -70,7 +70,6 @@ public:
 	vector<City*> adjoiningCities(City*);
 	bool operator==(City&);
     
-    map<City*, vertex *> getcityMap();
 
 
 };
