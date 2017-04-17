@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
-
+//#include "Action.h"
 #include "Subject.h"
 #include "Pawn.h"
 
@@ -62,11 +62,12 @@ public:
     bool drive(vector<City*>, bool toexecute);
     bool buildResearchStation(std::vector<PlayerCard*> *discardPile, bool toexecute);
     bool shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute);
-
-    virtual bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute);
-    virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute);
     
-    void moveAnyPawn();
+    virtual void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    virtual void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+
+    void ShareKnowledge(std::vector<Player*> vectorplayers);
+    
     
 };
 
@@ -89,8 +90,10 @@ public:
     Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Medic (Medic const& med);
     virtual ~Medic();
-	bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute);
-	void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+
+    void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+
 
 };
 
@@ -100,7 +103,7 @@ public:
     Scientist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Scientist (Scientist const& scient);
     virtual ~Scientist();
-    bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toExecute); //base method will be overridden
+    void discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated); //base method will be overridden
     
 };
 
@@ -123,8 +126,8 @@ public:
     void buildResearchStation();
     void moveResearchstationCity();
     void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
-
-
+    
+    
 };
 
 
