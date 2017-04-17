@@ -337,7 +337,7 @@ int main(){
     initGame();
     
     Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
-    m.displayMenu(cityarr);
+    m.doMenu(cityarr);
     
     vector <City*> vtest = vertexarr[0]->getAdjCities();
     vector <City*> vtest1 = vertexarr[1]->getAdjCities();

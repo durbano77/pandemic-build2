@@ -10,6 +10,7 @@
 #define Menu_h
 
 #include <stdio.h>
+#include <set>
 
 #include "GraphView.h"
 #include "PlayerView.h"
@@ -37,10 +38,13 @@ public:
     void setPlayer(Player* pl);
     Player* getPlayer();
     
-    int options(int choice);
+    void doMenu(City* acities[]);
+    
     void displayMenu(City* acities[]);
+    int inChoice();
     void doAction(int a, City* acities[]);
-
+    
+    
 };
 
 #endif /* Menu_h */
