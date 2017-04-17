@@ -281,7 +281,10 @@ InfectionCard* infectioncardarr[] = { sanfrancisco_inf,chicago_inf,atlanta_inf,m
 //-----------------------------------------------------------------------------------------------//
 std::vector <vertex *> verticies;
 //blue
-Graph* myGraph = new Graph(); 
+typedef map<City*, vertex *> cMap;
+cMap cityMap;
+Graph* myGraph = new Graph(&cityMap);
+
 vertex *vertex_Atlanta = new vertex(city_Atlanta);// , myGraph);
 vertex*vertex_SanFrancisco = new vertex(city_SanFrancisco);
 vertex*vertex_Chicago = new vertex(city_Chicago);

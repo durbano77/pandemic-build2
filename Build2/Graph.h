@@ -45,10 +45,10 @@ class Graph: public Subject
 protected:
 	typedef map<City*, vertex *> cMap;
 	//vmap work;
-	cMap cityMap;
+	cMap* cityMap;
 	vector <City*> cityInGraph;
 public:
-	Graph();
+	Graph(cMap* citMap);
 	Graph(vector<City**>cityVector);
 	vector <City*> getCityInGraph();
 	void addC(vector<City*>cityVector);
