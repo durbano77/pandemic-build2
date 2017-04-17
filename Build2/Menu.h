@@ -15,22 +15,33 @@
 #include "PlayerView.h"
 #include "Player.h"
 
+//#include "Global.h"
+
 
 class Menu{
 protected:
-    Menu();
     Player* p;
+    int nbactionsdone=4;
+    vector<City*> vcities;
+ //  vector<City*> vertex;  //to pass vertex of the city where the player is
+    std::vector<Player*> vectorplayers;
+    std::vector<PlayerCard*> *discardPile;
     
-    virtual ~Menu();
+    std::vector<int> possible;
+
     
 public:
+    Menu();
+    Menu(Player* p, vector<City*> &vc, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile);
+    virtual ~Menu();
     void setPlayer(Player* pl);
     Player* getPlayer();
     
     int options(int choice);
-    void displayMenu();
-    void setAction(int a);
+    void displayMenu(City* acities[]);
+    void doAction(int a, City* acities[]);
 
 };
 
 #endif /* Menu_h */
+

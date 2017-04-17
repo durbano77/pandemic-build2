@@ -88,9 +88,9 @@ public:
     Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Medic (Medic const& med);
     virtual ~Medic();
-	void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-	void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
-
+    void treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    
 };
 
 class Scientist : public Player{
@@ -122,8 +122,8 @@ public:
     void buildResearchStation();
     void moveResearchstationCity();
     void moveResearchstationCity(City* toCity , vector<PlayerCard*> *discardPile);
-
-
+    
+    
 };
 
 

@@ -33,13 +33,13 @@ Player::Player(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<Playe
 }
 
 
- Player::Player(Player const& theplayer){
-     playername=theplayer.playername;
-     playerpawn=theplayer.playerpawn;
- reference_card=theplayer.reference_card;
- role_card=theplayer.role_card;
- player_hand=theplayer.player_hand;
- }
+Player::Player(Player const& theplayer){
+    playername=theplayer.playername;
+    playerpawn=theplayer.playerpawn;
+    reference_card=theplayer.reference_card;
+    role_card=theplayer.role_card;
+    player_hand=theplayer.player_hand;
+}
 
 
 //Player - Destructor
@@ -93,7 +93,7 @@ std::string  Player::getPlayerName() const{
     return playername;
 }
 void Player::printPlayerName() {
-	cout << playername;
+    cout << playername;
 }
 
 
@@ -145,20 +145,20 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
             std::cout<<"ERR: player deck last card nullptr"<<std::endl;
         }
     }
-   Notify(1); //display hand
+    Notify(1); //display hand
     
     //Display all the event cards in the eventCardsAvail vector
-//    if(eventCardsAvail.size()>0){
-//        for(int j=0;j<eventCardsAvail.size();j++){
-//            eventCardsAvail[j]->printCard();
-//        }
-//    }
+    //    if(eventCardsAvail.size()>0){
+    //        for(int j=0;j<eventCardsAvail.size();j++){
+    //            eventCardsAvail[j]->printCard();
+    //        }
+    //    }
     
-       
+    
     if(player_hand.size()>7){
         discardCards();
     }
-
+    
 }
 
 
@@ -166,41 +166,41 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
 
 void Player::discardCards(){
     
-        int handsize=static_cast<int>(player_hand.size());
-        while(handsize>7){
-            
-            Notify(2); //Notify DiscardHand
-            
-            int cardnb=handsize+2; //cardnb < handsize
-            std::cout<<"Discard one card.";
-            while (cardnb < 1 || cardnb > handsize) {
-                std::cout << "Enter a valid number from 1 to "<< handsize << ":";
-                std::cin >> cardnb;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            
-            if(cardnb>=0 && cardnb<=handsize){
-                string cardn= player_hand.at(cardnb-1)->getCardName();
-                delete player_hand.at(cardnb-1);
-                player_hand.erase(player_hand.begin() + (cardnb-1));
-                std::cout<<cardn<<" was succesfully removed"<<std::endl;
-            }
-            
-            
-            
-            handsize=static_cast<int>(player_hand.size());
-            
+    int handsize=static_cast<int>(player_hand.size());
+    while(handsize>7){
+        
+        Notify(2); //Notify DiscardHand
+        
+        int cardnb=handsize+2; //cardnb < handsize
+        std::cout<<"Discard one card.";
+        while (cardnb < 1 || cardnb > handsize) {
+            std::cout << "Enter a valid number from 1 to "<< handsize << ":";
+            std::cin >> cardnb;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
+        
+        if(cardnb>=0 && cardnb<=handsize){
+            string cardn= player_hand.at(cardnb-1)->getCardName();
+            delete player_hand.at(cardnb-1);
+            player_hand.erase(player_hand.begin() + (cardnb-1));
+            std::cout<<cardn<<" was succesfully removed"<<std::endl;
+        }
+        
+        
+        
+        handsize=static_cast<int>(player_hand.size());
+        
+    }
     
     Notify(1);
-
+    
 }
 
 bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities (vertex)
 {
     int cityNum;
-
+    
     if (cVec.size() > 0)
     {
         std::cout<<"List of adjacent cities you can drive to: "<<std::endl;
@@ -209,20 +209,20 @@ bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities 
         }
         
         if(toexecute){
-        do{
-            cout << "enter the city # you want to drive to\n";
-            cin >> cityNum;
-            while (cin.fail())
-            {
-                cout << "Integer wanted please enter the city number \n";
-                cin.clear();
-                cin.ignore(INT_MAX, '\n');
-                //return;
-            }
-            
-        } while (cityNum <0 || cityNum > cVec.size());
-        getPawn()->setPawnCity(cVec[cityNum - 1]);
-        cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+            do{
+                cout << "enter the city # you want to drive to\n";
+                cin >> cityNum;
+                while (cin.fail())
+                {
+                    cout << "Integer wanted please enter the city number \n";
+                    cin.clear();
+                    cin.ignore(INT_MAX, '\n');
+                    //return;
+                }
+                
+            } while (cityNum <0 || cityNum > cVec.size());
+            getPawn()->setPawnCity(cVec[cityNum - 1]);
+            cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
         }//if toexecute
         
         return true;
@@ -257,12 +257,12 @@ bool Player::directFlight(City* acities[], bool toexecute){
                 
                 delete player_hand[i];
                 player_hand.erase(player_hand.begin() + (i));
-            
+                
             }
             
             return true;
         } //action condition
-
+        
         
     } //for loop
     
@@ -271,7 +271,7 @@ bool Player::directFlight(City* acities[], bool toexecute){
 }
 
 bool Player::charterFlight(City* acities[], bool toexecute){
-  
+    
     if(player_hand.size()!=0){
         if(toexecute){
             std::cout<<"Charter Flight - What city do you want to fly to?"<<std::endl;
@@ -311,9 +311,9 @@ bool Player::charterFlight(City* acities[], bool toexecute){
             
             delete player_hand[indexphand];
             player_hand.erase(player_hand.begin() + indexphand);
-        
+            
         }
-    
+        
         return true;
     }else{
         return false;
@@ -325,22 +325,22 @@ bool Player::charterFlight(City* acities[], bool toexecute){
 
 //onlt to move to city with research station
 bool Player::shuttleFlight(City* acities[], bool toexecute){
-	vector<City*> cityWithResearchStation;
-	int cityNum;
-	for (int i = 0; i < 48; i++) {
-		if (acities[i]->getResearchStation())
-		{
-			cityWithResearchStation.push_back(acities[i]);
-	        }
-	}
-  	cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
-	if (cityWithResearchStation.size() > 0)
-	{
+    vector<City*> cityWithResearchStation;
+    int cityNum;
+    for (int i = 0; i < 48; i++) {
+        if (acities[i]->getResearchStation())
+        {
+            cityWithResearchStation.push_back(acities[i]);
+        }
+    }
+    cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
+    if (cityWithResearchStation.size() > 0)
+    {
         
-		cout << "these are these cities with researchStation" << endl;
-		for (int i = 0; i < cityWithResearchStation.size(); i++) {
-			cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
-		}
+        cout << "these are these cities with researchStation" << endl;
+        for (int i = 0; i < cityWithResearchStation.size(); i++) {
+            cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
+        }
         
         if(toexecute){
             do{
@@ -361,10 +361,10 @@ bool Player::shuttleFlight(City* acities[], bool toexecute){
         return true;
     }
     
-	else
-	{
-		cout << "  There are no cities with research station" << endl;
-	}
+    else
+    {
+        cout << "  There are no cities with research station" << endl;
+    }
     
     return false;
 }
@@ -372,86 +372,86 @@ bool Player::shuttleFlight(City* acities[], bool toexecute){
 
 
 bool Player::buildResearchStation(vector<PlayerCard*> *discardPile, bool toexecute){
-
-	for (unsigned i = 0; i < player_hand.size(); i++){
-		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName()){
+    
+    for (unsigned i = 0; i < player_hand.size(); i++){
+        if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName()){
             std::cout<<"Your pawn is currently located in"<< playerpawn->getPawnCity()->getCityName()<<" and you have City card "<<player_hand[i]->getCardName()<<" in your hand. You can build a research station."<<std::endl;
-                if(toexecute){
-                    discardPile->push_back(player_hand[i]);
-                    player_hand.erase(player_hand.begin() + i);
-                    playerpawn->getPawnCity()->addResearchStation();
-                    playerpawn->getPawnCity()->print();
-                    if(playerpawn->getPawnCity()->getResearchStation()){
-                        std::cout<<playerpawn->getPawnCity()->getCityName()<<" has a research station"<<std::endl;
-                    }
-                    else{
-                         std::cout<<playerpawn->getPawnCity()->getCityName()<<" doesn't have a research station"<<std::endl;
-                    }
+            if(toexecute){
+                discardPile->push_back(player_hand[i]);
+                player_hand.erase(player_hand.begin() + i);
+                playerpawn->getPawnCity()->addResearchStation();
+                playerpawn->getPawnCity()->print();
+                if(playerpawn->getPawnCity()->getResearchStation()){
+                    std::cout<<playerpawn->getPawnCity()->getCityName()<<" has a research station"<<std::endl;
                 }
-				return true;
-		}
-		
-	}
+                else{
+                    std::cout<<playerpawn->getPawnCity()->getCityName()<<" doesn't have a research station"<<std::endl;
+                }
+            }
+            return true;
+        }
+        
+    }
     
     return false;
 }
 
 void Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEradicated){
-	//Remove 1 disease cube from player's current city
-	//get current city
-	Pawn *pawn = this->getPawn();
-	City *currentCity = pawn->getPawnCity();
-	currentCity->removeCubes();
-	
-	//Increment the diseasecube count of that color disease by 1
-	//get disease color (blue 0, yellow 1, black 2, red 3)
-	string dColor = currentCity->getColor();
-	int colorIndex;
-	if (dColor == "blue") {
-		colorIndex = 0;
-	}
-	else if (dColor == "yellow") {
-		colorIndex = 1;
-	}
-	else if (dColor == "black") {
-		colorIndex = 2;
-	}
-	else {//red
-		colorIndex = 3;
-	}
-	if (remainingDiseaseCubes[colorIndex] < 24) {
-		//re-add a disease cube to the "pile" of its color
-		remainingDiseaseCubes[colorIndex]++;
-	}
-	//If this disease color is cured, remove all cubes of that color from player's current city
-	int cubesRemoved = 1;
-	if (isCured[colorIndex] == true) {
-		cubesRemoved = currentCity->getCubes();
-		currentCity->removeAllCubes();
-		remainingDiseaseCubes[colorIndex] += cubesRemoved;
-		if (remainingDiseaseCubes[colorIndex] > 24) {
-			remainingDiseaseCubes[colorIndex] = 24;
-		}
-	}
-	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-	if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-		isEradicated[colorIndex] = true;
-		//TODO: if eradicated, no new cubes are placed when infecting.
-	}
+    //Remove 1 disease cube from player's current city
+    //get current city
+    Pawn *pawn = this->getPawn();
+    City *currentCity = pawn->getPawnCity();
+    currentCity->removeCubes();
+    
+    //Increment the diseasecube count of that color disease by 1
+    //get disease color (blue 0, yellow 1, black 2, red 3)
+    string dColor = currentCity->getColor();
+    int colorIndex;
+    if (dColor == "blue") {
+        colorIndex = 0;
+    }
+    else if (dColor == "yellow") {
+        colorIndex = 1;
+    }
+    else if (dColor == "black") {
+        colorIndex = 2;
+    }
+    else {//red
+        colorIndex = 3;
+    }
+    if (remainingDiseaseCubes[colorIndex] < 24) {
+        //re-add a disease cube to the "pile" of its color
+        remainingDiseaseCubes[colorIndex]++;
+    }
+    //If this disease color is cured, remove all cubes of that color from player's current city
+    int cubesRemoved = 1;
+    if (isCured[colorIndex] == true) {
+        cubesRemoved = currentCity->getCubes();
+        currentCity->removeAllCubes();
+        remainingDiseaseCubes[colorIndex] += cubesRemoved;
+        if (remainingDiseaseCubes[colorIndex] > 24) {
+            remainingDiseaseCubes[colorIndex] = 24;
+        }
+    }
+    //If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+    if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
+        isEradicated[colorIndex] = true;
+        //TODO: if eradicated, no new cubes are placed when infecting.
+    }
 }
 
 
 
 bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
-//give the City card that matches the city you are in to another player
-//or take the City card that matches the city you are in from another player
-
+    //give the City card that matches the city you are in to another player
+    //or take the City card that matches the city you are in from another player
+    
     City* cityplayer=this->getPawn()->getPawnCity();
     
     for(int i=0;i<vectorplayers.size();i++){
         City* cityotherplayer = vectorplayers[i]->getPawn()->getPawnCity();
         
-		//operator overload: comparison between cities compares cityNames
+        //operator overload: comparison between cities compares cityNames
         if(cityotherplayer==cityplayer && this!=vectorplayers[i]){
             //this player and another one are in the same city/they're not the same player
             //checking if one of them has the corresponding city card
@@ -461,11 +461,11 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
             int phs=player_hand.size();
             for(int j=0; j<phs;j++){
                 if(player_hand[j]->getCardName()==cname){
-                     std::cout<< "You have the City card '"<<cname<<"' that matches the city you are in."<<" You can give it to "<<vectorplayers[i]->getPlayerName() <<std::endl;
+                    std::cout<< "You have the City card '"<<cname<<"' that matches the city you are in."<<" You can give it to "<<vectorplayers[i]->getPlayerName() <<std::endl;
                     
                     if(toexecute){
                         Notify(4); //display pawn info
-                     
+                        
                         char response='a';
                         do
                         {
@@ -484,12 +484,12 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
                         else{
                             //player doesnt want to give the city card
                         }
-
+                        
                     } //if toexecute
                     
                     return true;
                 }
-             //phs=player_hand.size();
+                //phs=player_hand.size();
             }//for
             
             //now, compare the inverse [checks if other player has the matching card in their hand]
@@ -499,7 +499,7 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
                 if((vectorplayers[i]->getHand())[k]->getCardName()==cname){
                     std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<cname<<"' that matches the city "<<cityplayer<<" you both are in."<<std::endl;
                     if(toexecute){
-  
+                        
                         char response='a';
                         do
                         {
@@ -518,64 +518,64 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
                         else{
                             //player doesnt want to take the city card
                         }
-                    
+                        
                     }//if toexecute
-                   
+                    
                     return true;
                 }//if
-    
+                
                 
             }//for
-           
+            
         }
         
-
+        
     }
     return false;
 }
 
 void Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated){
-//At any research station, discard 5 City cards of the same color from your hand to cure the disease of that color.
-	//Determine which city cards/color to discard (what color do they have 5 of?)
-	int cityColorCount[4] = { 0,0,0,0 };
-	int theColor;	//will contain the index of the color to cure
-	for (int j = 0; j<player_hand.size(); j++) {
-		if (dynamic_cast<BlueCity*>(player_hand[j])) {
-			cityColorCount[0]++;
-			if (cityColorCount[0] == 5) {
-				theColor = 0;
-				break;
-			}
-		}
-		else if (dynamic_cast<YellowCity*>(player_hand[j])) {
-			cityColorCount[1]++;
-			if (cityColorCount[1] == 5) {
-				theColor = 1;
-				break;
-			}
-		}
-		else if (dynamic_cast<BlackCity*>(player_hand[j])) {
-			cityColorCount[2]++;
-			if (cityColorCount[2] == 5) {
-				theColor = 2;
-				break;
-			}
-		}
-		else if (dynamic_cast<RedCity*>(player_hand[j])) {
-			cityColorCount[3]++;
-			if (cityColorCount[3] == 5) {
-				theColor = 3;
-				break;
-			}
-		}
-		
-	}
-//Move the diseases cure marker to its Cure Indicator.
-	isCured[theColor] = true;
-//	If no cubes of this color are on the board, this disease is now eradicated.
-	if (remainingDiseaseCubes[theColor] == 24) {
-		isEradicated[theColor] = true;
-	}
+    //At any research station, discard 5 City cards of the same color from your hand to cure the disease of that color.
+    //Determine which city cards/color to discard (what color do they have 5 of?)
+    int cityColorCount[4] = { 0,0,0,0 };
+    int theColor;	//will contain the index of the color to cure
+    for (int j = 0; j<player_hand.size(); j++) {
+        if (dynamic_cast<BlueCity*>(player_hand[j])) {
+            cityColorCount[0]++;
+            if (cityColorCount[0] == 5) {
+                theColor = 0;
+                break;
+            }
+        }
+        else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+            cityColorCount[1]++;
+            if (cityColorCount[1] == 5) {
+                theColor = 1;
+                break;
+            }
+        }
+        else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+            cityColorCount[2]++;
+            if (cityColorCount[2] == 5) {
+                theColor = 2;
+                break;
+            }
+        }
+        else if (dynamic_cast<RedCity*>(player_hand[j])) {
+            cityColorCount[3]++;
+            if (cityColorCount[3] == 5) {
+                theColor = 3;
+                break;
+            }
+        }
+        
+    }
+    //Move the diseases cure marker to its Cure Indicator.
+    isCured[theColor] = true;
+    //	If no cubes of this color are on the board, this disease is now eradicated.
+    if (remainingDiseaseCubes[theColor] == 24) {
+        isEradicated[theColor] = true;
+    }
 }
 
 
@@ -611,65 +611,65 @@ Player(ppawn, refcard, rolecard, p_hand)
 Medic::Medic (Medic const& med){}
 Medic::~Medic(){}
 void Medic::treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-	//Remove all disease cubes from player's current city
-	//get current city
-	Pawn *pawn = this->getPawn();
-	City *currentCity = pawn->getPawnCity();
-	int cubesRemoved = currentCity->getCubes();
-	currentCity->removeAllCubes();
-
-	//get disease color (blue 0, yellow 1, black 2, red 3)
-	string dColor = currentCity->getColor();
-	int colorIndex;
-	if (dColor == "blue") {
-		colorIndex = 0;
-	}
-	else if (dColor == "yellow") {
-		colorIndex = 1;
-	}
-	else if (dColor == "black") {
-		colorIndex = 2;
-	}
-	else {//red
-		colorIndex = 3;
-	}
-	//Increment the diseasecube count of that color disease by however many removed
-	remainingDiseaseCubes[colorIndex] += cubesRemoved;
-
-	//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-	if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
-		isEradicated[colorIndex] = true;
-	}
+    //Remove all disease cubes from player's current city
+    //get current city
+    Pawn *pawn = this->getPawn();
+    City *currentCity = pawn->getPawnCity();
+    int cubesRemoved = currentCity->getCubes();
+    currentCity->removeAllCubes();
+    
+    //get disease color (blue 0, yellow 1, black 2, red 3)
+    string dColor = currentCity->getColor();
+    int colorIndex;
+    if (dColor == "blue") {
+        colorIndex = 0;
+    }
+    else if (dColor == "yellow") {
+        colorIndex = 1;
+    }
+    else if (dColor == "black") {
+        colorIndex = 2;
+    }
+    else {//red
+        colorIndex = 3;
+    }
+    //Increment the diseasecube count of that color disease by however many removed
+    remainingDiseaseCubes[colorIndex] += cubesRemoved;
+    
+    //If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+    if (isCured[colorIndex] == true && remainingDiseaseCubes[colorIndex] == 24) {
+        isEradicated[colorIndex] = true;
+    }
 }
 void Medic::removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-	//Whenever a medic visits a city, any cubes of a CURED DISEASE are automatically removed
-	int cityCubes = this->getPawn()->getPawnCity()->getCubes();
-	string dColor = this->getPawn()->getPawnCity()->getColor();
-	int colorIndex;
-	if (dColor == "blue") {
-		colorIndex = 0;
-	}
-	else if (dColor == "yellow") {
-		colorIndex = 1;
-	}
-	else if (dColor == "black") {
-		colorIndex = 2;
-	}
-	else {//red
-		colorIndex = 3;
-	}
-	if (cityCubes > 0 && isCured[colorIndex] == true) {
-		//medic is in a city with disease cubes, and cure exists for the disease
-		int cubesRemoved = this->getPawn()->getPawnCity()->getCubes();
-		this->getPawn()->getPawnCity()->removeAllCubes();
-		//add the removed cubes back to the pile
-		remainingDiseaseCubes[colorIndex] += cubesRemoved;
-
-		//If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
-		if (remainingDiseaseCubes[colorIndex] == 24) {
-			isEradicated[colorIndex] = true;
-		}
-	}
+    //Whenever a medic visits a city, any cubes of a CURED DISEASE are automatically removed
+    int cityCubes = this->getPawn()->getPawnCity()->getCubes();
+    string dColor = this->getPawn()->getPawnCity()->getColor();
+    int colorIndex;
+    if (dColor == "blue") {
+        colorIndex = 0;
+    }
+    else if (dColor == "yellow") {
+        colorIndex = 1;
+    }
+    else if (dColor == "black") {
+        colorIndex = 2;
+    }
+    else {//red
+        colorIndex = 3;
+    }
+    if (cityCubes > 0 && isCured[colorIndex] == true) {
+        //medic is in a city with disease cubes, and cure exists for the disease
+        int cubesRemoved = this->getPawn()->getPawnCity()->getCubes();
+        this->getPawn()->getPawnCity()->removeAllCubes();
+        //add the removed cubes back to the pile
+        remainingDiseaseCubes[colorIndex] += cubesRemoved;
+        
+        //If diseasecube count of that disease is back to 24, and disease is cured, disease is ERADICATED
+        if (remainingDiseaseCubes[colorIndex] == 24) {
+            isEradicated[colorIndex] = true;
+        }
+    }
 }
 
 
@@ -684,46 +684,46 @@ Player(ppawn, refcard, rolecard, p_hand)
 Scientist::Scientist (Scientist const& scient){}
 Scientist::~Scientist(){}
 void Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated) {
-	//At any research station, discard 4 City cards of the same color from your hand to cure the disease of that color.
-	//Determine which city cards/color to discard (what color do they have 4 of?)
-	int cityColorCount[4] = { 0,0,0,0 };
-	int theColor;	//will contain the index of the color to cure
-	for (int j = 0; j<player_hand.size(); j++) {
-		if (dynamic_cast<BlueCity*>(player_hand[j])) {
-			cityColorCount[0]++;
-			if (cityColorCount[0] == 4) {
-				theColor = 0;
-				break;
-			}
-		}
-		else if (dynamic_cast<YellowCity*>(player_hand[j])) {
-			cityColorCount[1]++;
-			if (cityColorCount[1] == 4) {
-				theColor = 1;
-				break;
-			}
-		}
-		else if (dynamic_cast<BlackCity*>(player_hand[j])) {
-			cityColorCount[2]++;
-			if (cityColorCount[2] == 4) {
-				theColor = 2;
-				break;
-			}
-		}
-		else if (dynamic_cast<RedCity*>(player_hand[j])) {
-			cityColorCount[3]++;
-			if (cityColorCount[3] == 4) {
-				theColor = 3;
-				break;
-			}
-		}
-	}
-	//Move the diseases cure marker to its Cure Indicator.
-	isCured[theColor] = true;
-	//	If no cubes of this color are on the board, this disease is now eradicated.
-	if (remainingDiseaseCubes[theColor] == 24) {
-		isEradicated[theColor] = true;
-	}
+    //At any research station, discard 4 City cards of the same color from your hand to cure the disease of that color.
+    //Determine which city cards/color to discard (what color do they have 4 of?)
+    int cityColorCount[4] = { 0,0,0,0 };
+    int theColor;	//will contain the index of the color to cure
+    for (int j = 0; j<player_hand.size(); j++) {
+        if (dynamic_cast<BlueCity*>(player_hand[j])) {
+            cityColorCount[0]++;
+            if (cityColorCount[0] == 4) {
+                theColor = 0;
+                break;
+            }
+        }
+        else if (dynamic_cast<YellowCity*>(player_hand[j])) {
+            cityColorCount[1]++;
+            if (cityColorCount[1] == 4) {
+                theColor = 1;
+                break;
+            }
+        }
+        else if (dynamic_cast<BlackCity*>(player_hand[j])) {
+            cityColorCount[2]++;
+            if (cityColorCount[2] == 4) {
+                theColor = 2;
+                break;
+            }
+        }
+        else if (dynamic_cast<RedCity*>(player_hand[j])) {
+            cityColorCount[3]++;
+            if (cityColorCount[3] == 4) {
+                theColor = 3;
+                break;
+            }
+        }
+    }
+    //Move the diseases cure marker to its Cure Indicator.
+    isCured[theColor] = true;
+    //	If no cubes of this color are on the board, this disease is now eradicated.
+    if (remainingDiseaseCubes[theColor] == 24) {
+        isEradicated[theColor] = true;
+    }
 }
 
 //Researcher
@@ -749,36 +749,36 @@ Operationsexpert::Operationsexpert(Operationsexpert const& opexpert){}
 Operationsexpert::~Operationsexpert(){}
 void Operationsexpert::buildResearchStation()
 {
-	for (unsigned i = 0; i < player_hand.size(); i++)
-	{
-		if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
-		{
-			playerpawn->getPawnCity()->addResearchStation();
-			playerpawn->getPawnCity()->print();
-			return;
-		}
-	}
+    for (unsigned i = 0; i < player_hand.size(); i++)
+    {
+        if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+        {
+            playerpawn->getPawnCity()->addResearchStation();
+            playerpawn->getPawnCity()->print();
+            return;
+        }
+    }
 }
 // moves from a city with researchstation to any city
 void Operationsexpert::moveResearchstationCity(City* toCity, std::vector<PlayerCard*> *discardPile)
 {
-	for (unsigned i = 0; i < player_hand.size(); i++)
-	{
-		if (toCity->getCityName() == player_hand[i]->getCardName())
-		{
-
-			discardPile->push_back(player_hand[i]);
-			player_hand.erase(player_hand.begin() + i);
-			playerpawn->setPawnCity(toCity);
-			playerpawn->getPawnCity()->print();
-			return;
-		}
-		
-		if (i == player_hand.size() - 1)
-		{
-			cout << "you dont have the city card of " << toCity->getCityName();
-		}
-	}
+    for (unsigned i = 0; i < player_hand.size(); i++)
+    {
+        if (toCity->getCityName() == player_hand[i]->getCardName())
+        {
+            
+            discardPile->push_back(player_hand[i]);
+            player_hand.erase(player_hand.begin() + i);
+            playerpawn->setPawnCity(toCity);
+            playerpawn->getPawnCity()->print();
+            return;
+        }
+        
+        if (i == player_hand.size() - 1)
+        {
+            cout << "you dont have the city card of " << toCity->getCityName();
+        }
+    }
 }
 
 //Quarantinespecialist::
@@ -803,4 +803,3 @@ Player(ppawn, refcard, rolecard, p_hand)
 Contingencyplanner::Contingencyplanner(Contingencyplanner const& cplanner){}
 Contingencyplanner::~Contingencyplanner(){}
 void Contingencyplanner::takeEventCard(){}
-

@@ -17,6 +17,9 @@
 #include "PlayerView.h"
 //#include "CardsHeaders.h" (through PlayerView - Player - Subject - CardsHeaders)
 //#include "SaveLoad.h"
+
+#include "Menu.h"
+
 #include "Global.h"
 
 
@@ -332,6 +335,9 @@ int main(){
 
     
     initGame();
+    
+    Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
+    m.displayMenu(cityarr);
     
     vector <City*> vtest = vertexarr[0]->getAdjCities();
     vector <City*> vtest1 = vertexarr[1]->getAdjCities();
