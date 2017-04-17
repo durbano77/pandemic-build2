@@ -40,7 +40,9 @@ public:
     
     //void printListPlayersInCity();
     void print();
-
+	bool operator== (City* other) {
+		return (getCityName() == other->getCityName());
+	};
 	
 private:
     string cityname;

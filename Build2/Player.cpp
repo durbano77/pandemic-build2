@@ -411,6 +411,7 @@ void Player::ShareKnowledge(std::vector<Player*> vectorplayers){
     for(int i=0;i<vectorplayers.size();i++){
         City* cityotherplayer = vectorplayers[i]->getPawn()->getPawnCity();
         
+		//operator overload: comparison between cities compares cityNames
         if(cityotherplayer==cityplayer && this!=vectorplayers[i]){
             //this player and another one are in the same city/they're not the same player
             //checking if one of them has the corresponding city card
