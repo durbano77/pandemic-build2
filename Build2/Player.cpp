@@ -312,7 +312,84 @@ void Player::shuttleFlight(City* acities[]){
 		cout << "  There are no cities with research station" << endl;
 	}
 }
+void Player:: drive(vector<City*> cVec)
+{
+	int cityNum;
+	for (int i = 0; i < cVec.size(); i++) {
+		cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+	}
+	if (cVec.size() > 0)
+	{
+		do{
+			cout << "enter the city # you want to drive to\n";
+			cin >> cityNum;
+			while (cin.fail())
+			{
+				cout << "Integer wanted please enter the city number \n";
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+				//return;
+			}
 
+		} while (cityNum <0 || cityNum > cVec.size());
+
+		getPawn()->setPawnCity(cVec[cityNum - 1]);
+		cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+	}
+}
+void Player:: drive(vector<City*> cVec)
+{
+	int cityNum;
+	for (int i = 0; i < cVec.size(); i++) {
+		cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+	}
+	if (cVec.size() > 0)
+	{
+		do{
+			cout << "enter the city # you want to drive to\n";
+			cin >> cityNum;
+			while (cin.fail())
+			{
+				cout << "Integer wanted please enter the city number \n";
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+				//return;
+			}
+
+		} while (cityNum <0 || cityNum > cVec.size());
+
+		getPawn()->setPawnCity(cVec[cityNum - 1]);
+		cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+	}
+}
+void Player:: drive(vector<City*> cVec)
+{
+	int cityNum;
+	for (int i = 0; i < cVec.size(); i++) {
+
+		cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+
+	}
+
+	if (cVec.size() > 0)
+
+	{
+		do{
+			cout << "enter the city # you want to drive to\n";
+			cin >> cityNum;
+			while (cin.fail())
+			{
+				cout << "Integer wanted please enter the city number \n";
+				cin.clear();
+				cin.ignore(INT_MAX, '\n');
+				//return;
+			}
+		} while (cityNum <0 || cityNum > cVec.size());
+		getPawn()->setPawnCity(cVec[cityNum - 1]);
+		cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
+	}
+
+}
 void Player::buildResearchStation(vector<PlayerCard*> *discardPile){
 
 	for (unsigned i = 0; i < player_hand.size(); i++)
