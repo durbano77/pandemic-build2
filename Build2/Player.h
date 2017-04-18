@@ -68,10 +68,12 @@ public:
 
     void ShareKnowledge(std::vector<Player*> vectorplayers);
 	// event card
-	void airlift(vector <Player*> ,City* acities[]);
+	void airlift(vector <Player*>, City* acities[], vector <PlayerCard*> *discardpile);
 	void oneQuietNight();
-	void governmentGrant(City* acities[]);
+	void governmentGrant(City* acities[], vector <PlayerCard*> *discardpile);
 	void resilientPopulation();
+	
+	
 };
 
 //Class Declarations for each RolePlayer : Player
