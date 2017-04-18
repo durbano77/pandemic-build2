@@ -15,13 +15,18 @@
 //Contains only global objects (cards, pawns, player hands, array of players, array of playerviews, playerdeck, discard pile, etc.)
 //Graph* myGraph;
 //vertex* myVertex[];
-const int nbplayers = 4;
-const int nbcardsplayer = 4;    // # Cards per player when game starts
+//const int nbplayers = 4;
+//const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
+bool isgameover=false;
+
 //Infection rate, initialized to 2 infection cards to be drawn
-int infectionRate = 2;
+int infectionRatePos = 0;
+int infectionRateMarker[7] = { 2,2,2,3,3,4,4 };
+//Outbreak marker
+int outbreakMarker = 0;
 //remaining disease cubes (blue, yellow, black, red)
 int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount};
 //cured diseases (blue, yellow, black, red)
@@ -281,7 +286,10 @@ InfectionCard* infectioncardarr[] = { sanfrancisco_inf,chicago_inf,atlanta_inf,m
 //-----------------------------------------------------------------------------------------------//
 std::vector <vertex *> verticies;
 //blue
-Graph* myGraph = new Graph(); 
+typedef map<City*, vertex *> cMap;
+cMap cityMap;
+Graph* myGraph = new Graph(&cityMap);
+
 vertex *vertex_Atlanta = new vertex(city_Atlanta);// , myGraph);
 vertex*vertex_SanFrancisco = new vertex(city_SanFrancisco);
 vertex*vertex_Chicago = new vertex(city_Chicago);

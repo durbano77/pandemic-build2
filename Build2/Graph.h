@@ -31,7 +31,9 @@ struct vertex {
 			for (int i = 0; i < adj.size(); i++) {
 				cityVector.push_back(adj[i]->name);
 			}
-		cout << "\n City " << name->getCityName() << " has " << cityVector.size() << " cities it is connected to" << endl;;
+            
+//only for test display
+//		cout << "\n City " << name->getCityName() << " has " << cityVector.size() << " cities it is connected to" << endl;;
 			return cityVector;
 
 		}
@@ -45,10 +47,10 @@ class Graph: public Subject
 protected:
 	typedef map<City*, vertex *> cMap;
 	//vmap work;
-	cMap cityMap;
+	cMap* cityMap;
 	vector <City*> cityInGraph;
 public:
-	Graph();
+	Graph(cMap* citMap);
 	Graph(vector<City**>cityVector);
 	vector <City*> getCityInGraph();
 	void addC(vector<City*>cityVector);

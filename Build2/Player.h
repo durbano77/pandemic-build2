@@ -95,7 +95,7 @@ public:
     virtual ~Medic();
 
     bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
-    void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    bool removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
 
 
 };
@@ -139,10 +139,7 @@ public:
     Quarantinespecialist();
     Quarantinespecialist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Quarantinespecialist(Quarantinespecialist const& qspecialist);
-    virtual ~Quarantinespecialist();
-    void preventOutbreaks();
-    void preventCubes();
-    
+    virtual ~Quarantinespecialist();    
 };
 
 class Contingencyplanner : public Player{
