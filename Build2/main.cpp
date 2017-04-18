@@ -163,21 +163,29 @@ void Infect(City* theCity, vector <City*> alreadyOutbreak) {
 	bool enoughCubes = true;
 	int colorIndex = 0;
 	string color = theCity->getColor();
-	if (color == "blue" && remainingDiseaseCubes[0] == 0) {
-		enoughCubes = false;
+	if (color == "blue") {
 		colorIndex = 0;
+		if (remainingDiseaseCubes[0] == 0) {
+			enoughCubes = false;
+		}
 	}
-	else if (color == "yellow" && remainingDiseaseCubes[1] == 0) {
-		enoughCubes = false;
+	else if (color == "yellow") {
 		colorIndex = 1;
+		if (remainingDiseaseCubes[1] == 0) {
+			enoughCubes = false;
+		}
 	}
-	else if (color == "black" && remainingDiseaseCubes[2] == 0) {
-		enoughCubes = false;
+	else if (color == "black") {		
 		colorIndex = 2;
+		if (remainingDiseaseCubes[2] == 0) {
+			enoughCubes = false;
+		}
 	}
-	else if (color == "red" && remainingDiseaseCubes[3] == 0) {
-		enoughCubes = false;
+	else if (color == "red") {		
 		colorIndex = 3;
+		if(remainingDiseaseCubes[3] == 0){
+			enoughCubes = false; 
+		}
 	}
 
 	//Has disease been eradicated?
@@ -248,7 +256,6 @@ void initialInfection() {
 			string color = curr_inf->getCardTextFront();
 			//infect the city
 			for (int j = 1; j <= i; j++) {
-				//curr_inf->Infect(remainingDiseaseCubes, isEradicated, curr_inf->getCity(), color);
 				vector <City*> alreadyOutbreak;
 				Infect(curr_inf->getCity(), alreadyOutbreak);
 			}
@@ -294,34 +301,22 @@ void turn(Player* p){
 
     p->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
    
-    
-    
- //INFECTION
-//    for(int i=0;i<infectionRate;i++){
-//        InfectionCard* ic=infectiondeck.back();
-//        
-//       // Notify(6);   display infection card and infection
-//        ic->printCard();
-//        
-//        string iccolor=ic->getColor();
-//        
-//        for(int j=0;j<48;j++){
-//            //c[j].getCityName();
-//        }
-//        
-//       //HERE:
-//		//ic->Infect(remainingDiseaseCubes, isEradicated, ic->getCity(), iccolor);
-//        
-//        
-//        infectiondeck.pop_back();
-//    }
-//    
+	//Infect
+	int infCardsToDraw = infectionRateMarker[infectionRatePos];		//{2,2,2,3,3,4,4}, index determined by infectionRatePos
+	for (int i = 0; i < infCardsToDraw; i++) {
+		InfectionCard* curr_inf = infectiondeck.back();
+		string city = curr_inf->getCardName();
+		string color = curr_inf->getCardTextFront();
+		//infect the city				
+		vector <City*> alreadyOutbreak;
+		Infect(curr_inf->getCity(), alreadyOutbreak);		
+		//add drawn card to discard pile
+		infectiondeck_discard.push_back(curr_inf);
+		//remove card from infection deck
+		infectiondeck.pop_back();
+	}
 
-    //infect city 1
-    //(check #2) if there is an event card, possibility to use event card
-    //infect city 2
-    //(check #2) if there is an event card, possibility to use event card
-    //infect city 3
+	
 }
 void initGame(){
 
