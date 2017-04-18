@@ -72,6 +72,7 @@ void Player::setRefCard(RefCard &refc){
 }
 
 void Player::printRefCard(){
+    cout<<"|---------- Reference Card ----------|\n\n"<<endl;
     if (reference_card != nullptr){reference_card->printCard();}
 }
 
@@ -84,6 +85,7 @@ void Player::setRoleCard(Cards &rc){
 }
 
 void Player::printRoleCard(){
+    cout<<"|---------- "<<playername<<": Role Card ----------|\n\n"<<endl;
     if (role_card != nullptr){
         role_card->printCard();}
 }
@@ -111,6 +113,7 @@ void Player::setHand(std::vector<PlayerCard*> &ha){
 }
 
 void Player::printHand(){
+    cout<<"|---------- "<<playername<<" Hand ----------|\n\n"<<endl;
     for(int i=0; i<player_hand.size();i++){
         if (player_hand[i] != nullptr){
             player_hand[i]->printCard();}
@@ -118,6 +121,7 @@ void Player::printHand(){
 }
 
 void Player::printHandTitles(){
+    cout<<"----- "<<playername<<" Hand -----"<<endl;
     std::cout<<playername <<" has the following cards in their hand: ";
     for(int i=0; i<player_hand.size();i++){
         if (player_hand[i] != nullptr){
@@ -247,6 +251,7 @@ bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities 
     return false;
 }
 
+//check input handling
 bool Player::directFlight(City* acities[], bool toexecute){
     string currentcity=this->getPawn()->getPawnCity()->getCityName();
     for(int i=0;i<player_hand.size();i++){
@@ -412,6 +417,8 @@ bool Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 		conditionsMet = true;
 	}
 	if (conditionsMet) {//conditions
+        cout<<"There are "<<this->getPawn()->getPawnCity()->getCubes() <<" infection cubes in this city"<<std::endl;
+        
 		if (toExecute) {
 			//Remove 1 disease cube from player's current city
 			//get current city
@@ -458,6 +465,8 @@ bool Player::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isEra
 				isEradicated[colorIndex] = true;
 				cout << "The " << currentCity->getColor() << " disease is now eradicated! No new " << currentCity->getColor() << " cubes will be placed." << endl;
 			}
+            
+            cout<<"There are now "<<this->getPawn()->getPawnCity()->getCubes() <<" infection cubes in this city"<<std::endl;
 		}
 		return true;
 	}
@@ -757,6 +766,7 @@ bool Medic::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isErad
 		conditionsMet = true;
 	}
 	if (conditionsMet) {//conditions
+        cout<<"There are "<<this->getPawn()->getPawnCity()->getCubes() <<" infection cubes in this city"<<std::endl;
 		if (toExecute) {
 			//Remove all disease cubes from player's current city
 			//get current city
