@@ -325,7 +325,8 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     }
     
     for(int e=0;e<eventcardsavail.size();e++){
-        if(a==ai+10+e){
+       // cout<<"AI: "<<ai<<"  11:"<<11<<"  E:"<<e<<"  final:"<<ai+11+e<<endl;
+        if(a==ai+11+e){
             cout<<" EVENT ACTION - "<<eventcardsavail[e]->getCardName()<<" \n"<<endl;
             
             if(eventcardsavail[e]->getCardName()=="Event card: Airlift"){
@@ -344,6 +345,9 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             else{
                 cout<<"Error: Event card was not found"<<endl;
             }
+            
+            delete eventcardsavail[e];
+            eventcardsavail.erase(eventcardsavail.begin() + (e));
         }
         
         
