@@ -101,9 +101,9 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     std::cout<<"["<<vps+5<<"] All the cities"<<std::endl;
         possible.push_back(vps+5);
 
-    std::cout<<"-----ACTIONS-----\n"<<std::endl;
+    std::cout<<"\n-----ACTIONS-----\n"<<std::endl;
     if(nbactionstodo>0){
-        std::cout<<"You can still perform "<<nbactionstodo<<" actions.\n"<<std::endl;
+        std::cout<<"***You can still perform "<<nbactionstodo<<" actions***\n"<<std::endl;
         std::cout<<"["<<vps+6<<"] Drive"<<std::endl;
             if(!p->drive(adjcities, false)){
                 std::cout<<"This option is not available to you right now"<<std::endl;
@@ -179,33 +179,26 @@ int Menu::inChoice(){
     std::set<int> setofchoices(std::make_move_iterator(possible.begin()),
                                std::make_move_iterator(possible.end()));
     
-    do {
-        std::cout<<" Enter your choice #: ";
-        while(!(std::cin >> actionchoice)) {
-            std::cout<<" # of your choice? ";
-            std::cout<<std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        if(!setofchoices.count(actionchoice)){
-            std::cout<<"The number you entered doesn't match one of the possible choices."<<std::endl;
-        }
-    } while(!setofchoices.count(actionchoice));
     
-   
-    //possible.clear();
-//     cout<<"POSSIBLE AFTER GETTING INCHOICE: "<<possible.size();
-//    for(int i=0;i<possible.size();i++){
-//        cout<<possible[i];
-//    
-//    }
+    while(!setofchoices.count(actionchoice))
+    {
+        std::cout<<"Enter your choice # : "<<std::endl;
+        std::cin>>actionchoice;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
     
     return actionchoice;
 }
 
 void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
     
-    clearScreen();
+    //clearScreen();
+    for(int i = 0; i<100; i++){
+        cout << "    " << endl;
+    }
+
     
     int ai=vectorplayers.size()+4;
     
@@ -241,12 +234,32 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     ai-=1;
     
     if(a==ai+1){
+        cout<<"CITY INFORMATION"<<endl;
+        for(int c=0;c<48;c++){
+            cout<<"["<<c+1<<"] "<<acities[c]->getCityName()<<endl;
+        }
+        std::cout<<"What city do you want to get information for?"<<std::endl;
+        int t=0;
+        while(t<1 || t>48)
+        {
+            std::cout<<"Enter your choice # : "<<std::endl;
+            std::cin>>t;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        for(int i = 0; i<100; i++){
+            cout << "    " << endl;
+        }
+        acities[t-1]->print();
         
-        /*function to show one city info*/
         clearScreen();
         doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
-    else if(a==ai+2){/*function to show all the cities info*/
+    else if(a==ai+2){
+        cout<<" ALL CITIES INFO "<<endl;
+        for(int j=0;j<48;j++){
+            acities[j]->print();
+        }
         clearScreen();
         doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
