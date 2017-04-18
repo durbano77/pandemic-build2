@@ -296,6 +296,9 @@ int main(){
     
     initGame();
     
+ 
+
+    
     for(int i=0;i<numPlayers;i++){
         Menu m(arrayofPlayers[i], arrayofPlayers, &discardpile);
         vertex* x;
@@ -304,44 +307,29 @@ int main(){
             x = cityMap.at(arrayofPlayers[i]->getPawn()->getPawnCity()); //update adj cities
             vector <City*> adjCities = x->getAdjCities();
             m.setAdjCity(adjCities);
-
+            
             m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+            
+
+
         }
     }
     
 
     
     
-    vector <City*> vtest = vertexarr[0]->getAdjCities();
-    vector <City*> vtest1 = vertexarr[1]->getAdjCities();
-    
-    //vertex_Atlanta->getAdjCities();
-    city_Atlanta->addResearchStation();
-    city_Bagdad->addResearchStation();
+//    vector <City*> vtest = vertexarr[0]->getAdjCities();
+//    vector <City*> vtest1 = vertexarr[1]->getAdjCities();
+//    
+//    //vertex_Atlanta->getAdjCities();
+//    city_Atlanta->addResearchStation();
+//    city_Bagdad->addResearchStation();
 
-    system("pause");
-    
-//SetPawnCityString : moving the pawn to a city with arg string city name
-//arrayofPlayers[0]->getPawn()->setPawnCityString("Pekin", cityarr);
-//string sa=arrayofPlayers[0]->getPawn()->getPawnCity()->getCityName();
-//std::cout<<sa<<std::endl;
+
     
     
-//Charter Flight & Direct Flight (OK)
-//    arrayofPlayers[0]->DirectFlight(cityarr);
-//    arrayofPlayers[0]->getPawn()->printPawn();
-//    
-//    arrayofPlayers[1]->CharterFlight(cityarr);
-//    arrayofPlayers[1]->getPawn()->printPawn();
-//    
     
-//Share Knowledge (OK)
-//    arrayofPlayers[0]->ShareKnowledge(arrayofPlayers);
-//    arrayofPlayers[1]->ShareKnowledge(arrayofPlayers);
-//    arrayofPlayers[0]->getPawn()->printPawn();
-//    arrayofPlayers[0]->printHand();
-//    arrayofPlayers[1]->getPawn()->printPawn();
-//    arrayofPlayers[1]->printHand();
+
     
 //Draw player card (OK)
 //    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);

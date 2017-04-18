@@ -122,7 +122,7 @@ void Player::printHandTitles(){
     for(int i=0; i<player_hand.size();i++){
         if (player_hand[i] != nullptr){
             string cardname=player_hand[i]->getCardName();
-            std::cout<<cardname<<" ";
+            std::cout<<cardname<<" -";
         }
     }
 
@@ -213,12 +213,17 @@ bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities 
     
     if (cVec.size() > 0)
     {
-        std::cout<<"List of adjacent cities you can drive to: "<<std::endl;
-        for (int i = 0; i < cVec.size(); i++) {
-            cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+        std::cout<<"List of adjacent cities you could drive to: ";
+        if(!toexecute){
+            for (int i = 0; i < cVec.size(); i++) {
+                cout << " - " <<cVec[i]->getCityName();
+            }
+            std::cout<<std::endl;
         }
-        
-        if(toexecute){
+        else{
+            for (int i = 0; i < cVec.size(); i++) {
+                cout << i + 1 << " " <<cVec[i]->getCityName() << endl;
+            }
             do{
                 cout << "enter the city # you want to drive to\n";
                 cin >> cityNum;
@@ -245,7 +250,7 @@ bool Player::directFlight(City* acities[], bool toexecute){
     string currentcity=this->getPawn()->getPawnCity()->getCityName();
     for(int i=0;i<player_hand.size();i++){
         if(currentcity==player_hand[i]->getCardName()){ //main condition
-            
+
             if(toexecute){
                 int citychoice=0;
                 std::cout<<"Direct Flight - What city do you want to fly to?"<<std::endl;
@@ -343,11 +348,9 @@ bool Player::shuttleFlight(City* acities[], bool toexecute){
             cityWithResearchStation.push_back(acities[i]);
         }
     }
-    cout << "\n\n # of city with research station :  " << cityWithResearchStation.size()<<endl;
+    cout << "# of city with research station :  " << cityWithResearchStation.size()<<endl;
     if (cityWithResearchStation.size() > 0)
     {
-        
-        cout << "these are these cities with researchStation" << endl;
         for (int i = 0; i < cityWithResearchStation.size(); i++) {
             cout << i + 1 << " " << cityWithResearchStation[i]->getCityName() << endl;
         }
@@ -371,11 +374,6 @@ bool Player::shuttleFlight(City* acities[], bool toexecute){
         return true;
     }
     
-    else
-    {
-        cout << "  There are no cities with research station" << endl;
-    }
-    
     return false;
 }
 
@@ -385,7 +383,7 @@ bool Player::buildResearchStation(vector<PlayerCard*> *discardPile, bool toexecu
     
     for (unsigned i = 0; i < player_hand.size(); i++){
         if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName()){
-            std::cout<<"Your pawn is currently located in"<< playerpawn->getPawnCity()->getCityName()<<" and you have City card "<<player_hand[i]->getCardName()<<" in your hand. You can build a research station."<<std::endl;
+            std::cout<<"Your pawn is currently located in "<< playerpawn->getPawnCity()->getCityName()<<" and you have City card "<<player_hand[i]->getCardName()<<" in your hand. You can build a research station."<<std::endl;
             if(toexecute){
                 discardPile->push_back(player_hand[i]);
                 player_hand.erase(player_hand.begin() + i);
@@ -521,7 +519,7 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
             for(int k=0; k<phs2;k++){
                 //std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
                 if((vectorplayers[i]->getHand())[k]->getCardName()==cname){
-                    std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<cname<<"' that matches the city "<<cityplayer<<" you both are in."<<std::endl;
+                    std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<(vectorplayers[i]->getHand())[k]->getCardName()<<"' that matches the city "<<cityplayer<<" you both are in."<<std::endl;
                     if(toexecute){
                         
                         char response='a';

@@ -6,7 +6,6 @@
 
 #include "Menu.h"
 
-//display menu each time (so it evaluates conditions)
 
 Menu::Menu(){}
 
@@ -17,8 +16,6 @@ Menu::Menu(Player* pl, std::vector<Player*> &vectorplayer,  std::vector<PlayerCa
     this->vectorplayers=vectorplayer;
     this->discardPile=dPile;
     
-//    vertex* x = cityMap.at(p->getPawn()->getPawnCity());
- //   vector <City*> adjCities = x->getAdjCities();
 }
 
 
@@ -50,7 +47,7 @@ Player* Menu::getPlayer(){
 
 //add options to pick a event card anytime
 
-//display options graph, player, cities
+
 
 void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
 
@@ -66,7 +63,7 @@ void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4]
 
 
 void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
-    cout.clear();
+   
     int vps=vectorplayers.size();
     
     p->getPawn()->printPawn();
@@ -104,13 +101,19 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
         std::cout<<"["<<vps+7<<"] Direct Flight"<<std::endl;
         if(!p->directFlight(acities, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(vps+7);}
+        }else{
+            possible.push_back(vps+7);
+            std::cout<<"You have city card "<<p->getPawn()->getPawnCity()->getCityName()<<". You can fly to "<<p->getPawn()->getPawnCity()->getCityName()<<std::endl;
+        }
         
         
         std::cout<<"["<<vps+8<<"] Charter Flight"<<std::endl;
         if(!p->charterFlight(acities, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
-        }else{possible.push_back(vps+8);}
+        }else{
+            possible.push_back(vps+8);
+            std::cout<<"You can discard any city card from your hand to fly to the corresponding city."<<std::endl;
+        }
         
         
         std::cout<<"["<<vps+9<<"] Shuttle Flight"<<std::endl;
@@ -189,6 +192,9 @@ int Menu::inChoice(){
 }
 
 void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
+    
+   
+    
     int ai=vectorplayers.size()+4;
     
     if(a==1){  p->printRefCard(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
@@ -248,8 +254,8 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
         nbactionstodo-=1;
     }
     
-    p->getPawn()->printPawn();
-    p->printHandTitles();
+//    p->getPawn()->printPawn();
+//    p->printHandTitles();
     
     //doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
 

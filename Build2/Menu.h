@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <set>
+#include <stdlib.h>
 
 #include "GraphView.h"
 #include "PlayerView.h"
