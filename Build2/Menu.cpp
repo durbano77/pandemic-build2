@@ -329,13 +329,13 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             cout<<" EVENT ACTION - "<<eventcardsavail[e]->getCardName()<<" \n"<<endl;
             
             if(eventcardsavail[e]->getCardName()=="Event card: Airlift"){
-                 //p->airlift(vectorplayers, acities, dPile);
+                 p->airlift(vectorplayers, acities, dPile);
             }
             else if(eventcardsavail[e]->getCardName()=="Event card: One Quiet Night"){
             
             }
             else if(eventcardsavail[e]->getCardName()=="Event card: Government Grant"){
-                //p->govtGrsnt(acities, dPile);
+                 p->governmentGrant(acities, dPile);
             }else if(eventcardsavail[e]->getCardName()=="Event card: Resilient Population"){
             
             }else if(eventcardsavail[e]->getCardName() =="Event card: Forecast"){

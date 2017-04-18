@@ -21,7 +21,7 @@ struct vertex {
 		vector <City*> cityVector;
 		if (this->adj.size() ==0)
 		{
-			cout << "\n" << name->getCityName() << " has  " << cityVector.size() <<" ciit it is connected to\n\n";
+			cout << "\n" << name->getCityName() << " has  " << cityVector.size() <<" cities it is connected to\n\n";
 			return cityVector;
 		}
 		else

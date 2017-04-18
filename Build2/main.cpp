@@ -36,6 +36,7 @@ void initInfectionDeck() {
     infectiondeck.insert(infectiondeck.end(), infectioncardarr, infectioncardarr + (sizeof(infectioncardarr) / sizeof(infectioncardarr[0])));
     
     shuffle(infectiondeck.begin(), infectiondeck.end(), std::default_random_engine(std::random_device()()));
+    cout<<"Infection cards deck initialization...\n\n"<<endl;
 }
 void setInitPlayerDeck(){
     playerdeck.insert(playerdeck.end(), citycardarr, citycardarr+(sizeof(citycardarr)/sizeof(citycardarr[0])));
@@ -44,6 +45,8 @@ void setInitPlayerDeck(){
     shuffle(playerdeck.begin(), playerdeck.end(), std::default_random_engine(std::random_device()()));
     
     playerdeck.push_back(atlantatest);
+    
+    cout<<"Player cards deck initialization...\n\n"<<endl;
     
 }
 
@@ -157,6 +160,7 @@ void createRoles(){
 }
 
 void addEpCardsPlayerDeck(){
+    cout<<"Now adding epidemic cards to the player deck...\n\n"<<endl;
     //insert Epidemic card after initial PlayerCard's were distributed to players
     playerdeck.insert(playerdeck.end(), epcardarr, epcardarr+(sizeof(epcardarr)/sizeof(epcardarr[0])));
     //Rnd Shuffle PlayerDeck
@@ -165,6 +169,7 @@ void addEpCardsPlayerDeck(){
 void Infect(City* theCity, vector <City*> alreadyOutbreak) {
     //takes a city object, and empty vector of city* (on first call. subsequent recursive calls will populate alreadyOutbreak
     //are there enough remaining disease cubes?
+    
     bool enoughCubes = true;
     int colorIndex = 0;
     string color = theCity->getColor();
@@ -301,7 +306,7 @@ int getPlayerCount() {
 }
 
 void turn(Player* p){
-
+    cout<<"---------- NEW TURN ----------\n\n"<<endl;
     Menu m(p, arrayofPlayers);
     vertex* x;
 
@@ -408,6 +413,7 @@ void turn(Player* p){
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
     std::cout<<"STEP 3: Infect cities"<<std::endl;
     //Infect
+    cout<<"\n\n---------- Infect ----------\n"<<endl;
     int infCardsToDraw = infectionRateMarker[infectionRatePos];		//{2,2,2,3,3,4,4}, index determined by infectionRatePos
     for (int i = 0; i < infCardsToDraw; i++) {
         InfectionCard* curr_inf = infectiondeck.back();
@@ -446,7 +452,7 @@ void initGame(){
 void endGame(){
     isgameover=true;
     
-    cout<<"GAME OVER"<<endl;
+    cout<<"---------- GAME OVER ----------\n\n"<<endl;
     clearScreen();
     
     // <vector> arrayofPlayerViews contains all *PlayerView (1 per player)
@@ -496,8 +502,9 @@ int main(){
     cout<<"\n\n\n"<<endl;
     cout<<"\n\n\nPress enter to start a new game";
     cin.ignore();
+    cout<<"\n\n\n\n\n\n\n\n\n\nInitializing the map... "<<endl;
+    clearScreen();
     
-    cout<<"Initializing the map... "<<endl;
     myGraph->createMap(cityarr, vertexarr);
     myGraph->cityAndConnection();
     for(int i=0;i<48;i++){ //filling in vector with all cities' adjacent cities

@@ -5,16 +5,7 @@ Graph::Graph(cMap* c){
 	cityMap = c;
 }
 
-//void Graph::addC(vector<City*>cityVector){
-//
-//	//vector<City*>::iterator it = cityVector.begin();
-//	for (unsigned i = 0; i < cityVector.size(); i++)
-//	{
-//		addCityToGraph(cityVector[i]);
-//	}
-//
-//	//Notify();
-//}
+
 void Graph::addCityToGraph(City * name, vertex* v)
 {
 	cMap::iterator itr = cityMap->find(name);
@@ -75,7 +66,7 @@ void Graph::printGraph()
 	cMap::iterator itr = cityMap->begin();
 	//vector<City*>::iterator it = cityInGraph.begin();
 	cout << "*****************************************************" << endl;
-	cout << "list of cities in map and their information" << endl;
+	cout << "List of cities in map and their information" << endl;
 	while (itr != cityMap->end())
 	{
 		itr->first->print();
