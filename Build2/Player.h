@@ -8,7 +8,6 @@
 
 #ifndef Player_h
 #define Player_h
-
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
@@ -68,8 +67,11 @@ public:
     virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
 
     void ShareKnowledge(std::vector<Player*> vectorplayers);
-    
-    
+	// event card
+	void airlift(vector <Player*> ,City* acities[]);
+	void oneQuietNight();
+	void governmentGrant(City* acities[]);
+	void resilientPopulation();
 };
 
 //Class Declarations for each RolePlayer : Player

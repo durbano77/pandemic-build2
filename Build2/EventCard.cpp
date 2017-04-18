@@ -9,11 +9,11 @@
 #include "EventCard.h"
 
 EventCard::EventCard(){
-    Cards();
+    PlayerCard();
 }
 
 EventCard::EventCard(std::string title, std::string cardtextfront, std::string cardtextback) {
-    Cards(title, cardtextfront, cardtextback);
+    PlayerCard(title, cardtextfront, cardtextback);
 }
 
 EventCard::~EventCard(){
@@ -34,8 +34,9 @@ Airlift::Airlift(){
 Airlift::~Airlift(){
 
 }
-
+// mpve any pawn to any city
 void Airlift::EventAction(){
+	
 }
 
 

@@ -295,7 +295,8 @@ int main(){
 
     
     initGame();
-    
+	
+	
     Menu m(arrayofPlayers[0], vectorofcities, arrayofPlayers, &discardpile);
     m.doMenu(cityarr);
     
