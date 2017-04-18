@@ -313,7 +313,7 @@ void turn(Player* p){
         vector <City*> adjCities = x->getAdjCities();
         m.setAdjCity(adjCities);
         
-        m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated, eventCardsAvail, &discardpile);
+        m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated, eventCardsAvail, &discardpile,  valladjcities);
 		//check for passive actions from medic
 		if (p->getPlayerName() == "Medic") {
 			Medic* medic = static_cast<Medic*>(p);
@@ -500,6 +500,9 @@ int main(){
     cout<<"Initializing the map... "<<endl;
     myGraph->createMap(cityarr, vertexarr);
     myGraph->cityAndConnection();
+    for(int i=0;i<48;i++){ //filling in vector with all cities' adjacent cities
+        valladjcities.push_back((cityMap.at(cityarr[i]))->getAdjCities()); //vector< vector <City*> >
+    }
     cin.clear(); // reset any error flags
     clearScreen();
     

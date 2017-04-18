@@ -348,6 +348,7 @@ vertex *vertex_Sydney = new vertex(city_Sydney);
 
 vertex* vertexarr[] = { vertex_Atlanta, vertex_SanFrancisco, vertex_Chicago, vertex_Montreal, vertex_Washington, vertex_NewYork, vertex_London, vertex_Madrid, vertex_Paris, vertex_Milan, vertex_Essen, vertex_StPetersburg, vertex_LosAngeles, vertex_Mexico, vertex_Miami, vertex_Bogota, vertex_Lima, vertex_Santiago, vertex_BuenosAires, vertex_SaoPaolo, vertex_Lagos, vertex_Kinshasa, vertex_Johannesburg, vertex_Khartoum, vertex_Moscow, vertex_Istanbul, vertex_Algers, vertex_LeCaire, vertex_Bagdad, vertex_Teheran, vertex_Karachi, vertex_Ryad, vertex_Dehli, vertex_Mumbai, vertex_Chennai, vertex_Calcutta, vertex_Pekin, vertex_Seoul, vertex_Tokyo, vertex_Shanghai, vertex_Osaka, vertex_Taipei, vertex_HongKong, vertex_Manville, vertex_Bangkok, vertex_HoChiMinCity, vertex_Jakarta, vertex_Sydney };
 
+vector< vector<City*> > valladjcities;
 // <<<-----------------------global objects--------------------------------------------------
 
 #endif /* Global_h */

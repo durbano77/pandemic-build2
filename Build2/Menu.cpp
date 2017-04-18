@@ -52,20 +52,20 @@ void Menu::clearScreen(){
     }
 }
 
-void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
+void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile, vector<vector<City*>>  valladjcities){
 
-    displayMenu(acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile);
+    displayMenu(acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile, valladjcities);
 
     int choice=inChoice();
     
-    doAction(choice, acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile);
+    doAction(choice, acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile, valladjcities);
 
   
 }
 
 
 
-void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
+void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile, vector<vector<City*>>  valladjcities){
    
     int vps=vectorplayers.size();
     
@@ -192,7 +192,7 @@ int Menu::inChoice(){
     
     while(!setofchoices.count(actionchoice))
     {
-        std::cout<<"Enter your choice # : "<<std::endl;
+        std::cout<<"\n\n\nEnter your choice # : "<<std::endl;
         std::cin>>actionchoice;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -202,7 +202,7 @@ int Menu::inChoice(){
     return actionchoice;
 }
 
-void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
+void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile, vector<vector<City*>>  valladjcities){
     
     //clearScreen();
     for(int i = 0; i<100; i++){
@@ -256,12 +256,32 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
         for(int i = 0; i<100; i++){
             cout << "    " << endl;
         }
+        //print city info
         acities[t-1]->print();
+        cout<<"List of adjacent cities: ";
+        if(valladjcities[t-1].size()==0){
+            cout<<" No adjacent cities "<<endl;
+        }
+        else {
+            for(int k=0;k<valladjcities[t-1].size();k++){
+                cout<<valladjcities[t-1][k]->getCityName()<<" - ";
+            }
+        }
     }
     else if(a==ai+2){
         cout<<" DISPLAY - ALL CITIES INFO \n "<<endl;
         for(int j=0;j<48;j++){
             acities[j]->print();
+            cout<<"List of adjacent cities: ";
+            if(valladjcities[j].size()==0){
+                cout<<" No adjacent cities "<<endl;
+            }
+            else {
+                for(int k=0;k<valladjcities[j].size();k++){
+                    cout<<valladjcities[j][k]->getCityName()<<" - ";
+                }
+            }
+            std::cout<<"\n\n\n";
         }
     }
     

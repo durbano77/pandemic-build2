@@ -65,15 +65,15 @@ public:
     
     virtual bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
     virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
-
+    
     void ShareKnowledge(std::vector<Player*> vectorplayers);
-	// event card
-	void airlift(vector <Player*>, City* acities[], vector <PlayerCard*> *discardpile);
-	void oneQuietNight();
-	void governmentGrant(City* acities[], vector <PlayerCard*> *discardpile);
-	void resilientPopulation();
-	
-	
+    // event card
+    void airlift(vector <Player*>, City* acities[], vector <PlayerCard*> *discardpile);
+    void oneQuietNight();
+    void governmentGrant(City* acities[], vector <PlayerCard*> *discardpile);
+    void resilientPopulation();
+    
+    
 };
 
 //Class Declarations for each RolePlayer : Player
@@ -95,11 +95,11 @@ public:
     Medic(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Medic (Medic const& med);
     virtual ~Medic();
-
+    
     bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
     bool removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
-
-
+    
+    
 };
 
 class Scientist : public Player{
@@ -141,7 +141,7 @@ public:
     Quarantinespecialist();
     Quarantinespecialist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Quarantinespecialist(Quarantinespecialist const& qspecialist);
-    virtual ~Quarantinespecialist();    
+    virtual ~Quarantinespecialist();
 };
 
 class Contingencyplanner : public Player{
