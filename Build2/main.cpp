@@ -290,6 +290,9 @@ void turn(Player* p){
     Menu m(p, arrayofPlayers, &discardpile);
     vertex* x;
     
+    std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
+    std::cout<<"STEP 1: Do 4 actions"<<std::endl;
+     clearScreen();
     while(m.getnbactionstodo()>0){
         x = cityMap.at(p->getPawn()->getPawnCity()); //update adj cities
         vector <City*> adjCities = x->getAdjCities();
@@ -298,9 +301,14 @@ void turn(Player* p){
         m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
         clearScreen();
     }
-    
+    std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
+    std::cout<<"STEP 2: Drawing 2 player cards"<<std::endl;
+     clearScreen();
     p->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+    clearScreen();
     
+    std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
+    std::cout<<"STEP 3: Infect cities"<<std::endl;
     //Infect
     int infCardsToDraw = infectionRateMarker[infectionRatePos];		//{2,2,2,3,3,4,4}, index determined by infectionRatePos
     for (int i = 0; i < infCardsToDraw; i++) {
@@ -315,7 +323,7 @@ void turn(Player* p){
         //remove card from infection deck
         infectiondeck.pop_back();
     }
-    
+    clearScreen();
     
 }
 void initGame(){

@@ -21,7 +21,8 @@ const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
 //Infection rate, initialized to 2 infection cards to be drawn
-int infectionRate = 2;
+int infectionRatePos = 0;
+int infectionRateMarker[7] = { 2,2,2,3,3,4,4 };
 //Outbreak marker
 int outbreakMarker = 0;
 //remaining disease cubes (blue, yellow, black, red)
