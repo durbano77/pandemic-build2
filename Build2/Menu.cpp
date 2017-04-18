@@ -162,10 +162,16 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     
     
     std::cout<<"\n-----EVENT ACTIONS-----\n"<<std::endl;
-    for(int i=0;i<eventcardsavail.size();i++){
-        std::cout<<"["<<vps+13+i<<"] "<<eventcardsavail[i]<<std::endl;
-        possible.push_back(vps+13+i);
+    if(eventcardsavail.size()>0){
+        for(int i=0;i<eventcardsavail.size();i++){
+            std::cout<<"["<<vps+14+i<<"] "<<eventcardsavail[i]->getCardName()<<std::endl;
+            possible.push_back(vps+14+i);
+        }
     }
+    else{
+        cout<<"No event cards available"<<endl;
+    }
+
     
     
 //    cout<<"POSSIBLE AFTER ORIGINAL DISPLAY: "<<possible.size();
@@ -297,11 +303,34 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             //doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
         }
     }
-    else if(a==ai+10){
-        cout<<" ACTION - DISCOVER CURE \n"<<endl;
-        p->discoverCure(remainingDiseaseCubes, isCured, isEradicated , true);
-        nbactionstodo-=1;
+    
+    for(int e=0;e<eventcardsavail.size();e++){
+        if(a==ai+10+e){
+            cout<<" EVENT ACTION - "<<eventcardsavail[e]->getCardName()<<" \n"<<endl;
+            
+            if(eventcardsavail[e]->getCardName()=="Event card: Airlift"){
+                 //p->airlift(vectorplayers, acities, dPile);
+            }
+            else if(eventcardsavail[e]->getCardName()=="Event card: One Quiet Night"){
+            
+            }
+            else if(eventcardsavail[e]->getCardName()=="Event card: Government Grant"){
+                //p->govtGrsnt(acities, dPile);
+            }else if(eventcardsavail[e]->getCardName()=="Event card: Resilient Population"){
+            
+            }else if(eventcardsavail[e]->getCardName() =="Event card: Forecast"){
+            
+            }
+            else{
+                cout<<"Error: Event card was not found"<<endl;
+            }
+        }
+        
+        
+  
     }
+    
+
 
 
 }
