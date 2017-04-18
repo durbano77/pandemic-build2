@@ -180,41 +180,43 @@ int getPlayerCount() {
 	return pCount;
 }
 
-void turn(){
-    //check if there is an event card, if so: possibility to use event card
-    //action 1
-    //if there is an event card, possibility to use event card
-    //action 2
-    //if there is an event card, possibility to use event card
-    //action 3
-    //if there is an event card, possibility to use event card
-    //action 4
-    //if there is an event card, possibility to use event card
+void turn(Player* p){
+    Menu m(p, arrayofPlayers, &discardpile);
+    vertex* x;
     
-    //draw 2 cards arrayofPlayers[0]->draw2pcards(playerdeck);
-    //(check #2) if there is an event card, if so: possibility to use event card
-    
-    
- //infection
-    for(int i=0;i<infectionRate;i++){
-        InfectionCard* ic=infectiondeck.back();
+    while(m.getnbactionstodo()>0){
+        x = cityMap.at(p->getPawn()->getPawnCity()); //update adj cities
+        vector <City*> adjCities = x->getAdjCities();
+        m.setAdjCity(adjCities);
         
-       // Notify(6);   display infection card and infection
-        ic->printCard();
-        
-        string iccolor=ic->getColor();
-        
-        for(int j=0;j<48;j++){
-            //c[j].getCityName();
-        }
-        
-       //HERE:
-		//ic->Infect(remainingDiseaseCubes, isEradicated, ic->getCity(), iccolor);
-        
-        
-        infectiondeck.pop_back();
+        m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+
     }
+
+    p->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+   
     
+    
+ //INFECTION
+//    for(int i=0;i<infectionRate;i++){
+//        InfectionCard* ic=infectiondeck.back();
+//        
+//       // Notify(6);   display infection card and infection
+//        ic->printCard();
+//        
+//        string iccolor=ic->getColor();
+//        
+//        for(int j=0;j<48;j++){
+//            //c[j].getCityName();
+//        }
+//        
+//       //HERE:
+//		//ic->Infect(remainingDiseaseCubes, isEradicated, ic->getCity(), iccolor);
+//        
+//        
+//        infectiondeck.pop_back();
+//    }
+//    
 
     //infect city 1
     //(check #2) if there is an event card, possibility to use event card
@@ -298,21 +300,9 @@ int main(){
     
  
 
-    
+    //while  -> do this until the game ends!
     for(int i=0;i<numPlayers;i++){
-        Menu m(arrayofPlayers[i], arrayofPlayers, &discardpile);
-        vertex* x;
-        
-        while(m.getnbactionstodo()>0){
-            x = cityMap.at(arrayofPlayers[i]->getPawn()->getPawnCity()); //update adj cities
-            vector <City*> adjCities = x->getAdjCities();
-            m.setAdjCity(adjCities);
-            
-            m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
-            
-
-
-        }
+        turn(arrayofPlayers[i]);
     }
     
 
@@ -326,19 +316,7 @@ int main(){
 //    city_Bagdad->addResearchStation();
 
 
-    
-    
-    
 
-    
-//Draw player card (OK)
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
-//    arrayofPlayers[0]->getPawn()->printPawn();
-//    arrayofPlayers[0]->printHand();
     
 
 
