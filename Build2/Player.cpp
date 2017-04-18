@@ -647,6 +647,92 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 	}
     return false;
 }
+void Player::airlift(vector <Player*>vecP ,City* vecCity[]){
+	
+		int  pOption; 
+		
+		for (int i = 0; i < vecP.size(); i++) {
+			if (vecP[i] != this)
+			{
+				for (int j = 0; j < player_hand.size(); j++)
+				{
+					if (player_hand[j]->getCardName() == "Event card: Airlift")
+					{
+						cout << "\n\n i have an airlift card and i can move you to any city\n";
+						cout << "do you want to move\n";
+
+						do{
+							cout << "enter the 1 for yes \n 2 for no\n";
+							cin >> pOption;
+							while (cin.fail())
+							{
+								cout << "Integer wanted \n";
+								cin.clear();
+								cin.ignore(INT_MAX, '\n');
+								//return;
+							}
+						} while (pOption < 1 || pOption > 2);
+						if (pOption == 1)
+						{
+							vecP[i]->getPawn()->setPawnCity(vecCity[i + 20]);
+							cout << "\n you have been moved to : " << vecCity[i + 20]->getCityName() << endl;
+							return;
+						}
+						else
+							cout << "you have not been moved \n Because you dont want to be moved " << endl;
+					}
+				}
+			}
+			else
+				continue;
+			
+
+		}
+}
+
+void Player::oneQuietNight()
+{
+	
+}
+void Player::governmentGrant(City* acities[])
+{
+	int cityNum;
+	for (unsigned i = 0; i < player_hand.size(); i++)
+	{
+		if (getPawn()->getPawnCity()->getResearchStation())
+		{
+			cout << "\nthere is already a research station in your current city : " << playerpawn->getPawnCity()->getCityName() << endl;
+		}
+		else
+		{
+
+			if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+			{
+				std::cout << "\nYour pawn is currently located in " << playerpawn->getPawnCity()->getCityName() << "\nYou can build a research station any where." << std::endl;
+				
+				
+					do{
+						cout << "enter a city number you want to move to\n";
+						cin >> cityNum;
+						while (cin.fail())
+						{
+							cout << "Integer wanted \n";
+							cin.clear();
+							cin.ignore(INT_MAX, '\n');
+							//return;
+						}
+					}while (cityNum < 1 || cityNum > 48);
+
+				acities[cityNum-1]->addResearchStation();
+				cout << "\n the city information are as follows:\n";
+				acities[cityNum - 1]->print();
+				return;
+			}
+		}
+
+	}
+}
+void resilientPopulation();
 
 //Class Implementations for each RolePlayer : Player
 //dispatcher, medic, scientist, researcher, operationsexpert, quarantinespecialist, contingencyplanner
@@ -872,8 +958,11 @@ void Operationsexpert::buildResearchStation()
 {
     for (unsigned i = 0; i < player_hand.size(); i++)
     {
+		 std::cout<<"Your pawn is currently located in"<< playerpawn->getPawnCity()->getCityName()<<" and you have City card "<<player_hand[i]->getCardName()<<" in your hand. You can build a research station."<<std::endl;
+           
         if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
         {
+
             playerpawn->getPawnCity()->addResearchStation();
             playerpawn->getPawnCity()->print();
             return;

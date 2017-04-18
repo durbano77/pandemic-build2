@@ -420,8 +420,9 @@ int main(){
     clearScreen();
     
     initGame();
+
     clearScreen();
-    
+ 
     
     while(!isgameover){
         for(int i=0;i<numPlayers;i++){
