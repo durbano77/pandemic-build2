@@ -22,6 +22,8 @@ const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
 //Infection rate, initialized to 2 infection cards to be drawn
 int infectionRate = 2;
+//Outbreak marker
+int outbreakMarker = 0;
 //remaining disease cubes (blue, yellow, black, red)
 int remainingDiseaseCubes[4] = {diseaseCubesCount,diseaseCubesCount,diseaseCubesCount,diseaseCubesCount};
 //cured diseases (blue, yellow, black, red)

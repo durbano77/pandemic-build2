@@ -31,6 +31,7 @@ void clearScreen(){
     }
 }
 
+void endGame();
 void initInfectionDeck() {
     infectiondeck.insert(infectiondeck.end(), infectioncardarr, infectioncardarr + (sizeof(infectioncardarr) / sizeof(infectioncardarr[0])));
     
@@ -156,6 +157,86 @@ void addEpCardsPlayerDeck(){
     //Rnd Shuffle PlayerDeck
     shuffle(playerdeck.begin(), playerdeck.end(), std::default_random_engine(std::random_device()()));
 }
+void Infect(City* theCity, vector <City*> alreadyOutbreak) {
+	//takes a city object, and empty vector of city* (on first call. subsequent recursive calls will populate alreadyOutbreak
+	//are there enough remaining disease cubes?
+	bool enoughCubes = true;
+	int colorIndex = 0;
+	string color = theCity->getColor();
+	if (color == "blue" && remainingDiseaseCubes[0] == 0) {
+		enoughCubes = false;
+		colorIndex = 0;
+	}
+	else if (color == "yellow" && remainingDiseaseCubes[1] == 0) {
+		enoughCubes = false;
+		colorIndex = 1;
+	}
+	else if (color == "black" && remainingDiseaseCubes[2] == 0) {
+		enoughCubes = false;
+		colorIndex = 2;
+	}
+	else if (color == "red" && remainingDiseaseCubes[3] == 0) {
+		enoughCubes = false;
+		colorIndex = 3;
+	}
+
+	//Has disease been eradicated?
+	if (isEradicated[colorIndex] == true) {
+		//skip placing the cubes.
+	}
+	else {
+		//does city to infect have a quarantinespecialist?
+		bool quarantineSpec = false;
+		for (int i = 0; i < arrayofPlayers.size(); i++) {
+			if (theCity == arrayofPlayers[i]->getPawn()->getPawnCity() && arrayofPlayers[i]->getPlayerName() == "Quarantine Specialist") {
+				//don't infect city
+				quarantineSpec = true;
+				cout << "Quarantine Specialist has prevented " << theCity->getCityName() << " from being infected!" << endl;
+			}
+		}
+		if (!quarantineSpec) {
+			//place cubes (if enough remain)
+			if (enoughCubes) {
+				cout << "Infecting " << theCity->getCityName() << " with the " << color << " disease!" << endl;
+				//outbreak scenario?
+				if (theCity->getCubes() == 3) {
+					// outbreak
+					outbreakMarker++;
+					if (outbreakMarker > 7) {
+						cout << "The outbreak marker is at 8, you lose the game!" << endl;
+						system("pause");
+						endGame();
+					}
+					//in order to prevent a city from having outbreak twice, keep track of those outbreaked
+					alreadyOutbreak.push_back(theCity);
+					vertex* x;
+					x = cityMap.at(theCity);
+					vector <City*> adjCities = x->getAdjCities();
+					//remove any cities in alreadyOutbreak from adjCities to prevent re-outbreak
+					for (City* c : adjCities) {
+						if (std::find(adjCities.begin(), adjCities.end(), c) != adjCities.end()) {
+							//do not infect again
+						}
+						else {
+							Infect(c, alreadyOutbreak);
+						}
+					}
+				}
+				else {
+					//	increment city's disease counter by 1
+					theCity->addCubes();
+					//	decrease remaining disease cubes of COLOR by 1
+					remainingDiseaseCubes[colorIndex]--;
+				}
+			}
+			else {
+				cout << "There are no more " << color << " disease cubes! Game over!" << endl;
+				system("pause");
+				endGame();
+			}
+		}
+	}
+}
 void initialInfection() {
 	//draw 3, then 2, then 1 infection cards and infect according to their city and color
 	int i = 3;
@@ -168,6 +249,8 @@ void initialInfection() {
 			//infect the city
 			for (int j = 1; j <= i; j++) {
 				//curr_inf->Infect(remainingDiseaseCubes, isEradicated, curr_inf->getCity(), color);
+				vector <City*> alreadyOutbreak;
+				Infect(curr_inf->getCity(), alreadyOutbreak);
 			}
 			//add drawn card to discard pile
 			infectiondeck_discard.push_back(curr_inf);
@@ -294,6 +377,7 @@ void endGame(){
         infectiondeck_discard[i] = nullptr;
         delete infectiondeck_discard[i];
     }
+	exit(0);
     
     
 }
