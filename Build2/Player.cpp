@@ -243,7 +243,7 @@ bool Player:: drive(vector<City*> cVec, bool toexecute)  //vector of adj cities 
                     //return;
                 }
                 
-            } while (cityNum <0 || cityNum > cVec.size());
+            } while (cityNum < 1 || cityNum > cVec.size());
             getPawn()->setPawnCity(cVec[cityNum - 1]);
             cout << "players is now in new city : " << getPawn()->getPawnCity()->getCityName() << endl;
         }//if toexecute
@@ -375,7 +375,7 @@ bool Player::shuttleFlight(City* acities[], bool toexecute){
                     cin.ignore(INT_MAX, '\n');
                     //return;
                 }
-            } while (cityNum <0 || cityNum > cityWithResearchStation.size() );
+            } while (cityNum < 1 || cityNum > cityWithResearchStation.size() );
             playerpawn->setPawnCity(cityWithResearchStation[cityNum-1]);
             cout << "players new city is: "<< playerpawn->getPawnCity()->getCityName()<<endl;
         }
