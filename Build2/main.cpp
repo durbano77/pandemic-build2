@@ -140,6 +140,13 @@ void createRoles(){
         clearScreen();
     }
     
+    cout<<"Roles are now distributed to the "<< numPlayers<<" players\n"<<endl;
+    cout<<"Turns will begin where each player performs 4 actions, draws 2 cards from the player cards pile and infect cities\n"<<endl;
+    cout<<"Order between players: "<<endl;
+    for(int i=0;i<numPlayers;i++){
+        std::cout<<i+1<<" - "<<arrayofPlayers[i]->getPlayerName() <<std::endl;
+    
+    }
     
 }
 
@@ -308,7 +315,7 @@ int main(){
     clearScreen();
     
     initGame();
- //no clear screen here - taken care of in createroles
+    clearScreen();
  
 
     //while  -> do this until the game ends!

@@ -519,7 +519,7 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
             for(int k=0; k<phs2;k++){
                 //std::vector<PlayerCard*> otherplayershand =vectorplayers[i]->getHand();
                 if((vectorplayers[i]->getHand())[k]->getCardName()==cname){
-                    std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<(vectorplayers[i]->getHand())[k]->getCardName()<<"' that matches the city "<<cityplayer<<" you both are in."<<std::endl;
+                    std::cout<< vectorplayers[i]->getPlayerName()<< " has the City card '"<<(vectorplayers[i]->getHand())[k]->getCardName()<<"' that matches the city you are both in."<<std::endl;
                     if(toexecute){
                         
                         char response='a';
