@@ -295,7 +295,8 @@ int getPlayerCount() {
 }
 
 void turn(Player* p){
-    Menu m(p, arrayofPlayers, &discardpile);
+
+    Menu m(p, arrayofPlayers);
     vertex* x;
 
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
@@ -306,7 +307,7 @@ void turn(Player* p){
         vector <City*> adjCities = x->getAdjCities();
         m.setAdjCity(adjCities);
         
-        m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+        m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated, eventCardsAvail, &discardpile);
 		//check for passive actions from medic
 		if (p->getPlayerName() == "Medic") {
 			Medic* medic = static_cast<Medic*>(p);

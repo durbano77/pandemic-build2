@@ -29,7 +29,6 @@ protected:
     vector<City*> adjcities;
 
     std::vector<Player*> vectorplayers;
-    std::vector<PlayerCard*> *discardPile;
     
     
     std::vector<int> possible;
@@ -37,7 +36,7 @@ protected:
     
 public:
     Menu();
-    Menu(Player* p, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile);
+    Menu(Player* p, std::vector<Player*> &vectorplayer) ;
     virtual ~Menu();
     
     int getnbactionstodo();
@@ -46,11 +45,11 @@ public:
     void setPlayer(Player* pl);
     Player* getPlayer();
     
-    void doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]);
+    void doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile);
     
-    void displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]);
+    void displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile);
     int inChoice();
-    void doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]);
+    void doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile);
     
     void clearScreen();
     

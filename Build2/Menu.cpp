@@ -9,12 +9,9 @@
 
 Menu::Menu(){}
 
-Menu::Menu(Player* pl, std::vector<Player*> &vectorplayer,  std::vector<PlayerCard*> *dPile){
+Menu::Menu(Player* pl, std::vector<Player*> &vectorplayer){
     this->p=pl;
-    //this->adjcities;
-    
     this->vectorplayers=vectorplayer;
-    this->discardPile=dPile;
     
 }
 
@@ -55,20 +52,20 @@ void Menu::clearScreen(){
     }
 }
 
-void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
+void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
 
-    displayMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    displayMenu(acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile);
 
     int choice=inChoice();
     
-    doAction(choice, acities, remainingDiseaseCubes, isCured, isEradicated);
+    doAction(choice, acities, remainingDiseaseCubes, isCured, isEradicated, eventcardsavail, dPile);
 
   
 }
 
 
 
-void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
+void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
    
     int vps=vectorplayers.size();
     
@@ -136,7 +133,7 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
         
         
         std::cout<<"["<<vps+10<<"] Build a Research Station"<<std::endl;
-        if(!p->buildResearchStation(discardPile, false)){
+        if(!p->buildResearchStation(dPile, false)){
             std::cout<<"This option is not available to you right now"<<std::endl;
         }else{possible.push_back(vps+10);}
         
@@ -163,7 +160,13 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     else{
         std::cout<<"You dont have any actions left.\n"<<std::endl;}
     
-    //std::cout<<"-----EVENT ACTIONS-----\n"<<std::endl;
+    
+    std::cout<<"\n-----EVENT ACTIONS-----\n"<<std::endl;
+    for(int i=0;i<eventcardsavail.size();i++){
+        std::cout<<"["<<vps+13+i<<"] "<<eventcardsavail[i]<<std::endl;
+        possible.push_back(vps+13+i);
+    }
+    
     
 //    cout<<"POSSIBLE AFTER ORIGINAL DISPLAY: "<<possible.size();
 //    for(int i=0;i<possible.size();i++){
@@ -193,7 +196,7 @@ int Menu::inChoice(){
     return actionchoice;
 }
 
-void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
+void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4], std::vector<PlayerCard*> &eventcardsavail, std::vector<PlayerCard*> *dPile){
     
     //clearScreen();
     for(int i = 0; i<100; i++){
@@ -278,7 +281,7 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     }
     else if(a==ai+7){
         cout<<" ACTION - BUILD A RESEARCH STATION \n"<<endl;
-         p->buildResearchStation(discardPile, true);
+         p->buildResearchStation(dPile, true);
         nbactionstodo-=1;
     }
     else if(a==ai+8){
