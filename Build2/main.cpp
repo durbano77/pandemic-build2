@@ -23,6 +23,13 @@
 
 BlueCity* atlantatest=new BlueCity("atlanta", "Atlanta", "", ""); //test city card for player actions
 
+void clearScreen(){
+    cout<<"\n\n\nPress enter to continue";
+    cin.ignore();
+    for(int i = 0; i<100; i++){
+        cout << "    " << endl;
+    }
+}
 
 void initInfectionDeck() {
     infectiondeck.insert(infectiondeck.end(), infectioncardarr, infectioncardarr + (sizeof(infectioncardarr) / sizeof(infectioncardarr[0])));
@@ -73,7 +80,8 @@ void createRoles(){
     // arrayOfPlayer[i] points to the role player object created to keep track of all players
     // creates playerview object (observer) for each player (subject)
     // Then NOTIFY();
-    for (int i = 0; i < numPlayers; i++) {        
+    for (int i = 0; i < numPlayers; i++) {
+        cout<<"               PLAYER "<<i+1<<endl;
         switch(arrcheck[i]){
             case 0:{
                 Dispatcher* dispatcher = new Dispatcher(&dispatcherpawn, &referencecards[i], &dispatchercard1, dispatcherhand);
@@ -129,6 +137,7 @@ void createRoles(){
             }
         }
         arrayofPlayers[i]->Notify(0);
+        clearScreen();
     }
     
     
@@ -282,22 +291,24 @@ void endGame(){
     
 }
 
-
-
 int main(){
     
     //  Graph myGraph;
    // GraphView gView(&myGraph);
   //  myGraph.createMap(cityarr);
-
+    cout<<"PANDEMIC"<<endl;
+    cout<<"\n\n\n"<<endl;
+    cout<<"\n\n\nPress enter to start a new game";
+    cin.ignore();
+    
+    cout<<"Initializing the map... "<<endl;
     myGraph->createMap(cityarr, vertexarr);
     myGraph->cityAndConnection();
     cin.clear(); // reset any error flags
-
-
+    clearScreen();
     
     initGame();
-    
+ //no clear screen here - taken care of in createroles
  
 
     //while  -> do this until the game ends!

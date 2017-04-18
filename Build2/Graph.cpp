@@ -232,7 +232,6 @@ void  Graph::createMap(City* citiesarr[], vertex* vertexarr[])
 
 	//City c[48];
 
-
 	//copy cityarr objects into c
 	for (int i = 0; i < 48; i++) {
 		//c[i] = *citiesarr[i];
