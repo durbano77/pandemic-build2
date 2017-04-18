@@ -707,9 +707,7 @@ bool Medic::treatDisease(int *remainingDiseaseCubes, bool* isCured, bool* isErad
 		}
 		return true;
 	}
-	else {
-		return false;
-	}
+    return false;
 }
 
 bool Medic::removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute) {

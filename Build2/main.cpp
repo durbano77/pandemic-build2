@@ -50,8 +50,8 @@ void setInitPlayerDeck(){
 void createRoles(){
     // Method for distributing roles
     srand(static_cast<unsigned int>(time(nullptr)));
-    int arrcheck[nbplayers];
-    for (int i = 0; i < numPlayers; i++) {
+    int arrcheck[4]; //4: max of players possible.. because array must be fixed
+    for (int i = 0; i < 4; i++) {
         arrcheck[i] = numPlayers + 2;		// initialize test array elements with values
         // numPlayers + 2  just to make sure that this value is never reached
     }
@@ -73,6 +73,11 @@ void createRoles(){
         arrcheck[i] = nb;
     }
     
+    int nbcardstodistribute=0;
+    if(numPlayers==4){nbcardstodistribute=2;}
+    else if(numPlayers==3){nbcardstodistribute=3;}
+    else if(numPlayers==2){nbcardstodistribute=4;}
+    else {cout<<"ERROR: number of players is invalid. Cannot distribute cards."<<endl;}
     
     // FOR EACH PAWN (PLAYER)...
     // Distributes actual role with switch(rndnumber)
@@ -86,49 +91,49 @@ void createRoles(){
         switch(arrcheck[i]){
             case 0:{
                 Dispatcher* dispatcher = new Dispatcher(&dispatcherpawn, &referencecards[i], &dispatchercard1, dispatcherhand);
-                dispatcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                dispatcher->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(dispatcher));
                 arrayofPlayers.push_back(dispatcher);
                 break;
             }
             case 1:{
                 Medic* medic=new Medic(&medicpawn, &referencecards[i], &mediccard1, medichand);
-                medic->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                medic->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(medic));
                 arrayofPlayers.push_back(medic);
                 break;
             }
             case 2:{
                 Scientist* scientist=new Scientist(&scientistpawn, &referencecards[i], &scientistcard1, scientisthand);
-                scientist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                scientist->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(scientist));
                 arrayofPlayers.push_back(scientist);
                 break;
             }
             case 3:{
                 Researcher* researcher=new Researcher(&researcherpawn, &referencecards[i], &researchercard1, researcherhand);
-                researcher->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                researcher->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(researcher));
                 arrayofPlayers.push_back(researcher);
                 break;
             }
             case 4:{
                 Operationsexpert* operationsexpert=new Operationsexpert(&operationsexpertpawn, &referencecards[i], &operationsexpertcard1, operationsexperthand);
-                operationsexpert->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                operationsexpert->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(operationsexpert));
                 arrayofPlayers.push_back(operationsexpert);
                 break;
             }
             case 5:{
                 Quarantinespecialist* quarantinespecialist=new Quarantinespecialist(&quarantinespecialistpawn, &referencecards[i], &quarantinespecialistcard1, quarantinespecialisthand);
-                quarantinespecialist->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                quarantinespecialist->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(quarantinespecialist));
                 arrayofPlayers.push_back(quarantinespecialist);
                 break;
             }
             case 6:{
                 Contingencyplanner* contingencyplanner=new Contingencyplanner(&contingencyplannerpawn, &referencecards[i], &contingencyplannercard1,  contingencyplannerhand);
-                contingencyplanner->drawpcards(4, playerdeck, discardpile,eventCardsAvail);
+                contingencyplanner->drawpcards(nbcardstodistribute, playerdeck, discardpile,eventCardsAvail);
                 arrayofPlayerViews.push_back(new PlayerView(contingencyplanner));
                 arrayofPlayers.push_back(contingencyplanner);
                 break;

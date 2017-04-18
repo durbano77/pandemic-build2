@@ -15,8 +15,8 @@
 //Contains only global objects (cards, pawns, player hands, array of players, array of playerviews, playerdeck, discard pile, etc.)
 //Graph* myGraph;
 //vertex* myVertex[];
-const int nbplayers = 4;
-const int nbcardsplayer = 4;    // # Cards per player when game starts
+//const int nbplayers = 4;
+//const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
