@@ -289,7 +289,7 @@ int getPlayerCount() {
 void turn(Player* p){
     Menu m(p, arrayofPlayers, &discardpile);
     vertex* x;
-    
+
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
     std::cout<<"STEP 1: Do 4 actions"<<std::endl;
      clearScreen();
@@ -299,6 +299,11 @@ void turn(Player* p){
         m.setAdjCity(adjCities);
         
         m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
+		//check for passive actions from medic
+		if (p->getPlayerName() == "Medic") {
+			Medic* medic = static_cast<Medic*>(p);
+			medic->removeCuredCubes(remainingDiseaseCubes, isCured, isEradicated, true);
+		}
         clearScreen();
     }
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
