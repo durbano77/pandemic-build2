@@ -21,7 +21,6 @@ PlayerCard::PlayerCard(std::string title, std::string cardtextfront, std::string
 void PlayerCard::EventAction(){
 
 }
-
 IMPLEMENT_SERIAL(PlayerCard, CObject, 1);
 
 void PlayerCard::Serialize(CArchive& archive) {

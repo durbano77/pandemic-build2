@@ -18,7 +18,6 @@ private:
 public:
     RoleCard();
     RoleCard(std::string rolename, std::string cardtextfront, std::string cardtextback);
-
 	DECLARE_SERIAL(RoleCard);
 	void Serialize(CArchive& archive);
 };
@@ -56,5 +55,4 @@ class ContingencyplannerCard : public RoleCard{
 public:
     ContingencyplannerCard();
 };
-
 #endif /* ROLECARD_H_ */

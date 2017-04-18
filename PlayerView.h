@@ -33,6 +33,8 @@ public:
     void displayDiscardHand();
     void displayEpidemicCard();
     void displayPawn();
+    
+    void clearScreen();
 protected:
     Player* p;
 

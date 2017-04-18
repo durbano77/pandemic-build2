@@ -64,7 +64,3 @@ void RefCard::Serialize(CArchive& archive) {
 		archive.ReadObject(RUNTIME_CLASS(RefCard));
 	}
 }
-
-
-
-

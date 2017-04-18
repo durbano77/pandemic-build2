@@ -9,13 +9,12 @@
 #ifndef PAWN_H_
 #define PAWN_H_
 
-
 #include <iostream>
 #include "City.h"
 
 using namespace std;
 
-class Pawn: public CObject {
+class Pawn : public CObject{
 public:
     Pawn();
     Pawn(std::string color, City* c, string playerName);
@@ -28,8 +27,6 @@ public:
     void setPawnCityString(string citystringname, City* acities[]);
 	string getPlayerName();
 	void setPlayerName(string playerName);
-    //Player* getPawnPlayer();
-    //Player* p;
 	DECLARE_SERIAL(Pawn);
 	void Serialize(CArchive& archive);
     
@@ -37,7 +34,7 @@ protected:
     std::string color;
     City* pawncity;
 	string playerName;
-    
+  
 };
 
 #endif /* PAWN_H_ */

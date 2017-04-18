@@ -8,14 +8,13 @@
 
 #include "City.h"
 #include<iostream>
-using namespace std;
+// namespace std;
 
 
 City::City()
 {
     cityname="";
-    //color="";
-    //pcitycard=nullptr;
+    color="";
     cubes=0;
     researchstation=false;
 }
@@ -61,10 +60,7 @@ bool City::getResearchStation()
 {
 	return researchstation;
 }
-//vector<Pawn*> City::getPawnsInCity()
-//{
-//    return pawnsincity;
-//}
+
 
 void City::addCubes()
 {
@@ -94,37 +90,20 @@ void City::removeResearchStation(){
     researchstation=false;
 }
 
-//void City::addPawnsToCity(Pawn* pa)
-//{
-//    pawnsincity.push_back(pa);
-//}
 
-//void City::removePawnFromCity(Pawn* pa){
-//    for(int i=0;i<pawnsincity.size();i++){
-//        if(pawnsincity[i]==pa)
-//            pawnsincity.erase(pawnsincity.begin() + i);
-//    }
-//    
-//}
-
-//void City::printListPlayersInCity(){
-//    for(int i=0;i<pawnsincity.size();i++){
-//        cout<<pawnsincity[i]->getPawnPlayerName()<<endl;
-//    }
-//}
 
 void City::print()
 {
-	//cardColor;
-    cout << " City Card: "<< cityname << endl;
-//	//RefCard ref = getPlayerInCity();
-//    cout << "List of players in city :"<<endl;
-//    printListPlayersInCity();
 
-	cout << "the number of infection in city:" << cubes <<endl;
+    cout<<"----------------------------------------"<<endl;
+    cout <<"City: "<< cityname <<" (" <<color<<") " << endl;
+	cout <<cubes << " infection cubes in city " <<endl;
+    if(researchstation){cout<<"City has a research station"<<endl;}
+    else{cout<<"City does not have a research station"<<endl;}
+    cout<<"----------------------------------------"<<endl;
+
 
 }
-
 IMPLEMENT_SERIAL(City, CObject, 1);
 
 void City::Serialize(CArchive& archive) {

@@ -8,7 +8,6 @@
 
 #ifndef Player_h
 #define Player_h
-
 #include <stdio.h>
 #include <vector>
 #include <algorithm>
@@ -68,7 +67,12 @@ public:
     virtual bool discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
 
     void ShareKnowledge(std::vector<Player*> vectorplayers);
-    
+	// event card
+	void airlift(vector <Player*> ,City* acities[]);
+	void oneQuietNight();
+	void governmentGrant(City* acities[]);
+	void resilientPopulation();
+
 	DECLARE_SERIAL(Player);
 	void Serialize(CArchive& archive);
 };
@@ -94,7 +98,7 @@ public:
     virtual ~Medic();
 
     bool treatDisease(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
-    void removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated);
+    bool removeCuredCubes(int* remainingDiseaseCubes, bool* isCured, bool* isEradicated, bool toexecute);
 
 
 };
@@ -138,10 +142,7 @@ public:
     Quarantinespecialist();
     Quarantinespecialist(Pawn *ppawn, RefCard *refcard, Cards *rolecard, std::vector<PlayerCard*> p_hand);
     Quarantinespecialist(Quarantinespecialist const& qspecialist);
-    virtual ~Quarantinespecialist();
-    void preventOutbreaks();
-    void preventCubes();
-    
+    virtual ~Quarantinespecialist();    
 };
 
 class Contingencyplanner : public Player{

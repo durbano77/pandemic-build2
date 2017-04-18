@@ -16,12 +16,11 @@
 class RefCard : public Cards
 {
 private:
-	;
+    ;
 public:
     RefCard();
 	RefCard(const RefCard &rc);
 	DECLARE_SERIAL(RefCard);
 	void Serialize(CArchive& archive);
-   
 };
 #endif /* RefCard_h */

@@ -19,7 +19,6 @@ public:
     PlayerCard();
     PlayerCard(std::string playercardname, std::string cardtextfront, std::string cardtextback);
     virtual void EventAction();
-
 	DECLARE_SERIAL(PlayerCard);
 	void Serialize(CArchive& archive);
 };
