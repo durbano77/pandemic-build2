@@ -74,6 +74,7 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     
     p->getPawn()->printPawn();
     p->printHandTitles();
+    cout<<"\n\n";
     p->getPawn()->getPawnCity()->print();
     
     std::cout<<"\n\n***************MENU***************"<<std::endl;
@@ -203,38 +204,34 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     int ai=vectorplayers.size()+4;
     
     if(a==1){
+        cout<<" DISPLAY - REFERENCE CARD \n"<<endl;
         p->getPawn()->printPawn();
         p->printRefCard();
-        clearScreen();
-        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     else if(a==2){
+        cout<<" DISPLAY - ROLE CARD \n"<<endl;
         p->getPawn()->printPawn();
         p->printRoleCard();
-        clearScreen();
-        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     else if(a==3){
+        cout<<" DISPLAY - PLAYER HAND \n"<<endl;
         p->getPawn()->printPawn();
         p->printHand();
-        clearScreen();
-        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     
     for(int i=0;i<vectorplayers.size();i++){
         if(a==4+i){
+            cout<<" DISPLAY - "<<vectorplayers[i]->getPlayerName()<<" INFORMATION\n"<<endl;
             vectorplayers[i]->getPawn()->printPawn();
             vectorplayers[i]->printRoleCard();
             vectorplayers[i]->printHand();
-            clearScreen();
-            doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
         }
     }
     
     ai-=1;
     
     if(a==ai+1){
-        cout<<"CITY INFORMATION"<<endl;
+        cout<<"DISPLAY - CITY INFORMATION \n"<<endl;
         for(int c=0;c<48;c++){
             cout<<"["<<c+1<<"] "<<acities[c]->getCityName()<<endl;
         }
@@ -251,48 +248,54 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             cout << "    " << endl;
         }
         acities[t-1]->print();
-        
-        clearScreen();
-        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     else if(a==ai+2){
-        cout<<" ALL CITIES INFO "<<endl;
+        cout<<" DISPLAY - ALL CITIES INFO \n "<<endl;
         for(int j=0;j<48;j++){
             acities[j]->print();
         }
-        clearScreen();
-        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     
     else if(a==ai+3){
+        cout<<" ACTION - DRIVE \n"<<endl;
         p->drive(adjcities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+4){
+        cout<<" ACTION - DIRECT FLIGHT \n"<<endl;
          p->directFlight(acities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+5){
+        cout<<" ACTION - CHARTER FLIGHT\n"<<endl;
         p->charterFlight(acities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+6){
+        cout<<" ACTION - SHUTTLE FLIGHT \n"<<endl;
         p->shuttleFlight(acities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+7){
+        cout<<" ACTION - BUILD A RESEARCH STATION \n"<<endl;
          p->buildResearchStation(discardPile, true);
         nbactionstodo-=1;
     }
     else if(a==ai+8){
+        cout<<" ACTION - TREAT DISEASE\n"<<endl;
         p->treatDisease(remainingDiseaseCubes, isCured, isEradicated , true);
         nbactionstodo-=1;
     }
     else if(a==ai+9){
-        p->shareKnowledge(vectorplayers, true);
-        nbactionstodo-=1;
+        cout<<" ACTION - SHARE KNOWLEDGE\n"<<endl;
+        if(p->shareKnowledge(vectorplayers, true)){
+            nbactionstodo-=1;
+        }else{
+            //doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+        }
     }
     else if(a==ai+10){
+        cout<<" ACTION - DISCOVER CURE \n"<<endl;
         p->discoverCure(remainingDiseaseCubes, isCured, isEradicated , true);
         nbactionstodo-=1;
     }

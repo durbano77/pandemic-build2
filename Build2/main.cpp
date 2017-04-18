@@ -251,6 +251,7 @@ void Infect(City* theCity, vector <City*> alreadyOutbreak) {
     }
 }
 void initialInfection() {
+    cout<<"---------- Initial Infection ----------\n\n"<<endl;
     //draw 3, then 2, then 1 infection cards and infect according to their city and color
     int i = 3;
     while (i >= 1) {
@@ -271,7 +272,8 @@ void initialInfection() {
         }
         i--;
     }
-    system("pause");
+   // system("pause");
+    clearScreen();
 }
 int getPlayerCount() {
     //get the number of players playing, validate, and return as int.
@@ -286,8 +288,9 @@ int getPlayerCount() {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    //clear the screen
-    system("cls");
+    cout<<"Initializing "<<pCount<<" players..."<<endl;
+    clearScreen();
+   // system("cls");
     return pCount;
 }
 
