@@ -52,6 +52,7 @@ public:
     int inChoice();
     void doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]);
     
+    void clearScreen();
     
 };
 

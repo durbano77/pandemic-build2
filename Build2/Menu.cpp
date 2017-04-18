@@ -47,7 +47,13 @@ Player* Menu::getPlayer(){
 
 //add options to pick a event card anytime
 
-
+void Menu::clearScreen(){
+    cout<<"\n\n\nPress enter to continue";
+    cin.ignore();
+    for(int i = 0; i<100; i++){
+        cout << "    " << endl;
+    }
+}
 
 void Menu::doMenu(City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
 
@@ -76,18 +82,24 @@ void Menu::displayMenu(City* acities[], int remainingDiseaseCubes[4], bool isCur
     std::cout<<"-----DISPLAY-----\n"<<std::endl;
     std::cout<<p->getPlayerName()<<" information"<<std::endl;
     std::cout<<"[1] Reference card"<<std::endl;
+        possible.push_back(1);
     std::cout<<"[2] Role card"<<std::endl;
+        possible.push_back(2);
     std::cout<<"[3] Player hand\n"<<std::endl;
+        possible.push_back(3);
     
 
     std::cout<<"Players information"<<std::endl;
     for(int i=0;i<vectorplayers.size();i++){
         std::cout<<"["<<4+i<<"] "<<vectorplayers[i]->getPlayerName()<<std::endl;
+        possible.push_back(4+i);
     }
     
     std::cout<<"\nCity information"<<std::endl;
     std::cout<<"["<<vps+4<<"] One city to display"<<std::endl;
+        possible.push_back(vps+4);
     std::cout<<"["<<vps+5<<"] All the cities"<<std::endl;
+        possible.push_back(vps+5);
 
     std::cout<<"-----ACTIONS-----\n"<<std::endl;
     if(nbactionstodo>0){
@@ -193,19 +205,35 @@ int Menu::inChoice(){
 
 void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool isCured[4], bool isEradicated[4]){
     
-   
+    clearScreen();
     
     int ai=vectorplayers.size()+4;
     
-    if(a==1){  p->printRefCard(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
-    else if(a==2){ p->printRoleCard(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
-    else if(a==3){p->printHand(); doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);}
+    if(a==1){
+        p->getPawn()->printPawn();
+        p->printRefCard();
+        clearScreen();
+        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    }
+    else if(a==2){
+        p->getPawn()->printPawn();
+        p->printRoleCard();
+        clearScreen();
+        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    }
+    else if(a==3){
+        p->getPawn()->printPawn();
+        p->printHand();
+        clearScreen();
+        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+    }
     
     for(int i=0;i<vectorplayers.size();i++){
         if(a==4+i){
             vectorplayers[i]->getPawn()->printPawn();
             vectorplayers[i]->printRoleCard();
             vectorplayers[i]->printHand();
+            clearScreen();
             doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
         }
     }
@@ -215,10 +243,12 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     if(a==ai+1){
         
         /*function to show one city info*/
-    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+        clearScreen();
+        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     else if(a==ai+2){/*function to show all the cities info*/
-    doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+        clearScreen();
+        doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
     }
     
     else if(a==ai+3){
@@ -253,10 +283,6 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
         p->discoverCure(remainingDiseaseCubes, isCured, isEradicated , true);
         nbactionstodo-=1;
     }
-    
-//    p->getPawn()->printPawn();
-//    p->printHandTitles();
-    
-    //doMenu(acities, remainingDiseaseCubes, isCured, isEradicated);
+
 
 }

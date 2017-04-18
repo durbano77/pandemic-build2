@@ -206,7 +206,7 @@ void turn(Player* p){
         m.setAdjCity(adjCities);
         
         m.doMenu(cityarr, remainingDiseaseCubes, isCured, isEradicated);
-
+        clearScreen();
     }
 
     p->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
