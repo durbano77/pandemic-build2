@@ -647,7 +647,9 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 	}
     return false;
 }
-void Player::airlift(vector <Player*>vecP ,City* vecCity[]){
+			
+			
+void Player::airlift(vector <Player*>vecP, City* vecCity[], vector <PlayerCard*> *dpile){
 	
 		int  pOption; 
 		
@@ -658,15 +660,16 @@ void Player::airlift(vector <Player*>vecP ,City* vecCity[]){
 				{
 					if (player_hand[j]->getCardName() == "Event card: Airlift")
 					{
-						cout << "\n\n i have an airlift card and i can move you to any city\n";
-						cout << "do you want to move\n";
+						cout << "\n\nusing Event card: Airlift\n";
+						cout << "i have an airlift card and i can move you to any city\n";
+						cout << "do you want to move?\n";
 
 						do{
-							cout << "enter the 1 for yes \n 2 for no\n";
+							cout << "enter 1 for yes \n2 for no\n";
 							cin >> pOption;
 							while (cin.fail())
 							{
-								cout << "Integer wanted \n";
+								cout << "Integer wanted enter 1 for yes \n2 for no\n \n";
 								cin.clear();
 								cin.ignore(INT_MAX, '\n');
 								//return;
@@ -675,11 +678,14 @@ void Player::airlift(vector <Player*>vecP ,City* vecCity[]){
 						if (pOption == 1)
 						{
 							vecP[i]->getPawn()->setPawnCity(vecCity[i + 20]);
-							cout << "\n you have been moved to : " << vecCity[i + 20]->getCityName() << endl;
+							dpile->push_back(player_hand[i]);
+							player_hand.erase(player_hand.begin() + i);
+							cout << "you have been moved to : " << vecCity[i + 20]->getCityName() << endl;
+							cout << "Your Event card: Airlifthas been discarded\n";
 							return;
 						}
 						else
-							cout << "you have not been moved \n Because you dont want to be moved " << endl;
+							cout << "you have not been moved \n Because you dont want to be moved\n\n " << endl;
 					}
 				}
 			}
@@ -694,42 +700,46 @@ void Player::oneQuietNight()
 {
 	
 }
-void Player::governmentGrant(City* acities[])
+void Player::governmentGrant(City* acities[], vector <PlayerCard*> *dpile)
 {
 	int cityNum;
-	for (unsigned i = 0; i < player_hand.size(); i++)
+	for (int j = 0; j < player_hand.size(); j++)
 	{
-		if (getPawn()->getPawnCity()->getResearchStation())
+		if (player_hand[j]->getCardName() == "Event card: Government Grant")
 		{
-			cout << "\nthere is already a research station in your current city : " << playerpawn->getPawnCity()->getCityName() << endl;
-		}
-		else
-		{
-
-			if (playerpawn->getPawnCity()->getCityName() == (player_hand[i])->getCardName())
+			for (unsigned i = 0; i < player_hand.size(); i++)
 			{
-				std::cout << "\nYour pawn is currently located in " << playerpawn->getPawnCity()->getCityName() << "\nYou can build a research station any where." << std::endl;
-				
-				
+				if (getPawn()->getPawnCity()->getResearchStation())
+				{
+					cout << "\nthere is already a research station in your current city : " << playerpawn->getPawnCity()->getCityName() << endl;
+				}
+				else
+				{
+					cout << "\n\nusing your Event card: Government Grant ";
+					std::cout << "Your pawn is currently located in\n " << playerpawn->getPawnCity()->getCityName() << "\nYou can build a research station any where." << std::endl;
 					do{
 						cout << "enter a city number you want to move to\n";
 						cin >> cityNum;
 						while (cin.fail())
 						{
-							cout << "Integer wanted \n";
+							cout << "Integer wanted enter a number between 0 and 47 \n";
 							cin.clear();
 							cin.ignore(INT_MAX, '\n');
 							//return;
 						}
-					}while (cityNum < 1 || cityNum > 48);
+					} while (cityNum < 1 || cityNum > 48);
 
-				acities[cityNum-1]->addResearchStation();
-				cout << "\n the city information are as follows:\n";
-				acities[cityNum - 1]->print();
-				return;
+						acities[cityNum - 1]->addResearchStation();
+						dpile->push_back(player_hand[i]);
+						player_hand.erase(player_hand.begin() + i);
+						cout << "the city you moved has the following information: \n";
+						acities[cityNum - 1]->print();
+						cout << "your event card has been discarded\n\n";
+
+						return;
+				}
 			}
 		}
-
 	}
 }
 void resilientPopulation();
