@@ -129,11 +129,15 @@ IMPLEMENT_SERIAL(City, CObject, 1);
 
 void City::Serialize(CArchive& archive) {
 	CObject::Serialize(archive);
-
+	int count = 0;
 	if (archive.IsStoring()) {
 		archive.WriteObject(this);
+		cout << cityname << " saved " << endl;
 	}
 	else {
-		archive.ReadObject(RUNTIME_CLASS(City));
+		CObject* temp = new City;
+		temp = archive.ReadObject(RUNTIME_CLASS(City));
+		City* tempC = (City*)temp;
+		cout << tempC->getCityName() << " loaded " << endl;
 	}
 }

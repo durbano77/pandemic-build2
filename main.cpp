@@ -319,23 +319,39 @@ void drive(Player* p, Graph* graph)
 }
 
 
-void Save() {
+void Save(int x) {
 	CFile savefile;
-	savefile.Open(_T("SaveState.txt"), CFile::modeCreate | CFile::modeWrite);
-	CArchive archive(&savefile, CArchive::store);
+	savefile.Open(_T("SaveState.txt"), CFile::modeCreate | CFile::modeReadWrite);
+	CArchive archivestore(&savefile, CArchive::store);
+	CArchive archiveload(&savefile, CArchive::load);
+	if (x == 0) {
+		//storing cities
+		for (int i = 0; i < vectorofcities.size(); i++) {
+			vectorofcities[i]->Serialize(archivestore);
+		}
 
-	//storing cities
-	for (int i = 0; i < vectorofcities.size(); i++) {
-		vectorofcities[i]->Serialize(archive);
+		//saving player
+		for (int j = 0; j < numPlayers; j++) {
+			arrayofPlayers[j]->Serialize(archivestore);
+		}
+		savefile.SeekToBegin();
+		archivestore.Close();
 	}
 
-	//saving player
-	for (int j = 0; j < numPlayers; j++) {
-		arrayofPlayers[j]->Serialize(archive);
-	}
+	if (x == 1) {
+		//loading cities
+		for (int i = 0; i < vectorofcities.size(); i++) {
+			vectorofcities[i]->Serialize(archiveload);
+		}
 
-	archive.Close();
-	savefile.Close();
+		//loading player
+		for (int j = 0; j < numPlayers; j++) {
+			arrayofPlayers[j]->Serialize(archiveload);
+
+		}
+		archiveload.Close();
+		savefile.Close();
+	}
 }
 
 int main(){
@@ -399,13 +415,11 @@ int main(){
 
 
 
-	Save();
+	Save(0);
 	cout << "about to load";
     system("pause");
-	Save();
+	Save(1);
 	cout << "loaded";
-	system("pause");
-	cout << vectorofcities[0]->getCityName();
 	system("pause");
     endGame();
     

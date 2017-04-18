@@ -636,14 +636,13 @@ IMPLEMENT_SERIAL(Player, CObject, 1);
 
 void Player::Serialize(CArchive& archive) {
 	CObject::Serialize(archive);
-
 	if (archive.IsStoring()) {
 		archive.WriteObject(this);
-		cout << "player saved ";
+		cout << playername << " saved " << endl;
 	}
 	else {
-		archive.ReadObject(RUNTIME_CLASS(Player));
-		cout << "player loaded ";
+		//archive.ReadObject(RUNTIME_CLASS(Player));
+		cout << playername << " loaded " << endl;
 	}
 }
 
