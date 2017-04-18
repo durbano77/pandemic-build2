@@ -70,7 +70,7 @@ public:
     // event card
     void airlift(vector <Player*>, City* acities[], vector <PlayerCard*> *discardpile, vector <PlayerCard*> &eventcardsavail);
     void oneQuietNight();
-    void governmentGrant(City* acities[], vector <PlayerCard*> *discardpile);
+    void governmentGrant(City* acities[], vector <PlayerCard*> *discardpile, vector<PlayerCard*> &eventcardsavail);
     void resilientPopulation();
     
     

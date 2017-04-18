@@ -335,7 +335,7 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             
             }
             else if(eventcardsavail[e]->getCardName()=="Event card: Government Grant"){
-                 p->governmentGrant(acities, dPile);
+                 p->governmentGrant(acities, dPile, eventcardsavail);
             }else if(eventcardsavail[e]->getCardName()=="Event card: Resilient Population"){
             
             }else if(eventcardsavail[e]->getCardName() =="Event card: Forecast"){

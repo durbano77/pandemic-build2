@@ -707,7 +707,7 @@ void Player::oneQuietNight()
 {
 	
 }
-void Player::governmentGrant(City* acities[], vector <PlayerCard*> *dpile)
+void Player::governmentGrant(City* acities[], vector <PlayerCard*> *dpile, vector<PlayerCard*> &eventcardsavail)
 {
 	int cityNum;
 	for (int j = 0; j < player_hand.size(); j++)
