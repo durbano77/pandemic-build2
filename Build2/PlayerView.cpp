@@ -105,7 +105,7 @@ void PlayerView::displayDiscardHand(){
 
 void PlayerView::displayEpidemicCard(){
     std::cout<<"////////// ALERT EPIDEMIC CARD \\\\\\\\\\"<<std::endl;
-    ((p->getHand()).back())->printCard();
+    //((p->getHand()).back())->printCard();
     
 }
 

@@ -9,6 +9,7 @@
 #include "EpidemicCard.h"
 #include <algorithm>
 #include <random>
+#include <iostream>
 
 EpidemicCard::EpidemicCard(){
     card_name="Epidemic Card";
@@ -26,16 +27,17 @@ EpidemicCard::~EpidemicCard(){
 
 }
 
-void EpidemicCard::EventAction(int *remainingDiseaseCubes, bool* isEradicated, int& infectionRate, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard	) {
-    Increase(infectionRate);
+void EpidemicCard::EventAction(int *remainingDiseaseCubes, bool* isEradicated, int& infectionRatePos, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard	) {
+    Increase(infectionRatePos);
     Infect(remainingDiseaseCubes, isEradicated, infectiondeck, infectiondeck_discard);
     Intensify(infectiondeck, infectiondeck_discard);
 
 }
 
-void EpidemicCard::Increase(int& infectionRate){
+void EpidemicCard::Increase(int& infectionRatePos){
 //Move the infection rate marker foward
-	infectionRate++;
+	cout << "Increasing infection rate!" << endl;
+	infectionRatePos++;
 }
 
 void EpidemicCard::Infect(int* remainingDiseaseCubes, bool* isEradicated, vector<InfectionCard*>& infectiondeck, vector<InfectionCard*>& infectiondeck_discard){
@@ -55,11 +57,11 @@ void EpidemicCard::Intensify(vector<InfectionCard*>& infectiondeck, vector<Infec
 //Shuffle the cards in the infection discard pile and put them on top of the infection deck
 	shuffle(infectiondeck_discard.begin(), infectiondeck_discard.end(), std::default_random_engine(std::random_device()()));
 	infectiondeck.insert(infectiondeck.end(), infectiondeck_discard.begin(), infectiondeck_discard.end());
-
+	cout << "Intensifying! The infection card discard pile has been shuffled and placed on top of the infection deck." << endl;
 	//clean up discard pile
 	// <vector> infectiondeck_discard contains *InfectionCard
-	for (int i = 0; i<infectiondeck_discard.size(); i++) {
-		infectiondeck_discard[i] = nullptr;
-		delete infectiondeck_discard[i];
+	int size = infectiondeck_discard.size();
+	for (int i = 0; i<size; i++) {
+		infectiondeck_discard.pop_back();
 	}
 }

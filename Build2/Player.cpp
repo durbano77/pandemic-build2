@@ -156,7 +156,10 @@ void Player::drawpcards(int nbcardsdraw, std::vector<PlayerCard*> &plyrdeck, std
             plyrdeck.pop_back();
         }
         else{
-            std::cout<< "The player deck is now empty, you have lost the game!" <<std::endl;
+			for (int i = 0; i<100; i++) {
+				cout << "    " << endl;
+			}
+            std::cout<< "The player deck is now empty. There are no more cards to draw, you have lost the game!" <<std::endl;
 			exit(0);
         }
     }
@@ -629,6 +632,9 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 				cout << "The " << sColor << " disease is now cured! " << endl;
 				//game win?
 				if (isCured[0] && isCured[1] && isCured[2] && isCured[3]) {
+					for (int i = 0; i<100; i++) {
+						cout << "    " << endl;
+					}
 					cout << "Congratulations, all diseases have been cured! You win!" << endl;
 					system("pause");
 					exit(0);
@@ -924,6 +930,9 @@ bool Scientist::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* is
 				cout << "The " << sColor << " disease is now cured! " << endl;
 				//game win?
 				if (isCured[0] && isCured[1] && isCured[2] && isCured[3]) {
+					for (int i = 0; i<100; i++) {
+						cout << "    " << endl;
+					}
 					cout << "Congratulations, all diseases have been cured! You win!" << endl;
 					system("pause");
 					exit(0);

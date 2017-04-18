@@ -216,6 +216,9 @@ void Infect(City* theCity, vector <City*> alreadyOutbreak) {
                     // outbreak
                     outbreakMarker++;
                     if (outbreakMarker > 7) {
+						for (int i = 0; i<100; i++) {
+							cout << "    " << endl;
+						}
                         cout << "The outbreak marker is at 8, you lose the game!" << endl;
                         system("pause");
                         endGame();
@@ -243,6 +246,9 @@ void Infect(City* theCity, vector <City*> alreadyOutbreak) {
                 }
             }
             else {
+				for (int i = 0; i<100; i++) {
+					cout << "    " << endl;
+				}
                 cout << "There are no more " << color << " disease cubes! Game over!" << endl;
                 system("pause");
                 endGame();
@@ -318,7 +324,85 @@ void turn(Player* p){
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
     std::cout<<"STEP 2: Drawing 2 player cards"<<std::endl;
      clearScreen();
-    p->drawpcards(2, playerdeck, discardpile,eventCardsAvail);
+
+	 /*			Epidemic Card Handling		*/
+	//peek at next 2 cards, to check for epidemic card
+	 int epidemicCardsDrawn = 0;	//how many to pop after
+	 if (playerdeck.end()[-1]->getCardName() == "Epidemic Card") {		 
+		 //top card is epidemic
+		 //trigger epidemic
+		 p->Notify(3);
+		 //increase
+		 static_cast<EpidemicCard*>(playerdeck.back())->Increase(infectionRatePos);
+		 //infect
+		 InfectionCard* currInf = infectiondeck.back();
+		 vector <City*> alreadyOutbreak;
+		 //add drawn card to discard pile
+		 infectiondeck_discard.push_back(currInf);
+		 //remove card from infection deck
+		 infectiondeck.pop_back();
+		 Infect(currInf->getCity(), alreadyOutbreak);
+		 //intensify
+		 static_cast<EpidemicCard*>(playerdeck.back())->Intensify(infectiondeck, infectiondeck_discard);
+		 //pop_back playerdeck
+		 playerdeck.pop_back();
+		 //epidemic cards drawn++
+		 epidemicCardsDrawn++;
+		 //check new top of deck
+		 if (playerdeck.end()[-1]->getCardName() == "Epidemic Card") {
+			 //top card is epidemic
+			 //trigger epidemic
+			  p->Notify(3);
+			 //increase
+			 static_cast<EpidemicCard*>(playerdeck.back())->Increase(infectionRatePos);
+			 //infect
+			 InfectionCard* currInf = infectiondeck.back();
+			 //add drawn card to discard pile
+			 infectiondeck_discard.push_back(currInf);
+			 //remove card from infection deck
+			 infectiondeck.pop_back();
+			 vector <City*> alreadyOutbreak;
+			 Infect(currInf->getCity(), alreadyOutbreak);
+			 //intensify
+			 static_cast<EpidemicCard*>(playerdeck.back())->Intensify(infectiondeck, infectiondeck_discard);
+			 //pop_back playerdeck
+			 playerdeck.pop_back();
+			 //epidemic cards drawn++
+			 epidemicCardsDrawn++;
+		 }
+	 }
+	 //firts card in deck wasn't epidemic, check next
+	 else {
+		 if (playerdeck.end()[-2]->getCardName() == "Epidemic Card") {
+			 //draw top card, since it isnt epidemic
+			 p->drawpcards(1, playerdeck, discardpile, eventCardsAvail);
+			 epidemicCardsDrawn++;
+			 //pop_back playerdeck
+			 playerdeck.pop_back();
+			 //top card is epidemic
+			 p->Notify(3);
+			 //trigger epidemic
+			 //increase
+			 static_cast<EpidemicCard*>(playerdeck.back())->Increase(infectionRatePos);
+			 //infect
+			 InfectionCard* currInf = infectiondeck.back();
+			 vector <City*> alreadyOutbreak;
+			 //add drawn card to discard pile
+			 infectiondeck_discard.push_back(currInf);
+			 //remove card from infection deck
+			 infectiondeck.pop_back();
+			 Infect(currInf->getCity(), alreadyOutbreak);
+			 //intensify
+			 static_cast<EpidemicCard*>(playerdeck.back())->Intensify(infectiondeck, infectiondeck_discard);
+			 //pop_back playerdeck
+			 playerdeck.pop_back();
+			 //epidemic cards drawn++
+			 epidemicCardsDrawn++;
+		 }
+	 }	
+	 
+	//draw however many more cards to make it 2 in total (depends on how many epidemic cards were found)
+    p->drawpcards(2-epidemicCardsDrawn, playerdeck, discardpile,eventCardsAvail);
     clearScreen();
     
     std::cout<<"Player: "<<p->getPlayerName()<<std::endl;
