@@ -655,7 +655,7 @@ bool Player::discoverCure(int* remainingDiseaseCubes, bool* isCured, bool* isEra
 }
 			
 			
-void Player::airlift(vector <Player*>vecP, City* vecCity[], vector <PlayerCard*> *dpile){
+void Player::airlift(vector <Player*>vecP, City* vecCity[], vector <PlayerCard*> *dpile, vector<PlayerCard*> &eventcardsavail){
 	
 		int  pOption; 
 		
@@ -686,6 +686,7 @@ void Player::airlift(vector <Player*>vecP, City* vecCity[], vector <PlayerCard*>
 							vecP[i]->getPawn()->setPawnCity(vecCity[i + 20]);
 							dpile->push_back(player_hand[i]);
 							player_hand.erase(player_hand.begin() + i);
+                            
 							cout << "you have been moved to : " << vecCity[i + 20]->getCityName() << endl;
 							cout << "Your Event card: Airlifthas been discarded\n";
 							return;

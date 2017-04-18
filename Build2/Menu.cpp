@@ -329,7 +329,7 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
             cout<<" EVENT ACTION - "<<eventcardsavail[e]->getCardName()<<" \n"<<endl;
             
             if(eventcardsavail[e]->getCardName()=="Event card: Airlift"){
-                 p->airlift(vectorplayers, acities, dPile);
+                 p->airlift(vectorplayers, acities, dPile, eventcardsavail);
             }
             else if(eventcardsavail[e]->getCardName()=="Event card: One Quiet Night"){
             
