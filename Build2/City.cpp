@@ -60,10 +60,7 @@ bool City::getResearchStation()
 {
 	return researchstation;
 }
-//vector<Pawn*> City::getPawnsInCity()
-//{
-//    return pawnsincity;
-//}
+
 
 void City::addCubes()
 {
@@ -93,24 +90,7 @@ void City::removeResearchStation(){
     researchstation=false;
 }
 
-//void City::addPawnsToCity(Pawn* pa)
-//{
-//    pawnsincity.push_back(pa);
-//}
 
-//void City::removePawnFromCity(Pawn* pa){
-//    for(int i=0;i<pawnsincity.size();i++){
-//        if(pawnsincity[i]==pa)
-//            pawnsincity.erase(pawnsincity.begin() + i);
-//    }
-//    
-//}
-
-//void City::printListPlayersInCity(){
-//    for(int i=0;i<pawnsincity.size();i++){
-//        cout<<pawnsincity[i]->getPawnPlayerName()<<endl;
-//    }
-//}
 
 void City::print()
 {
