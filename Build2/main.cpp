@@ -346,6 +346,10 @@ void initGame(){
 
 
 void endGame(){
+    isgameover=true;
+    
+    cout<<"GAME OVER"<<endl;
+    clearScreen();
     
     // <vector> arrayofPlayerViews contains all *PlayerView (1 per player)
     for(int i=0; i<numPlayers;i++){
@@ -405,24 +409,15 @@ int main(){
     clearScreen();
     
     
-    //while  -> do this until the game ends!
-    for(int i=0;i<numPlayers;i++){
-        turn(arrayofPlayers[i]);
+    while(!isgameover){
+        for(int i=0;i<numPlayers;i++){
+            turn(arrayofPlayers[i]);
+        }
     }
+
     
     
-    
-    
-    //    vector <City*> vtest = vertexarr[0]->getAdjCities();
-    //    vector <City*> vtest1 = vertexarr[1]->getAdjCities();
-    //    
-    //    //vertex_Atlanta->getAdjCities();
-    //    city_Atlanta->addResearchStation();
-    //    city_Bagdad->addResearchStation();
-    
-    
-    
-    
+
     
     
     

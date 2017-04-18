@@ -20,6 +20,8 @@ const int nbcardsplayer = 4;    // # Cards per player when game starts
 const int nbplayercards = 59;   // # PlayerCard's in the whole game
 const int diseaseCubesCount = 24; // # of disease cubes per color disease
 
+bool isgameover=false;
+
 //Infection rate, initialized to 2 infection cards to be drawn
 int infectionRatePos = 0;
 int infectionRateMarker[7] = { 2,2,2,3,3,4,4 };

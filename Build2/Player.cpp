@@ -511,6 +511,8 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
                         }
                         else{
                             //player doesnt want to give the city card
+                            cout<<"Action Share Knowledge was cancelled"<<endl;
+                            return false;
                         }
                         
                     } //if toexecute
@@ -545,6 +547,8 @@ bool Player::shareKnowledge(std::vector<Player*> vectorplayers, bool toexecute){
                         }
                         else{
                             //player doesnt want to take the city card
+                            cout<<"Action Share Knowledge was cancelled"<<endl;
+                            return false;
                         }
                         
                     }//if toexecute

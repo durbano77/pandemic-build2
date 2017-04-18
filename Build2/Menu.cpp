@@ -265,7 +265,7 @@ void Menu::doAction(int a, City* acities[], int remainingDiseaseCubes[4], bool i
     }
     
     else if(a==ai+3){
-         p->drive(adjcities, true);
+        p->drive(adjcities, true);
         nbactionstodo-=1;
     }
     else if(a==ai+4){
